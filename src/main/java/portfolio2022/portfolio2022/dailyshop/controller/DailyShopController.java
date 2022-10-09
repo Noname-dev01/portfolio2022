@@ -1,14 +1,15 @@
-package portfolio2022.portfolio2022.controller;
+package portfolio2022.portfolio2022.dailyshop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class DailyShopController {
 
-    @GetMapping("/")
+    @GetMapping("/dailyShop")
     public String home(){
-        return "index";
+        return "dailyshop/index";
     }
+
 
 }
