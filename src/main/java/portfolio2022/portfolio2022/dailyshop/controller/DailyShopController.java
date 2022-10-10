@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/dailyShop")
 public class DailyShopController {
 
-    @GetMapping
-    public String home(){
-        return "dailyshop/index";
+    @GetMapping("/wishlist")
+    public String wishlist(){
+        return "/dailyshop/wishlist";
+    }
+    @GetMapping("/product-detail")
+    public String productDetail() {
+        return "dailyshop/product-detail";
     }
 
     @GetMapping("/product")
@@ -18,14 +22,29 @@ public class DailyShopController {
         return "dailyshop/product";
     }
 
+    @GetMapping
+    public String home(){
+        return "dailyshop/index";
+    }
+
     @GetMapping("/contact")
-    public String contact() {
+    public String contact(){
         return "dailyshop/contact";
     }
 
-    @GetMapping("/product-detail")
-    public String productDetail() {
-        return "dailyshop/product-detail";
+    @GetMapping("/checkout")
+    public String checkout(){
+        return "dailyshop/checkout";
+    }
+
+    @GetMapping("/cart")
+    public String cart(){
+        return "dailyshop/cart";
+    }
+
+    @GetMapping("/account")
+    public String account(){
+        return "dailyshop/account";
     }
 
     @GetMapping("/error-404")
