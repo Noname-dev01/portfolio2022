@@ -17,4 +17,19 @@ public class DailyShopController {
     public String product(){
         return "dailyshop/product";
     }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "dailyshop/contact";
+    }
+
+    @GetMapping("/product-detail")
+    public String productDetail() {
+        return "dailyshop/product-detail";
+    }
+
+    @GetMapping("/error-404")
+    public String error404(){
+        return "dailyshop/404";
+    }
 }
