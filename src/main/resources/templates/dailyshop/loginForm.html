@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="dailyshop/fragments/header :: header">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <title>Daily Shop | Account Page</title>
+  </head>
+  <body>
+  
+   <!-- wpf loader Two -->
+    <div id="wpf-loader-two">          
+      <div class="wpf-loader-two-inner">
+        <span>Loading</span>
+      </div>
+    </div> 
+    <!-- / wpf loader Two -->       
+ <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+
+   <!-- Start header section -->
+   <header th:replace="dailyshop/fragments/headerSection :: headerSection" />
+   <!-- / header section -->
+
+   <!-- menu -->
+   <section th:replace="dailyshop/fragments/menu :: menu" />
+   <!-- / menu -->
+
+  <!-- catg header banner section -->
+  <section id="aa-catg-head-banner">
+    <img src="/dailyShop/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+     <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2>Account Page</h2>
+        <ol class="breadcrumb">
+          <li><a href="/dailyShop">Home</a></li>
+          <li class="active">Account</li>
+        </ol>
+      </div>
+     </div>
+   </div>
+  </section>
+  <!-- / catg header banner section -->
+
+ <!-- Cart view section -->
+ <section id="aa-myaccount">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="aa-myaccount-area">         
+            <div class="row">
+              <div class="col-md-6">
+                <div class="aa-myaccount-login">
+                <h4>Login</h4>
+                 <form action="" class="aa-login-form">
+                  <label for="">Username or Email address<span>*</span></label>
+                   <input type="text" placeholder="Username or email">
+                   <label for="">Password<span>*</span></label>
+                    <input type="password" placeholder="Password">
+                    <button type="submit" class="aa-browse-btn">Login</button>
+                    <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
+                    <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
+
+   <!-- footer -->
+   <footer th:replace="dailyshop/fragments/footer :: footer"/>
+   <!--  / footer -->
+
+   <!-- login Modal -->
+   <div th:replace="dailyshop/fragments/loginModal :: loginModal"/>
+   <!--/ login Modal -->
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/dailyShop/js/bootstrap.js"></script>
+  <!-- SmartMenus jQuery plugin -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.js"></script>
+  <!-- SmartMenus jQuery Bootstrap Addon -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.bootstrap.js"></script>
+  <!-- To Slider JS -->
+  <script src="/dailyShop/js/sequence.js"></script>
+  <script src="/dailyShop/js/sequence-theme.modern-slide-in.js"></script>
+  <!-- Product view slider -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.simpleGallery.js"></script>
+  <script type="text/javascript" src="/dailyShop/js/jquery.simpleLens.js"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="/dailyShop/js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="/dailyShop/js/nouislider.js"></script>
+  <!-- Custom js -->
+  <script src="/dailyShop/js/custom.js"></script>
+  
+
+  </body>
+</html>
