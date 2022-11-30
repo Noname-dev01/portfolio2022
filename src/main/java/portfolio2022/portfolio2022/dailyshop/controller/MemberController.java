@@ -41,6 +41,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public String loginForm(Model model){
+        model.addAttribute("member", new MemberForm());
         return "dailyshop/loginForm";
     }
 }
