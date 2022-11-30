@@ -24,9 +24,10 @@ public class MemberServiceTest {
     @Test
     public void 회원가입() throws Exception{
         //given
-        Member member = new Member();
-        member.setName("kim");
-        member.setPassword("1234");
+        Member member = Member.builder()
+                .userId("kim")
+                .password("1234")
+                .build();
         //when
         Long saveId = memberService.join(member);
         //then
@@ -36,11 +37,13 @@ public class MemberServiceTest {
     @Test
     public void 중복_회원_예외() throws Exception{
         //given
-        Member member1 = new Member();
-        member1.setName("kim");
+        Member member1 = Member.builder()
+                .userId("kim")
+                .build();
 
-        Member member2 = new Member();
-        member2.setName("kim");
+        Member member2 = Member.builder()
+                .userId("kim")
+                .build();
         //when
         memberService.join(member1);
 //        memberService.join(member2); //중복 예외 발생해야함.

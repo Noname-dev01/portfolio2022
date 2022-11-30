@@ -1,10 +1,8 @@
 package portfolio2022.portfolio2022.dailyshop.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import portfolio2022.portfolio2022.dailyshop.controller.MemberForm;
 import portfolio2022.portfolio2022.dailyshop.domain.member.Member;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
@@ -23,7 +21,6 @@ public class MemberService {
         memberRepository.save(member);
         return member.getId();
     }
-
 
     //회원 전체 조회
     public List<Member> findMembers(){
