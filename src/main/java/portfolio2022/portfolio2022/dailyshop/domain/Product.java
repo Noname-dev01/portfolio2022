@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import portfolio2022.portfolio2022.dailyshop.exception.NotEnoughStockException;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -38,7 +37,7 @@ public class Product {
     /**
      * stock 감소
      */
-    public void removeStock(int quantity){
+    public void minusStock(int quantity){
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0){
             throw new NotEnoughStockException("재고수량이 부족합니다.");
