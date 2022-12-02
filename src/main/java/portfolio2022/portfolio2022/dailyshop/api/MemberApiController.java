@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import portfolio2022.portfolio2022.dailyshop.domain.member.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.Member;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 
 import javax.validation.Valid;

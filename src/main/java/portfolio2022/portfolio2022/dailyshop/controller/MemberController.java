@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import portfolio2022.portfolio2022.dailyshop.domain.member.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.Member;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 
 import javax.validation.Valid;

@@ -3,14 +3,11 @@ package portfolio2022.portfolio2022.dailyshop.service;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.properties.PropertyMapping;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-import portfolio2022.portfolio2022.dailyshop.domain.member.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.Address;
+import portfolio2022.portfolio2022.dailyshop.domain.Member;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -27,6 +24,7 @@ public class MemberServiceTest {
         Member member = Member.builder()
                 .userId("kim")
                 .password("1234")
+                .name("kim")
                 .build();
         //when
         Long saveId = memberService.join(member);
@@ -35,14 +33,20 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void 중복_회원_예외() throws Exception{
+    public void 중복_회원_예외(){
         //given
         Member member1 = Member.builder()
                 .userId("kim")
+                .password("1234")
+                .name("kim")
+                .address(new Address("asd","asd","asd"))
                 .build();
 
         Member member2 = Member.builder()
                 .userId("kim")
+                .password("1234")
+                .name("kim")
+                .address(new Address("asd","asd","asd"))
                 .build();
         //when
         memberService.join(member1);

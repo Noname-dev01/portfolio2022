@@ -59,9 +59,13 @@
                     <label th:for="userId">ID<span>*</span></label>
                     <input type="text" th:field="*{userId}" class="form-control" placeholder="이름을 입력하세요"
                             th:class="${#fields.hasErrors('userId')}? 'form-control fieldError' : 'form-control'">
-                     <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">Incorrect date</p>
+                     <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">Incorrect Id</p>
                     <label th:for="password">Password<span>*</span></label>
                     <input type="password" th:field="*{password}" placeholder="Password">
+                     <label th:for="name">name<span>*</span></label>
+                     <input type="text" th:field="*{name}" placeholder="name">
+                     <label th:for="address">address<span>*</span></label>
+                     <input type="text" th:field="*{address}" placeholder="address">
                     <button type="submit" class="aa-browse-btn">Register</button>                    
                   </form>
                 </div>
