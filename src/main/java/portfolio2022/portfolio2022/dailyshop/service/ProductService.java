@@ -17,8 +17,9 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public void saveProduct(Product product) {
+    public Long saveProduct(Product product) {
         productRepository.save(product);
+        return product.getId();
     }
 
     public List<Product> findProducts(){
