@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio2022.portfolio2022.dailyshop.domain.Address;
 import portfolio2022.portfolio2022.dailyshop.domain.Member;
+import portfolio2022.portfolio2022.dailyshop.exception.DuplicateMemberException;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
 @SpringBootTest
@@ -53,7 +54,7 @@ public class MemberServiceTest {
 //        memberService.join(member2); //중복 예외 발생해야함.
         //then
         Assertions.assertThatThrownBy(()->memberService.join(member2))
-                .isInstanceOf(IllegalStateException.class);
+                .isInstanceOf(DuplicateMemberException.class);
     }
 
 

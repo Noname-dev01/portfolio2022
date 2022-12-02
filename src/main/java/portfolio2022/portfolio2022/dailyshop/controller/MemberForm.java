@@ -1,5 +1,6 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
+import lombok.Builder;
 import lombok.Data;
 import portfolio2022.portfolio2022.dailyshop.domain.Address;
 import portfolio2022.portfolio2022.dailyshop.domain.Member;
@@ -14,16 +15,8 @@ public class MemberForm {
 
     private String password;
     private String name;
-    private Address address;
+    private String city;
+    private String street;
+    private String zipcode;
 
-    public static Member createMemberForm(MemberForm form){
-        Member member = Member.builder()
-                .userId(form.getUserId())
-                .password(form.getPassword())
-                .name(form.getName())
-                .address(form.getAddress())
-                .build();
-
-        return member;
-    }
 }
