@@ -1,15 +1,13 @@
 package portfolio2022.portfolio2022.dailyshop.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
     @Id @GeneratedValue
@@ -28,4 +26,27 @@ public class OrderItem {
     private int orderPrice; //주문 가격
     private int orderCount;//주문 수량
 
+    //==생성 메서드==//
+    public static OrderItem createOrderItem(Product product, int orderPrice, int orderCount){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setOrderCount(orderCount);
+
+        product.minusStock(orderCount);
+        return orderItem;
+    }
+
+    //== 비즈니스 로직 ==//
+    public void cancel() {
+        getProduct().addStock(orderCount);
+    }
+
+    //== 조회 로직 ==//
+    /**
+     * 주문상품 전체 가격 조회
+     */
+    public int getTotalPrice() {
+        return getOrderPrice() * getOrderCount();
+    }
 }

@@ -41,4 +41,8 @@ public class Member {
         this.address = address;
         this.orders = orders;
     }
+    public Member(String userId, Address address) {
+        this.userId = userId;
+        this.address = address;
+    }
 }
