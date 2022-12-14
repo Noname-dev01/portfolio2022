@@ -63,6 +63,8 @@
                                         <th>카테고리</th>
                                         <th>가격</th>
                                         <th>재고 수량</th>
+                                        <th>삭제</th>
+                                        <th>수정</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -74,7 +76,7 @@
                                         <td th:text="${product.price}">가격</td>
                                         <td th:text="${product.stockQuantity}">재고 수량</td>
                                         <td><a class="remove" th:href="@{/dailyShop/product/delete(id=${product.id})}"><fa class="fa fa-close"></fa></a></td>
-                                        <td><a th:href="@{/dailyShop/product/delete(id=${product.id})}"><fa class="fa fa-edit"></fa></a></td>
+                                        <td><a th:href="@{/dailyShop/product/modify/{productId}(productId=${product.id})}"><fa class="fa fa-edit"></fa></a></td>
                                     </tr>
                                     </tbody>
                                 </table>

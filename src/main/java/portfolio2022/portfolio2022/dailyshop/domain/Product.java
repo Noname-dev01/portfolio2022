@@ -1,9 +1,11 @@
 package portfolio2022.portfolio2022.dailyshop.domain;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.exception.NotEnoughStockException;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Getter

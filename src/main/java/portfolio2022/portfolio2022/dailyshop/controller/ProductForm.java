@@ -7,6 +7,7 @@ public class ProductForm {
 
     private String name;
     private int price;
+    private String category;
     private int stockQuantity;
-    private String file;
+
 }

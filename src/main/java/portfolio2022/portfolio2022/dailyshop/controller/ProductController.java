@@ -3,10 +3,7 @@ package portfolio2022.portfolio2022.dailyshop.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.domain.Product;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
@@ -25,7 +22,7 @@ public class ProductController {
      */
     @GetMapping("/product/register")
     public String productSaveForm(){
-        return "dailyshop/product-form";
+        return "dailyshop/product-register";
     }
     @PostMapping("/product/register")
     public String productSave(Product product, MultipartFile file) throws IOException {
@@ -59,6 +56,22 @@ public class ProductController {
     @GetMapping ("/product/delete")
     public String productDelete(Long id){
         productService.productDelete(id);
+        return "redirect:/dailyShop/product/list";
+    }
+    /**
+     * 상품 수정
+     */
+    @GetMapping("/product/modify/{productId}")
+    public String productModifyForm(@PathVariable("productId") Long productId,Model model){
+        Product product = productService.findProduct(productId);
+        model.addAttribute("product",product);
+        return "dailyshop/product-modify";
+    }
+    @PostMapping("/product/modify/{productId}")
+    public String productModify(@PathVariable Long productId,
+                                @ModelAttribute ProductForm form,
+                                MultipartFile file) throws IOException {
+        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
         return "redirect:/dailyShop/product/list";
     }
 }
