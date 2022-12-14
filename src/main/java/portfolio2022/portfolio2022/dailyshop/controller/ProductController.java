@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.domain.Product;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 

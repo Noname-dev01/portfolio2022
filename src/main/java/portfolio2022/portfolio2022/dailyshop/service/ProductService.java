@@ -51,17 +51,18 @@ public class ProductService {
      * 상품 수정
      */
     @Transactional
-    public void productModify(Long id,String name,MultipartFile file,int price,String category,int stockQuantiy) throws IOException {
+    public void productModify(Long id,String name,MultipartFile file,int price,String category,int stockQuantity) throws IOException {
         Product findProduct = productRepository.findById(id).get();
         transferFileSetting(file, findProduct);
         findProduct.setName(name);
         findProduct.setPrice(price);
         findProduct.setCategory(category);
-        findProduct.setStockQuantity(stockQuantiy);
+        findProduct.setStockQuantity(stockQuantity);
     }
 
     private void transferFileSetting(MultipartFile file, Product findProduct) throws IOException {
-        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
+//        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
+        String projectPath = System.getProperty("file.dir");
 
         String originalFilename = file.getOriginalFilename();
         if (file.isEmpty()){
