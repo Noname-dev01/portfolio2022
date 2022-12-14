@@ -1,45 +1,43 @@
 package portfolio2022.portfolio2022.dailyshop.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import portfolio2022.portfolio2022.dailyshop.exception.NotEnoughStockException;
 
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long id;
     private String name;
     private int price;
     private int stockQuantity;
+    private String fileName;
+    private String filePath;
+    private String category;
 
-    @Builder
-    public Product(String name, int price, int stockQuantity) {
-        this.name = name;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
-    }
 
     //== 비즈니스 로직 ==//
+
     /**
      * stock 증가
      */
-    public void addStock(int quantity){this.stockQuantity +=quantity;}
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
 
     /**
      * stock 감소
      */
-    public void minusStock(int quantity){
+    public void minusStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
-        if (restStock < 0){
+        if (restStock < 0) {
             throw new NotEnoughStockException("재고수량이 부족합니다.");
         }
         this.stockQuantity = restStock;

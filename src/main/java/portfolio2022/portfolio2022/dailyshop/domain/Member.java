@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import portfolio2022.portfolio2022.dailyshop.domain.Address;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
