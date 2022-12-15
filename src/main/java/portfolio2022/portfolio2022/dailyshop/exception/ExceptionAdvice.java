@@ -2,6 +2,7 @@ package portfolio2022.portfolio2022.dailyshop.exception;
 
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,4 +18,5 @@ public class ExceptionAdvice {
         log.error(e.getMessage());
         return "dailyshop/joinForm";
     }
+
 }

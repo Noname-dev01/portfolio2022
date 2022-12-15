@@ -1,6 +1,10 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +40,8 @@ public class ProductController {
      * 테스트 페이지
      */
     @GetMapping("/product/test")
-    public String productView(Model model){
-        List<Product> products = productService.findProducts();
+    public String productView(Model model, Pageable pageable){
+        Page<Product> products = productService.findProducts(pageable);
         model.addAttribute("products",products);
         return "dailyshop/product-test";
     }
@@ -46,8 +50,10 @@ public class ProductController {
      * 전체 상품 리스트
      */
     @GetMapping("/product/list")
-    public String productList(Model model){
-        List<Product> productList = productService.findProducts();
+    public String productList(Model model,
+                              @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+
+        Page<Product> productList = productService.findProducts(pageable);
         model.addAttribute("list",productList);
         return "dailyshop/product-list";
     }

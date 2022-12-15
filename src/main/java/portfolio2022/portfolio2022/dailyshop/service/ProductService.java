@@ -1,6 +1,8 @@
 package portfolio2022.portfolio2022.dailyshop.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,8 +33,8 @@ public class ProductService {
     /**
      * 상품 전체 조회
      */
-    public List<Product> findProducts(){
-        return productRepository.findAll();
+    public Page<Product> findProducts(Pageable pageable){
+        return productRepository.findAll(pageable);
     }
     /**
      * 상품 한건 조회
@@ -61,8 +63,8 @@ public class ProductService {
     }
 
     private void transferFileSetting(MultipartFile file, Product findProduct) throws IOException {
-//        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
-        String projectPath = System.getProperty("file.dir");
+        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
+//        String projectPath = System.getProperty("file.dir");
 
         String originalFilename = file.getOriginalFilename();
         if (file.isEmpty()){

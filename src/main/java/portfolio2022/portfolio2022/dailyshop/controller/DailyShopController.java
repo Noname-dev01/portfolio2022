@@ -1,6 +1,7 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +33,8 @@ public class DailyShopController {
     }
 
     @GetMapping
-    public String home(Model model){
-        List<Product> products = productService.findProducts();
-        model.addAttribute("products", products);
+    public String home(Model model, Pageable pageable){
+        model.addAttribute("products", productService.findProducts(pageable));
         return "dailyshop/index";
     }
 
