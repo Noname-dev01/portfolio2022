@@ -33,6 +33,7 @@ public class ProductService {
     /**
      * 상품 전체 조회
      */
+    public List<Product> findProducts(){return productRepository.findAll();}
     public Page<Product> findProducts(Pageable pageable){
         return productRepository.findAll(pageable);
     }
@@ -53,7 +54,7 @@ public class ProductService {
      * 상품 수정
      */
     @Transactional
-    public void productModify(Long id,String name,MultipartFile file,int price,String category,int stockQuantity) throws IOException {
+    public void productModify(Long id, String name, MultipartFile file, int price,String category, int stockQuantity) throws IOException {
         Product findProduct = productRepository.findById(id).get();
         transferFileSetting(file, findProduct);
         findProduct.setName(name);

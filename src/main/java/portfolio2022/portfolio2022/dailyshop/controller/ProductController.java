@@ -12,9 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.domain.Product;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +20,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
     /**
      * 상품 등록
      */
