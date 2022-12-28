@@ -33,8 +33,8 @@ public class DailyShopController {
     }
 
     @GetMapping
-    public String home(Model model, Pageable pageable){
-        model.addAttribute("products", productService.findProducts(pageable));
+    public String home(Model model){
+        model.addAttribute("products", productService.findProducts());
         return "dailyshop/index";
     }
 

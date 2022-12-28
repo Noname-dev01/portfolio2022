@@ -180,7 +180,7 @@
                    <li class="active"><a href="#men" data-toggle="tab">Men</a></li>
                    <li><a href="#women" data-toggle="tab">Women</a></li>
                    <li><a href="#sports" data-toggle="tab">Sports</a></li>
-                   <li><a href="#electronics" data-toggle="tab">Electronics</a></li>
+                   <li><a href="#electronics" data-toggle="tab">Digital</a></li>
                  </ul>
                  <!-- Tab panes -->
                  <div class="tab-content">
@@ -259,7 +259,7 @@
                    <div class="tab-pane fade" id="electronics">
                      <ul class="aa-product-catg">
                        <!-- start single product item -->
-                       <li th:each="product : ${products}" th:if="${product.category == 'ELECTRONICS'}">
+                       <li th:each="product : ${products}" th:if="${product.category == 'DIGITAL'}">
                          <figure>
                            <a class="aa-product-img" href="#"><img th:src="${product.filePath}" alt="polo shirt img"></a>
                            <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <section id="menu" th:fragment="menu">
   <div class="container">
     <div class="menu-area">
@@ -17,71 +17,71 @@
           <!-- Left nav -->
           <ul class="nav navbar-nav">
             <li><a href="/dailyShop">Home</a></li>
-            <li><a href="#">Men <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="/dailyShop/Men/Casual">Casual</a></li>
-                <li><a href="/dailyShop/Men/Sports">Sports</a></li>
-                <li><a href="/dailyShop/Men/Formal">Formal</a></li>
-                <li><a href="/dailyShop/Men/Outer">Outer</a></li>
-                <li><a href="/dailyShop/Men/Shirts">Shirts</a></li>
-                <li><a href="/dailyShop/Men/Pants">Pants</a></li>
-                <li><a href="/dailyShop/Men/Shoes">Shoes</a></li>
+            <li><a th:href="@{/dailyShop/product/category/list(category='MEN')}">Men <span class="caret"></span></a>
+              <ul class="dropdown-menu" >
+                <li><a href="#">Casual</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Formal</a></li>
+                <li><a href="#">Outer</a></li>
+                <li><a href="#">Shirts</a></li>
+                <li><a href="#">Pants</a></li>
+                <li><a href="#">Shoes</a></li>
                 <li><a href="#">Bag&Acc<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/dailyShop/Men/Bag">BAG</a></li>
-                    <li><a href="/dailyShop/Men/Acc">ACC</a></li>
-                    <li><a href="/dailyShop/Men/Wallet">Wallet</a></li>
+                    <li><a href="#">BAG</a></li>
+                    <li><a href="#">ACC</a></li>
+                    <li><a href="#">Wallet</a></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><a href="#">Women <span class="caret"></span></a>
+            <li><a th:href="@{/dailyShop/product/category/list(category='WOMEN')}">Women <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/dailyShop/Women/Casual">Casual</a></li>
-                <li><a href="/dailyShop/Women/Sports">Sports</a></li>
-                <li><a href="/dailyShop/Women/Formal">Formal</a></li>
-                <li><a href="/dailyShop/Women/Outer">Outer</a></li>
-                <li><a href="/dailyShop/Women/Shirts">Shirts</a></li>
-                <li><a href="/dailyShop/Women/Pants">Pants</a></li>
-                <li><a href="/dailyShop/Women/Shoes">Shoes</a></li>
+                <li><a href="#">Casual</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Formal</a></li>
+                <li><a href="#">Outer</a></li>
+                <li><a href="#">Shirts</a></li>
+                <li><a href="#">Pants</a></li>
+                <li><a href="#">Shoes</a></li>
                 <li><a href="#">Bag&Acc<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/dailyShop/Women/Bag">BAG</a></li>
-                    <li><a href="/dailyShop/Women/Acc">ACC</a></li>
-                    <li><a href="/dailyShop/Women/Wallet">Wallet</a></li>
+                    <li><a href="#">BAG</a></li>
+                    <li><a href="#">ACC</a></li>
+                    <li><a href="#">Wallet</a></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><a href="#">Kids <span class="caret"></span></a>
+            <li><a th:href="@{/dailyShop/product/category/list(category='KIDS')}">Kids <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/dailyShop/Kids/Casual">Casual</a></li>
-                <li><a href="/dailyShop/Kids/Sports">Sports</a></li>
-                <li><a href="/dailyShop/Kids/Formal">Formal</a></li>
-                <li><a href="/dailyShop/Kids/Outer">Outer</a></li>
-                <li><a href="/dailyShop/Kids/Shirts">Shirts</a></li>
-                <li><a href="/dailyShop/Kids/Pants">Pants</a></li>
-                <li><a href="/dailyShop/Kids/Shoes">Shoes</a></li>
+                <li><a href="#">Casual</a></li>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Formal</a></li>
+                <li><a href="#">Outer</a></li>
+                <li><a href="#">Shirts</a></li>
+                <li><a href="#">Pants</a></li>
+                <li><a href="#">Shoes</a></li>
                 <li><a href="#">Bag&Acc<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/dailyShop/Kids/Bag">BAG</a></li>
-                    <li><a href="/dailyShop/Kids/Acc">ACC</a></li>
-                    <li><a href="/dailyShop/Kids/Wallet">Wallet</a></li>
+                    <li><a href="#">BAG</a></li>
+                    <li><a href="#">ACC</a></li>
+                    <li><a href="#">Wallet</a></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><a href="/dailyShop/Sports">Sports</a></li>
-            <li><a href="#">Digital <span class="caret"></span></a>
+            <li><a th:href="@{/dailyShop/product/category/list(category='SPORTS')}">Sports</a></li>
+            <li><a th:href="@{/dailyShop/product/category/list(category='DIGITAL')}">Digital <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/dailyShop/Digital/Camera">Camera</a></li>
-                <li><a href="/dailyShop/Digital/Mobile">Mobile</a></li>
-                <li><a href="/dailyShop/Digital/Tablet">Tablet</a></li>
-                <li><a href="/dailyShop/Digital/Laptop">Laptop</a></li>
-                <li><a href="/dailyShop/Digital/Acc">Accesories</a></li>
+                <li><a href="#">Camera</a></li>
+                <li><a href="#">Mobile</a></li>
+                <li><a href="#">Tablet</a></li>
+                <li><a href="#">Laptop</a></li>
+                <li><a href="#">Accesories</a></li>
               </ul>
             </li>
-            <li><a href="/dailyShop/Furniture">Furniture</a></li>
+            <li><a th:href="@{/dailyShop/product/category/list(category='FURNITURE')}">Furniture</a></li>
             <li><a href="/dailyShop/contact">Contact</a></li>
             <li><a href="#">Pages <span class="caret"></span></a>
               <ul class="dropdown-menu">

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import portfolio2022.portfolio2022.dailyshop.domain.Category;
 import portfolio2022.portfolio2022.dailyshop.domain.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
 
@@ -25,10 +26,11 @@ public class ProductService {
      * 상품 등록
      */
     @Transactional
-    public void productRegister(Product product, MultipartFile file) throws IOException {
+    public Long productRegister(Product product, MultipartFile file) throws IOException {
         transferFileSetting(file, product);
+        Product saveProduct = productRepository.save(product);
 
-        productRepository.save(product);
+        return saveProduct.getId();
     }
     /**
      * 상품 전체 조회
@@ -54,7 +56,7 @@ public class ProductService {
      * 상품 수정
      */
     @Transactional
-    public void productModify(Long id, String name, MultipartFile file, int price,String category, int stockQuantity) throws IOException {
+    public void productModify(Long id, String name, MultipartFile file, int price, String category, int stockQuantity) throws IOException {
         Product findProduct = productRepository.findById(id).get();
         transferFileSetting(file, findProduct);
         findProduct.setName(name);
@@ -82,5 +84,11 @@ public class ProductService {
 
         findProduct.setFileName(originalFilename);
         findProduct.setFilePath("/files/"+fileName);
+    }
+    /**
+     * 카테고리별 상품 조회
+     */
+    public Page<Product> findByCategory(String category,Pageable pageable){
+        return productRepository.findByCategory(category,pageable);
     }
 }

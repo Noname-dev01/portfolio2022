@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.domain.Product;
+import portfolio2022.portfolio2022.dailyshop.service.CategoryService;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.io.IOException;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     /**
      * 상품 등록
@@ -30,8 +32,7 @@ public class ProductController {
     }
     @PostMapping("/product/register")
     public String productSave(Product product, MultipartFile file) throws IOException {
-        productService.productRegister(product,file);
-
+        productService.productRegister(product, file);
         return "redirect:/dailyShop";
     }
 
@@ -79,5 +80,14 @@ public class ProductController {
                                 MultipartFile file) throws IOException {
         productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
         return "redirect:/dailyShop/product/list";
+    }
+
+    /**
+     * 카테고리별 상품 리스트
+     */
+    @GetMapping("/product/category/list")
+    public String productListByCategory(Model model,Pageable pageable,String category){
+        model.addAttribute("products",productService.findByCategory(category,pageable));
+        return "dailyshop/product-list-test";
     }
 }

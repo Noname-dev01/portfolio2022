@@ -5,7 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.exception.NotEnoughStockException;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -23,6 +22,10 @@ public class Product {
     private String fileName;
     private String filePath;
     private String category;
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "category_id")
+//    private Category category;
 
 
     //== 비즈니스 로직 ==//

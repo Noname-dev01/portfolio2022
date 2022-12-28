@@ -27,16 +27,22 @@ repositories {
 }
 
 dependencies {
+	//스프링 데이터 jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//타임리프
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	//검증
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+	//querydsl
 	implementation 'com.querydsl:querydsl-apt'
 	implementation 'com.querydsl:querydsl-jpa'
+	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//h2 database
 	implementation 'com.h2database:h2'
 }
 
