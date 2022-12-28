@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface MemberRepository extends JpaRepository<Member,Long> {
     List<Member> findByName(@NotEmpty String name);
+
+    Member findByUserId(String userId);
 }

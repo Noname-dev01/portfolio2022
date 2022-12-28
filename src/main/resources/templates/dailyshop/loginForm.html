@@ -50,16 +50,16 @@
    <div class="container">
      <div class="row">
        <div class="col-md-12">
-        <div class="aa-myaccount-area">         
+        <div class="aa-myaccount-area">
             <div class="row">
               <div class="col-md-6">
                 <div class="aa-myaccount-login">
                 <h4>Login</h4>
-                 <form action="/dailyShop/login" th:object="${member}" class="aa-login-form">
+                 <form action="/dailyShop/login" class="aa-login-form">
                   <label th:for="name">Username<span>*</span></label>
-                   <input type="text" th:field="*{userId}" placeholder="Username or email">
+                   <input type="text" id="userId" name="userId" placeholder="Username or email">
                    <label th:for="password">Password<span>*</span></label>
-                    <input type="password" th:field="*{password}" placeholder="Password">
+                    <input type="password" id="password" name="password" placeholder="Password">
                     <button type="submit" class="aa-browse-btn">Login</button>
                     <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
                     <p class="aa-lost-password"><a href="#">Lost your password?</a></p>

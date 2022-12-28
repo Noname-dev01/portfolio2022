@@ -57,7 +57,7 @@
                  <h4>Register</h4>
                  <form role="form" action="/dailyShop/join" th:object="${memberForm}" class="aa-login-form" method="post">
                     <label th:for="userId">ID<span>*</span></label>
-                    <input type="text" th:field="*{userId}" class="form-control" placeholder="이름을 입력하세요"
+                    <input type="text" th:field="*{userId}" class="form-control" placeholder="아이디를 입력하세요"
                             th:class="${#fields.hasErrors('userId')}? 'form-control fieldError' : 'form-control'">
                      <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">Incorrect Id</p>
                     <label th:for="password">Password<span>*</span></label>

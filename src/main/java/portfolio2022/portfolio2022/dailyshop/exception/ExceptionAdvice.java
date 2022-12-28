@@ -1,12 +1,10 @@
 package portfolio2022.portfolio2022.dailyshop.exception;
 
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import portfolio2022.portfolio2022.dailyshop.controller.MemberForm;
+import portfolio2022.portfolio2022.dailyshop.controller.JoinDto;
 
 @ControllerAdvice
 @Slf4j
@@ -14,7 +12,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(DuplicateMemberException.class)
     public String dupMemberEx(DuplicateMemberException e, Model model){
-        model.addAttribute("memberForm",new MemberForm());
+        model.addAttribute("memberForm",new JoinDto());
         log.error(e.getMessage());
         return "dailyshop/joinForm";
     }

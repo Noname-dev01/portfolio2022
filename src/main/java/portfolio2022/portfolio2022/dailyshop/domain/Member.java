@@ -1,18 +1,19 @@
 package portfolio2022.portfolio2022.dailyshop.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -20,6 +21,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
     @NotEmpty
+    @Column(unique = true)
     private String userId;
     @NotEmpty
     private String password;
@@ -27,21 +29,15 @@ public class Member {
     private String name;
     @Embedded
     private Address address;
-
+    private String role;
+    private LocalDateTime createDate;
     @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
-    @Builder
-    public Member(String userId, String password, String name, Address address, List<Order> orders) {
-        this.userId = userId;
-        this.password = password;
-        this.name = name;
-        this.address = address;
-        this.orders = orders;
+    @PrePersist
+    public void createDate(){
+        this.createDate = LocalDateTime.now();
     }
-    public Member(String userId, Address address) {
-        this.userId = userId;
-        this.address = address;
-    }
+
 }
