@@ -1,20 +1,19 @@
 package portfolio2022.portfolio2022.dailyshop.repository;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.util.StringUtils;
-import portfolio2022.portfolio2022.dailyshop.domain.Order;
-import portfolio2022.portfolio2022.dailyshop.domain.OrderStatus;
-import portfolio2022.portfolio2022.dailyshop.domain.QMember;
-import portfolio2022.portfolio2022.dailyshop.domain.QOrder;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Order;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.OrderStatus;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.QMember;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.QOrder;
 import portfolio2022.portfolio2022.dailyshop.service.OrderSearch;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static portfolio2022.portfolio2022.dailyshop.domain.QMember.*;
-import static portfolio2022.portfolio2022.dailyshop.domain.QOrder.*;
+import static portfolio2022.portfolio2022.dailyshop.domain.entity.QMember.member;
+import static portfolio2022.portfolio2022.dailyshop.domain.entity.QOrder.order;
 
 public class OrderRepositoryImpl implements OrderRepositoryQuery{
 

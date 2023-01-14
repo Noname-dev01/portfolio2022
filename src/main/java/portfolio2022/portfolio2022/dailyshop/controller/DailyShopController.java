@@ -1,15 +1,11 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import portfolio2022.portfolio2022.dailyshop.domain.Product;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import portfolio2022.portfolio2022.dailyshop.controller.JoinDto;
+import portfolio2022.portfolio2022.dailyshop.domain.dto.JoinDto;
 
 @ControllerAdvice
 @Slf4j

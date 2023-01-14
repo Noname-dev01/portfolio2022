@@ -1,17 +1,13 @@
 package portfolio2022.portfolio2022.dailyshop.service;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import portfolio2022.portfolio2022.dailyshop.domain.*;
-import portfolio2022.portfolio2022.dailyshop.exception.NotEnoughStockException;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Address;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.repository.OrderRepository;
 
 import javax.persistence.EntityManager;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -83,9 +79,9 @@ class OrderServiceTest {
 //        return product;
 //    }
 
-    private Member createMember() {
-        Member member = new Member("회원1",new Address("123","123","123"));
-        em.persist(member);
-        return member;
-    }
+//    private Member createMember() {
+//        Member member = new Member("회원1",new Address("123","123","123"));
+//        em.persist(member);
+//        return member;
+//    }
 }

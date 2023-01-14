@@ -1,10 +1,8 @@
-package portfolio2022.portfolio2022.dailyshop.domain;
+package portfolio2022.portfolio2022.dailyshop.domain.entity;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

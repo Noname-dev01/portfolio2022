@@ -1,10 +1,9 @@
-package portfolio2022.portfolio2022.dailyshop.controller;
+package portfolio2022.portfolio2022.dailyshop.domain.dto;
 
 import lombok.Data;
-import portfolio2022.portfolio2022.dailyshop.domain.Category;
 
 @Data
-public class ProductForm {
+public class ProductDto {
 
     private String name;
     private int price;

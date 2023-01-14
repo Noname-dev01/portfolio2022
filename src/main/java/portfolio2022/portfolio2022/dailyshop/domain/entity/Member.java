@@ -1,4 +1,4 @@
-package portfolio2022.portfolio2022.dailyshop.domain;
+package portfolio2022.portfolio2022.dailyshop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -22,7 +22,7 @@ public class Member {
     private Long id;
     @NotEmpty
     @Column(unique = true)
-    private String userId;
+    private String username;
     @NotEmpty
     private String password;
     @NotEmpty

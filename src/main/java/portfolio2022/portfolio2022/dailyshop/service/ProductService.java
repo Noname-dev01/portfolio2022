@@ -6,8 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import portfolio2022.portfolio2022.dailyshop.domain.Category;
-import portfolio2022.portfolio2022.dailyshop.domain.Product;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
 
 import java.io.File;

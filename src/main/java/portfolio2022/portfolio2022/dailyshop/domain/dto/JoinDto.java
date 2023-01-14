@@ -1,12 +1,12 @@
-package portfolio2022.portfolio2022.dailyshop.controller;
+package portfolio2022.portfolio2022.dailyshop.domain.dto;
 
 import lombok.Data;
-import portfolio2022.portfolio2022.dailyshop.domain.Address;
-import portfolio2022.portfolio2022.dailyshop.domain.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Address;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 
 @Data
 public class JoinDto {
-    private String userId;
+    private String username;
     private String password;
     private String name;
     private String city;
@@ -15,7 +15,7 @@ public class JoinDto {
     private String role;
     public Member toEntity() {
         return Member.builder()
-                .userId(userId)
+                .username(username)
                 .password(password)
                 .name(name)
                 .address(new Address(city,street,zipcode))

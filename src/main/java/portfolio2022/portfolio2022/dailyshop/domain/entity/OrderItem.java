@@ -1,4 +1,4 @@
-package portfolio2022.portfolio2022.dailyshop.domain;
+package portfolio2022.portfolio2022.dailyshop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

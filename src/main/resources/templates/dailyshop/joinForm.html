@@ -55,21 +55,19 @@
               <div class="col-md-6">
                 <div class="aa-myaccount-register">                 
                  <h4>Register</h4>
-                 <form role="form" action="/dailyShop/join" th:object="${memberForm}" class="aa-login-form" method="post">
-                    <label th:for="userId">ID<span>*</span></label>
-                    <input type="text" th:field="*{userId}" class="form-control" placeholder="아이디를 입력하세요"
-                            th:class="${#fields.hasErrors('userId')}? 'form-control fieldError' : 'form-control'">
-                     <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">Incorrect Id</p>
+                 <form role="form" action="/dailyShop/join"  class="aa-login-form" method="post">
+                    <label th:for="username">ID<span>*</span></label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="아이디를 입력하세요">
                     <label th:for="password">Password<span>*</span></label>
-                    <input type="password" th:field="*{password}" placeholder="Password">
+                    <input type="password" name="password" id="password" placeholder="Password">
                      <label th:for="name">name<span>*</span></label>
-                     <input type="text" th:field="*{name}" placeholder="name">
+                     <input type="text" name="name" id="name" placeholder="name">
                      <label th:for="zipcode">zipcode<span>*</span></label>
-                     <input type="text" th:field="*{zipcode}" placeholder="zipcode">
+                     <input type="text" name="zipcode" id="zipcode" placeholder="zipcode">
                      <label th:for="city">city<span>*</span></label>
-                     <input type="text" th:field="*{city}" placeholder="city">
+                     <input type="text" name="city" id="city" placeholder="city">
                      <label th:for="street">street<span>*</span></label>
-                     <input type="text" th:field="*{street}" placeholder="street">
+                     <input type="text" name="street" id="street" placeholder="street">
                     <button type="submit" class="aa-browse-btn">Register</button>                    
                   </form>
                 </div>

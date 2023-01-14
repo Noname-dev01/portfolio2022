@@ -3,7 +3,7 @@ package portfolio2022.portfolio2022.dailyshop.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import portfolio2022.portfolio2022.dailyshop.domain.Category;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Category;
 import portfolio2022.portfolio2022.dailyshop.repository.CategoryRepository;
 
 @Service

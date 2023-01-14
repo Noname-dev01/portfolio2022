@@ -3,13 +3,12 @@ package portfolio2022.portfolio2022.dailyshop.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import portfolio2022.portfolio2022.dailyshop.domain.*;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.OrderRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)

@@ -9,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import portfolio2022.portfolio2022.dailyshop.domain.Product;
+import portfolio2022.portfolio2022.dailyshop.domain.dto.ProductDto;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.service.CategoryService;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
@@ -76,7 +77,7 @@ public class ProductController {
     }
     @PostMapping("/product/modify/{productId}")
     public String productModify(@PathVariable Long productId,
-                                @ModelAttribute ProductForm form,
+                                @ModelAttribute ProductDto form,
                                 MultipartFile file) throws IOException {
         productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
         return "redirect:/dailyShop/product/list";
