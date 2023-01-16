@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <!-- Start header section -->
 <header id="aa-header" th:fragment="headerSection">
   <!-- start header top  -->
@@ -28,7 +29,7 @@
               <!-- start currency -->
               <div class="aa-currency">
                 <div class="dropdown">
-                  <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <i class="fa fa-usd"></i>USD
                     <span class="caret"></span>
                   </a>
@@ -48,11 +49,12 @@
             <!-- / header top left -->
             <div class="aa-header-top-right">
               <ul class="aa-head-top-nav-right">
-                <li><a href="/dailyShop/account">My Account</a></li>
-                <li class="hidden-xs"><a href="/dailyShop/wishlist">Wishlist</a></li>
-                <li class="hidden-xs"><a href="/dailyShop/cart">My Cart</a></li>
-                <li class="hidden-xs"><a href="/dailyShop/join">회원가입</a></li>
-                <li><a href="/dailyShop/login">로그인</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/account}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/wishlist}">Wishlist</a></li>
+                <li sec:authorize="isAuthenticated()"class="hidden-xs"><a th:href="@{/dailyShop/cart}">My Cart</a></li>
+                <li sec:authorize="isAnonymous()"class="hidden-xs"><a th:href="@{/dailyShop/join}">회원가입</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/dailyShop/login}">로그인</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/logout}">로그아웃</a></li>
               </ul>
             </div>
           </div>
