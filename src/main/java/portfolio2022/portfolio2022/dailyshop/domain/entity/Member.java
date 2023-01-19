@@ -24,8 +24,9 @@ public class Member {
     private String username;
     private String password;
     private String name;
-    @Embedded
-    private Address address;
+    private String address;
+    private String email;
+    private String phone;
     private String role;
     private LocalDateTime createDate;
     @JsonIgnore

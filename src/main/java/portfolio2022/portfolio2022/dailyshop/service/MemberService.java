@@ -41,4 +41,16 @@ public class MemberService {
 
     //회원 id로 찾기
     public Member findMember(Long memberId){return memberRepository.findById(memberId).get();}
+
+    /**
+     * 회원 정보 수정
+     */
+    @Transactional
+    public void memberModify(Member member){
+        Member memberUpdate = memberRepository.findById(member.getId()).get();
+        memberUpdate.setName(member.getName());
+        memberUpdate.setEmail(member.getEmail());
+        memberUpdate.setPhone(member.getPhone());
+        memberUpdate.setAddress(member.getAddress());
+    }
 }

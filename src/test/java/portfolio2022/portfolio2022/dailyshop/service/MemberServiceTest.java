@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Address;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.exception.DuplicateMemberException;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
@@ -40,14 +39,14 @@ public class MemberServiceTest {
                 .username("kim")
                 .password("1234")
                 .name("kim")
-                .address(new Address("asd","asd","asd"))
+                .address("asd")
                 .build();
 
         Member member2 = Member.builder()
                 .username("kim")
                 .password("1234")
                 .name("kim")
-                .address(new Address("asd","asd","asd"))
+                .address("asd")
                 .build();
         //when
         memberService.join(member1);

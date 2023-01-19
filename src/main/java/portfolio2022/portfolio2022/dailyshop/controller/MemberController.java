@@ -64,6 +64,9 @@ public class MemberController {
         return "redirect:/dailyShop";
     }
 
+    /**
+     * 마이페이지
+     */
     @GetMapping("/mypage/{id}")
     public String myPage(@PathVariable("id")Long id, Model model,@AuthenticationPrincipal MemberDetails memberDetails){
         if (memberDetails.getMember().getId() == id){
@@ -72,6 +75,27 @@ public class MemberController {
         }else {
             return "redirect:/dailyShop/main";
         }
+    }
+
+    /**
+     * 회원 정보 수정 페이지
+     */
+    @GetMapping("/mypage/modify/{id}")
+    public String memberModify(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
+        //로그인 한 유저와 수정 페이지에 접속하는 id가 같아야 함
+        if (memberDetails.getMember().getId() == id){
+            model.addAttribute("member",memberService.findMember(id));
+            return "/dailyshop/member-modify";
+        }else {
+            return "redirect:/dailyShop/main";
+        }
+    }
+
+    @PostMapping("/mypage/modify/{id}")
+    public String memberModify(@PathVariable("id") Long id,Member member){
+        memberService.memberModify(member);
+
+        return "redirect:/dailyShop/mypage/{id}";
     }
 }
 

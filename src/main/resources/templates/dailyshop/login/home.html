@@ -20,7 +20,7 @@
   <!-- END SCROLL TOP BUTTON -->
 
    <!-- Start header section -->
-   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()})}"/>
+   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()},memberId=${member.getId()})}"/>
    <!-- / header section -->
 
   <!-- menu -->

@@ -17,9 +17,8 @@ public class Delivery {
     @JsonIgnore
     @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
-
-    @Embedded
-    private Address address;
+    
+    private String address;
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status; //READY, COMP
@@ -28,7 +27,7 @@ public class Delivery {
         this.order = order;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 }

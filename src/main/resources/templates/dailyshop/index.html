@@ -74,7 +74,7 @@
                    <li sec:authorize="isAnonymous()" class="hidden-xs"><a th:href="@{/dailyShop/join}">회원가입</a></li>
                    <!--                <li sec:authorize="isAuthenticated()"><a th:href="@{#}" th:text="${#authentication.name}+'님'">사용자</a></li>-->
                    <li sec:authorize="isAuthenticated()"><a th:href="@{#}" th:text="${member.getName()}+'님'">사용자</a></li>
-                   <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage}">마이페이지</a></li>
+                   <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${member.getId()})}">마이페이지</a></li>
                    <li sec:authorize="isAnonymous()"><a th:href="@{/dailyShop/login}">로그인</a></li>
                    <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/logout}">로그아웃</a></li>
                  </ul>

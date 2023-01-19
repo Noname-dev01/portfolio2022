@@ -3,8 +3,6 @@ package portfolio2022.portfolio2022.dailyshop.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Address;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.repository.OrderRepository;
 
 import javax.persistence.EntityManager;
