@@ -1,20 +1,25 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
+import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/dailyShop")
+@Slf4j
 public class DailyShopController {
 
     private final ProductService productService;
+    private final MemberService memberService;
 
     @GetMapping("/wishlist")
     public String wishlist(){
@@ -30,16 +35,37 @@ public class DailyShopController {
         return "dailyshop/product";
     }
 
+    /**
+     * 로그인 안했을때
+     */
     @GetMapping
-    public String home(Model model){
+    public String homePageAnonymous(Model model,@AuthenticationPrincipal MemberDetails memberDetails){
         model.addAttribute("products", productService.findProducts());
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.isAuthenticated()){
-            model.addAttribute("username",authentication.getName());
+        try {
+            Long id = memberDetails.getMember().getId();
+            model.addAttribute("member",memberService.findMember(id));
+        }catch (NullPointerException e){
+            return "dailyshop/index";
         }
         return "dailyshop/index";
     }
 
+    /**
+     * 로그인 후 이동 화면
+     */
+    @GetMapping("/main")
+    public String home(Model model, @AuthenticationPrincipal MemberDetails memberDetails){
+
+        try {
+            Long id = memberDetails.getMember().getId();
+            model.addAttribute("member",memberService.findMember(id));
+        }catch (NullPointerException e){
+            return "redirect:/dailyShop/login";
+        }
+
+        model.addAttribute("products", productService.findProducts());
+        return "dailyshop/login/home";
+    }
     @GetMapping("/contact")
     public String contact(){
         return "dailyshop/contact";

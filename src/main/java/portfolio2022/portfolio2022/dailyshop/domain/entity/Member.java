@@ -20,12 +20,9 @@ public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-    @NotEmpty
     @Column(unique = true)
     private String username;
-    @NotEmpty
     private String password;
-    @NotEmpty
     private String name;
     @Embedded
     private Address address;

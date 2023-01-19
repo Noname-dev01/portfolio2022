@@ -2,19 +2,17 @@ package portfolio2022.portfolio2022.dailyshop.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import portfolio2022.portfolio2022.dailyshop.domain.dto.JoinDto;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
+import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,12 +33,12 @@ public class MemberController {
                             Model model){
         model.addAttribute("error",error);
         model.addAttribute("exception",exception);
-        return "dailyshop/loginForm";
+        return "dailyshop/login/loginForm";
     }
 
     @GetMapping("/join")
     public String joinForm(){
-        return "dailyshop/joinForm";
+        return "dailyshop/login/joinForm";
     }
 
     @PostMapping("/join")
@@ -63,7 +61,17 @@ public class MemberController {
             new SecurityContextLogoutHandler().logout(request,response,authentication);
         }
 
-
         return "redirect:/dailyShop";
     }
+
+    @GetMapping("/mypage/{id}")
+    public String myPage(@PathVariable("id")Long id, Model model,@AuthenticationPrincipal MemberDetails memberDetails){
+        if (memberDetails.getMember().getId() == id){
+            model.addAttribute("member",memberService.findMember(id));
+            return "dailyshop/mypage";
+        }else {
+            return "redirect:/dailyShop/main";
+        }
+    }
 }
+

@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import portfolio2022.portfolio2022.dailyshop.security.common.FormAuthenticationDetailsSource;
 import portfolio2022.portfolio2022.dailyshop.security.handler.CustomAccessDeniedHandler;
-import portfolio2022.portfolio2022.dailyshop.security.provider.CustomAuthenticationProvider;
 
 @EnableWebSecurity//security 활성화
 @Configuration
@@ -44,21 +43,18 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CustomAuthenticationProvider customAuthenticationProvider(){return new CustomAuthenticationProvider();}
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/main/**").authenticated()
+                .anyRequest().permitAll()
         .and()
                 .formLogin()
                 .loginPage("/dailyShop/login")//인증이 필요하면 여기로 이동
                 .loginProcessingUrl("/dailyShop/login_proc")//스프링 시큐리티가 로그인 자동 진행
-                .defaultSuccessUrl("/dailyShop")//로그인이 정상적이면 여기로 이동
+                .defaultSuccessUrl("/dailyShop/main")//로그인이 정상적이면 여기로 이동
                 .authenticationDetailsSource(authenticationDetailsSource)
                 .successHandler(customAuthenticationSuccessHandler)
                 .failureHandler(customAuthenticationFailureHandler)

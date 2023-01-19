@@ -34,7 +34,7 @@ public class ProductController {
     @PostMapping("/product/register")
     public String productSave(Product product, MultipartFile file) throws IOException {
         productService.productRegister(product, file);
-        return "redirect:/dailyShop";
+        return "redirect:/dailyShop/main";
     }
 
     /**

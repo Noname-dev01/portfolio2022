@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="dailyshop/fragments/header :: header">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <title>Daily Shop | Account Page</title>
+  </head>
+  <body>
+  
+   <!-- wpf loader Two -->
+    <div id="wpf-loader-two">          
+      <div class="wpf-loader-two-inner">
+        <span>Loading</span>
+      </div>
+    </div> 
+    <!-- / wpf loader Two -->       
+ <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+
+   <!-- Start header section -->
+   <header th:replace="dailyshop/fragments/headerSection :: headerSection" />
+   <!-- / header section -->
+
+   <!-- menu -->
+   <section th:replace="dailyshop/fragments/menu :: menu" />
+   <!-- / menu -->
+
+  <!-- catg header banner section -->
+  <section id="aa-catg-head-banner">
+    <img src="/dailyShop/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+     <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2>마이페이지</h2>
+        <ol class="breadcrumb">
+          <li><a href="/dailyShop">Home</a></li>
+          <li class="active">MyPage</li>
+        </ol>
+      </div>
+     </div>
+   </div>
+  </section>
+  <!-- / catg header banner section -->
+
+
+   <!-- mypage -->
+   <section id="aa-product-category">
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                   <div class="aa-product-catg-content">
+                       <div class="row gutters-sm">
+                           <div class="col-md-4 mb-3">
+                               <div class="card">
+                                   <div class="card-body">
+                                       <div class="d-flex flex-column align-items-center text-center">
+                                           <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                           <div class="mt-3">
+                                               <h4>John Doe</h4>
+                                               <a type="button" class="btn btn-primary">정보수정</a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md-8">
+                               <div class="card mb-3">
+                                   <div class="card-body">
+                                       <div class="row">
+                                           <div class="col-sm-3">
+                                               <h6 class="mb-0">회원이름</h6>
+                                           </div>
+                                           <div class="col-sm-9 text-secondary">
+                                               회원 이름
+                                           </div>
+                                       </div>
+                                       <hr>
+                                       <div class="row">
+                                           <div class="col-sm-3">
+                                               <h6 class="mb-0">닉네임</h6>
+                                           </div>
+                                           <div class="col-sm-9 text-secondary">
+                                               회원 닉네임
+                                           </div>
+                                       </div>
+                                       <hr>
+                                       <div class="row">
+                                           <div class="col-sm-3">
+                                               <h6 class="mb-0">이메일</h6>
+                                           </div>
+                                           <div class="col-sm-9 text-secondary">
+                                               회원 이메일
+                                           </div>
+                                       </div>
+                                       <hr>
+                                       <div class="row">
+                                           <div class="col-sm-3">
+                                               <h6 class="mb-0">전화번호</h6>
+                                           </div>
+                                           <div class="col-sm-9 text-secondary">
+                                               (239) 816-9029
+                                           </div>
+                                       </div>
+                                       <hr>
+                                       <div class="row">
+                                           <div class="col-sm-3">
+                                               <h6 class="mb-0">주소</h6>
+                                           </div>
+                                           <div class="col-sm-9 text-secondary">
+                                               회원 주소
+                                           </div>
+                                       </div>
+                                       <hr>
+                                   </div>
+                               </div>
+
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+                   <aside class="aa-sidebar">
+                       <!-- single sidebar -->
+                       <div class="aa-sidebar-widget">
+                           <h3>마이페이지</h3>
+                           <ul class="nav flex-md-column">
+                               <li th:class="nav-item"><a class="nav-link active" th:href="@{/dailyShop/mypage}">마이페이지</a></li>
+                               <li th:class="nav-item"><a th:class="nav-link" href="">장바구니</a></li>
+                               <li th:class="nav-item"><a th:class="nav-link" href="">주문내역</a></li>
+                               <li th:class="nav-item"><a th:class="nav-link" href="">충전하기</a></li>
+                           </ul>
+                       </div>
+                   </aside>
+               </div>
+           </div>
+       </div>
+   </section>
+    <!-- /mypage -->
+   <!-- footer -->
+   <footer th:replace="dailyshop/fragments/footer :: footer"/>
+   <!--  / footer -->
+
+   <!-- login Modal -->
+   <div th:replace="dailyshop/fragments/loginModal :: loginModal"/>
+   <!--/ login Modal -->
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/dailyShop/js/bootstrap.js"></script>
+  <!-- SmartMenus jQuery plugin -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.js"></script>
+  <!-- SmartMenus jQuery Bootstrap Addon -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.bootstrap.js"></script>
+  <!-- To Slider JS -->
+  <script src="/dailyShop/js/sequence.js"></script>
+  <script src="/dailyShop/js/sequence-theme.modern-slide-in.js"></script>
+  <!-- Product view slider -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.simpleGallery.js"></script>
+  <script type="text/javascript" src="/dailyShop/js/jquery.simpleLens.js"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="/dailyShop/js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="/dailyShop/js/nouislider.js"></script>
+  <!-- Custom js -->
+  <script src="/dailyShop/js/custom.js"></script>
+  
+
+  </body>
+</html>
