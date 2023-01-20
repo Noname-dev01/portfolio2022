@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
 
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CartService cartService;
 
     /**
      * 상품 등록
@@ -46,9 +48,15 @@ public class ProductService {
     }
     /**
      * 상품 삭제
+     * 지우려는 상품을 카트 상품에서도 삭제
      */
     @Transactional
     public void productDelete(Long id){
+        //cartItem 중에 해당 id를 가진 product 찾기
+        List<CartItem> product = cartService.findCartItemByProductId(id);
+        for (CartItem cartItem : product) {
+         cartService.cartItemDelete(cartItem.getId());
+        }
         productRepository.deleteById(id);
     }
     /**

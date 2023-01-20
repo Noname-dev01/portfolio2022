@@ -2,6 +2,7 @@ package portfolio2022.portfolio2022.dailyshop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -28,7 +29,13 @@ public class Member {
     private String email;
     private String phone;
     private String role;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDateTime createDate;
+
+    //회원의 카트
+    @OneToOne(mappedBy = "member")
+    private Cart cart;
+
     @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();

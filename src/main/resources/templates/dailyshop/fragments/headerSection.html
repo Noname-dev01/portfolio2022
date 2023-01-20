@@ -51,7 +51,7 @@
               <ul class="aa-head-top-nav-right">
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/account}">My Account</a></li>
                 <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/wishlist}">Wishlist</a></li>
-                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/cart}">My Cart</a></li>
+                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/cart/{id}(id=${memberId})}">My Cart</a></li>
                 <li sec:authorize="isAnonymous()" class="hidden-xs"><a th:href="@{/dailyShop/join}">회원가입</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{#}" th:text="${authname}+'님'">사용자</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}">마이페이지</a></li>

@@ -7,4 +7,6 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
     Page<Product> findByCategory(String category, Pageable pageable);
+
+    Product findProductById(Long id);
 }

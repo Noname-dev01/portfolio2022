@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.domain.dto.ProductDto;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
+import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.CategoryService;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
@@ -23,6 +24,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final CartService cartService;
 
     /**
      * 상품 등록

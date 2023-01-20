@@ -1,10 +1,14 @@
 package portfolio2022.portfolio2022.dailyshop.domain.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.exception.NotEnoughStockException;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,11 +26,13 @@ public class Product {
     private String fileName;
     private String filePath;
     private String category;
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItems = new ArrayList<>();
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private LocalDate createDate; // 상품 등록일
 
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "category_id")
-//    private Category category;
-
+    @PrePersist
+    public void createDate(){this.createDate = LocalDate.now();}
 
     //== 비즈니스 로직 ==//
 

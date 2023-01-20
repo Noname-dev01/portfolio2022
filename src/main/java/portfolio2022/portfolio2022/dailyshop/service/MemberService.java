@@ -8,6 +8,7 @@ import portfolio2022.portfolio2022.dailyshop.exception.DuplicateMemberException;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final CartService cartService;
 
     /**
      * 회원 가입
@@ -22,7 +24,10 @@ public class MemberService {
     @Transactional
     public Long join(Member member){
         validateDuplicateMember(member); //중복 회원 검증
-        memberRepository.save(member);
+        Member memberEntity = memberRepository.save(member);
+        if (Objects.equals(memberEntity.getRole(), "ROLE_USER")){
+            cartService.createCart(member);
+        }
         return member.getId();
     }
 
