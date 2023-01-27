@@ -6,13 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
+import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +27,7 @@ public class CartController {
 
     private final CartService cartService;
     private final MemberService memberService;
+    private final ProductService productService;
 
     /**
      * 카트 페이지 접속
@@ -54,6 +58,54 @@ public class CartController {
             return "dailyshop/memberCart";
         }else {
          return "redirect:/dailyShop/main";
+        }
+    }
+
+    /**
+     * 카트에 상품 넣기
+     */
+    @PostMapping("/mypage/cart/{id}/{productId}")
+    public String addCartItem(@PathVariable("id") Long id,@PathVariable("productId") Long productId, int amount){
+
+        Member member = memberService.findMember(id);
+        Product product = productService.findProduct(productId);
+
+        cartService.addCart(member,product,amount);
+
+        return "redirect:/dailyShop/main";
+    }
+
+    /**
+     * 카트에서 상품 삭제
+     */
+    @GetMapping("/mypage/cart/{id}/{cartItemId}/delete")
+    public String deleteCartItem(@PathVariable("id") Long id, @PathVariable("cartItemId") Long cartItemId,
+                                 Model model,@AuthenticationPrincipal MemberDetails memberDetails){
+        if (Objects.equals(memberDetails.getMember().getId(), id)){
+            //cartItemId로 카트 상품 찾기
+            CartItem cartItem = cartService.findCartItemById(cartItemId);
+            //해당 유저의 카트 찾기
+            Cart memberCart = cartService.findMemberCart(id);
+            //카트 전체 수량 감소
+            memberCart.setCount(memberCart.getCount()-cartItem.getCount());
+            //장바구니 물건 삭제
+            cartService.cartItemDelete(cartItemId);
+            //해당 유저의 장바구니 상품들
+            List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+
+            //총 가격 += 수량 * 가격
+            int totalPrice = 0;
+            for (CartItem item : cartItemList) {
+                totalPrice += item.getCount() * item.getProduct().getPrice();
+            }
+            model.addAttribute("totalPrice",totalPrice);
+            model.addAttribute("totalCount",memberCart.getCount());
+            model.addAttribute("cartItems",cartItemList);
+            model.addAttribute("member",memberService.findMember(id));
+
+            return "dailyshop/memberCart";
+        }else {
+            return "redirect:/dailyShop/main";
         }
     }
 }

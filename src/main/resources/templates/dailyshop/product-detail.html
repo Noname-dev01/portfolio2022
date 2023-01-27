@@ -58,7 +58,7 @@
                   <div class="aa-product-view-slider">                                
                     <div id="demo-1" class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
-                        <div class="simpleLens-big-image-container"><a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image"><img src="/dailyShop/img/view-slider/medium/polo-shirt-1.png" class="simpleLens-big-image"></a></div>
+                        <div class="simpleLens-big-image-container"><a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image"><img th:src="@{${product.getFilePath()}}" class="simpleLens-big-image"></a></div>
                       </div>
                       <div class="simpleLens-thumbnails-container">
                           <a data-big-image="img/view-slider/medium/polo-shirt-1.png" data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-thumbnail-wrapper" href="#">
@@ -77,9 +77,9 @@
                 <!-- Modal view content -->
                 <div class="col-md-7 col-sm-7 col-xs-12">
                   <div class="aa-product-view-content">
-                    <h3>T-Shirt</h3>
+                    <h3 th:text="${product.getName()}">T-Shirt</h3>
                     <div class="aa-price-block">
-                      <span class="aa-product-view-price">$34.99</span>
+                      <span class="aa-product-view-price" th:text="|${product.getPrice()}원|">$34.99</span>
                       <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
@@ -99,24 +99,55 @@
                       <a href="#" class="aa-color-white"></a>                      
                     </div>
                     <div class="aa-prod-quantity">
-                      <form action="">
-                        <select id="" name="">
-                          <option selected="1" value="0">1</option>
-                          <option value="1">2</option>
-                          <option value="2">3</option>
-                          <option value="3">4</option>
-                          <option value="4">5</option>
-                          <option value="5">6</option>
-                        </select>
-                      </form>
                       <p class="aa-prod-category">
-                        Category: <a href="#">Polo T-Shirt</a>
+                        Category: <a href="#" th:text="${product.getCategory()}">Polo T-Shirt</a>
                       </p>
                     </div>
                     <div class="aa-prod-view-bottom">
-                      <a class="aa-add-to-cart-btn" href="#">Add To Cart</a>
-                      <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
+                      <form method="post" onsubmit="return addCart();" th:action="@{/dailyShop/mypage/cart/{id}/{productId}(id=${member.id},productId=${product.id})}">
+                        <select id="amount" name="amount">
+                          <option selected="1" value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
+                      <button type="submit" id="addCart" class="aa-add-to-cart-btn" href="#">장바구니 담기</button>
+                      </form>
                     </div>
+<!--                    <div class="aa-prod-view-bottom">-->
+<!--                      <form method="post" th:action="@{/dailyShop/mypage/cart/{id}/{productId}(id=${member.id},productId=${product.id})}">-->
+<!--                        <select id="amount" name="amount">-->
+<!--                          <option selected="1" value="0">1</option>-->
+<!--                          <option value="1">2</option>-->
+<!--                          <option value="2">3</option>-->
+<!--                          <option value="3">4</option>-->
+<!--                          <option value="4">5</option>-->
+<!--                          <option value="5">6</option>-->
+<!--                        </select>-->
+<!--                        <button type="submit" class="aa-add-to-cart-btn" href="#">구매하기</button>-->
+<!--                      </form>-->
+<!--                    </div>-->
+                    <script th:inline="javascript">
+                      /* <![CDATA[ */
+                      var leftproductcount = [[${product.stockQuantity}]]
+                      const button = document.getElementById("addCart")
+
+                      function addCart(){
+                        var count = document.getElementById("amount").value
+                        if (isNaN(count)){
+                          alert("숫자를 입력해주세요")
+                          return false
+                        }else if (count > leftproductcount){
+                          alert("재고가 부족합니다.")
+                          return false
+                        }else {
+                          <!--document.getElementById("buy").innerText = count-->
+                          return true
+                        }
+                      }
+                    </script>
                   </div>
                 </div>
               </div>
