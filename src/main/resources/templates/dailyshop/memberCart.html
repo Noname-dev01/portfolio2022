@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <title>Daily Shop | Account Page</title>
+      <style>
+          td, th {
+              text-align: center;
+              padding: 0;
+          }
+      </style>
   </head>
   <body>
   
@@ -59,22 +65,24 @@
                                        <table class="table">
                                            <thead>
                                            <tr>
-                                               <th>번호</th>
-                                               <th>상품명</th>
-                                               <th>가격</th>
-                                               <th>수량</th>
-                                               <th>담은 날짜</th>
-                                               <th>삭제</th>
+                                               <th style="text-align: center;width: 5%;">번호</th>
+                                               <th style="text-align: center;width: 5%;">상품 이미지</th>
+                                               <th style="text-align: center;width: 5%;">상품명</th>
+                                               <th style="text-align: center;width: 5%;">가격</th>
+                                               <th style="text-align: center;width: 5%;">수량</th>
+                                               <th style="text-align: center;width: 5%;">담은 날짜</th>
+                                               <th style="text-align: center;width: 5%;">삭제</th>
                                            </tr>
                                            </thead>
                                            <tbody>
                                            <tr th:each="cartItem, i: ${cartItems}">
-                                               <td th:text="${i.count}">번호</td>
-                                               <td th:text="${cartItem.getProduct().getName()}">상품명</a></td>
-                                               <td th:text="${cartItem.getProduct().getPrice() * cartItem.getCount()}">가격</td>
-                                               <td th:text="${cartItem.getCount()}">수량</td>
-                                               <td th:text="${cartItem.getCart().getCreateDate()}">담은 날짜</td>
-                                               <td><a class="remove" th:href="@{/dailyShop/mypage/cart/{id}/{cartItemId}/delete(id=${cartItem.getCart().getMember().id},cartItemId=${cartItem.getId()})}"><fa class="fa fa-close"></fa></a></td>
+                                               <td th:text="${i.count}" style="vertical-align: middle;text-align: center;">번호</td>
+                                               <td style="vertical-align: middle;text-align: center;"><img th:src="${cartItem.product.getFilePath()}" style="width: 100%;"></td>
+                                               <td th:text="${cartItem.getProduct().getName()}" style="vertical-align: middle;text-align: center;">상품명</a></td>
+                                               <td th:text="${cartItem.getProduct().getPrice() * cartItem.getCount()}" style="vertical-align: middle;text-align: center;">가격</td>
+                                               <td th:text="${cartItem.getCount()}" style="vertical-align: middle;text-align: center;">수량</td>
+                                               <td th:text="${cartItem.getCart().getCreateDate()}" style="vertical-align: middle;text-align: center;">담은 날짜</td>
+                                               <td style="vertical-align: middle;text-align: center;"><a class="remove" th:href="@{/dailyShop/mypage/cart/{id}/{cartItemId}/delete(id=${cartItem.getCart().getMember().id},cartItemId=${cartItem.getId()})}"><fa class="fa fa-close"></fa></a></td>
                                            </tr>
                                            </tbody>
                                        </table>
