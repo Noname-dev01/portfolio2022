@@ -66,10 +66,9 @@ public class ProductController {
     public String productView(@PathVariable("productId") Long id, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
         if (memberDetails.getMember().getRole().equals("ROLE_ADMIN")){
             //관리자
-            Member member = memberDetails.getMember();
 
             model.addAttribute("product",productService.findProduct(id));
-            model.addAttribute("member",member);
+            model.addAttribute("member", memberDetails.getMember());
 
             return "dailyshop/product-detail";
         }else {
@@ -88,7 +87,7 @@ public class ProductController {
 
             model.addAttribute("cartCount",cartCount);
             model.addAttribute("product",productService.findProduct(id));
-            model.addAttribute("member",member);
+            model.addAttribute("member", memberDetails.getMember());
 
             return "dailyshop/product-detail";
         }

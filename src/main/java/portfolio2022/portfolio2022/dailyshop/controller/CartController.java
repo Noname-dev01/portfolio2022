@@ -108,4 +108,26 @@ public class CartController {
             return "redirect:/dailyShop/main";
         }
     }
+
+    /**
+     * 카트에서 상품 삭제(메인에 있는 카트) 삭제 후 메인 페이지로 이동
+     */
+    @GetMapping("/mypage/cart/{id}/{cartItemId}/deleteMain")
+    public String deleteCartItemMain(@PathVariable("id") Long id, @PathVariable("cartItemId") Long cartItemId,
+                                 Model model,@AuthenticationPrincipal MemberDetails memberDetails){
+        if (Objects.equals(memberDetails.getMember().getId(), id)){
+            //cartItemId로 카트 상품 찾기
+            CartItem cartItem = cartService.findCartItemById(cartItemId);
+            //해당 유저의 카트 찾기
+            Cart memberCart = cartService.findMemberCart(id);
+            //카트 전체 수량 감소
+            memberCart.setCount(memberCart.getCount()-cartItem.getCount());
+            //장바구니 물건 삭제
+            cartService.cartItemDelete(cartItemId);
+
+            return "redirect:/dailyShop/main";
+        }else {
+            return "redirect:/dailyShop/main";
+        }
+    }
 }

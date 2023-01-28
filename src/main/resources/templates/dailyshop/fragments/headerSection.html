@@ -53,7 +53,7 @@
                 <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/wishlist}">Wishlist</a></li>
                 <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/cart/{id}(id=${memberId})}">My Cart</a></li>
                 <li sec:authorize="isAnonymous()" class="hidden-xs"><a th:href="@{/dailyShop/join}">회원가입</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{#}" th:text="${authname}+'님'">사용자</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}" th:text="${authname}+'님'">사용자</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}">마이페이지</a></li>
                 <li sec:authorize="isAnonymous()"><a th:href="@{/dailyShop/login}">로그인</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/logout}">로그아웃</a></li>
@@ -84,35 +84,27 @@
             </div>
             <!-- / logo  -->
             <!-- cart box -->
-            <div class="aa-cartbox">
+            <div class="aa-cartbox" sec:authorize="isAuthenticated()">
               <a class="aa-cart-link" href="#">
                 <span class="fa fa-shopping-basket"></span>
                 <span class="aa-cart-title">SHOPPING CART</span>
-                <span class="aa-cart-notify">2</span>
+<!--                <span class="aa-cart-notify" th:text="${cartItems.size()}">2</span>-->
               </a>
               <div class="aa-cartbox-summary">
                 <ul>
-                  <li>
-                    <a class="aa-cartbox-img" href="#"><img src="/dailyShop/img/woman-small-2.jpg" alt="img"></a>
+                  <li th:each="cartItem : ${cartItems}">
+                    <a class="aa-cartbox-img" href="#"><img th:src="${cartItem.product.getFilePath()}" alt="img"></a>
                     <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
+                      <h4><a href="#" th:text="${cartItem.getProduct().getName()}">Product Name</a></h4>
+                      <p><span th:text="${cartItem.getCount()}">1</span> x <span th:text="|${cartItem.getProduct().getPrice()}원|">$250</span></p>
                     </div>
-                    <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
-                  </li>
-                  <li>
-                    <a class="aa-cartbox-img" href="#"><img src="/dailyShop/img/woman-small-1.jpg" alt="img"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>
-                    <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                    <a class="aa-remove-product" th:href="@{/dailyShop/mypage/cart/{id}/{cartItemId}/deleteMain(id=${cartItem.getCart().getMember().id},cartItemId=${cartItem.getId()})}"><span class="fa fa-times"></span></a>
                   </li>
                   <li>
                       <span class="aa-cartbox-total-title">
                         Total
                       </span>
-                    <span class="aa-cartbox-total-price">
+                    <span class="aa-cartbox-total-price" th:text="|${totalPrice}원|">
                         $500
                       </span>
                   </li>

@@ -27,7 +27,7 @@ public class Cart {
 
     private int count; // 카트에 담긴 상품 개수
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
     private List<CartItem> cartItems = new ArrayList<>();
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")

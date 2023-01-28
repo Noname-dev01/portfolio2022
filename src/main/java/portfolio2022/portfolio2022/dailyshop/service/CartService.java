@@ -1,6 +1,7 @@
 package portfolio2022.portfolio2022.dailyshop.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
@@ -9,7 +10,9 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.CartItemRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.CartRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
+import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,8 @@ public class CartService {
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
     private final CartItemRepository cartItemRepository;
+    //?
+    private final MemberRepository memberRepository;
 
     /**
      * 회원가입 하면 카트 하나 생성
