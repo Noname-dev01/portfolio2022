@@ -48,7 +48,7 @@ public class SecurityConfig {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/main/**").authenticated()
+                .antMatchers("/dailyShop/main/**","/dailyShop/mypage/**").authenticated()
                 .anyRequest().permitAll()
         .and()
                 .formLogin()

@@ -27,7 +27,7 @@
 
 
    <!-- Start header section -->
-   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()},memberId=${member.getId()})}"/>
+   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()},memberId=${member.getId()},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
    <!-- / header section -->
 
    <!-- menu -->
@@ -116,7 +116,7 @@
                                        <ul class="list-unstyled mt-3 mb-4">
                                            <li>잘못 담은 물건이 있는지 확인해보세요!</li>
                                        </ul>
-                                       <button type="submit" class="w-100 btn btn-lg btn-outline-primary">구매하기</button>
+                                       <a class="aa-cartbox-checkout aa-primary-btn" th:href="@{/dailyShop/checkout}">구매하기</a>
                                    </form>
                                </div>
                            </div>

@@ -21,7 +21,7 @@
 
 
    <!-- Start header section -->
-   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()},memberId=${member.getId()})}"/>
+   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()},memberId=${member.getId()},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
    <!-- / header section -->
 
    <!-- menu -->

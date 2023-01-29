@@ -21,7 +21,7 @@
 
 
    <!-- Start header section -->
-   <header th:replace="dailyshop/fragments/headerSection :: headerSection" />
+   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()},memberId=${member.getId()},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
    <!-- / header section -->
 
    <!-- menu -->
@@ -311,36 +311,23 @@
                     <table class="table table-responsive">
                       <thead>
                         <tr>
-                          <th>Product</th>
-                          <th>Total</th>
+                          <th>상품명</th>
+                          <th>수량</th>
+                          <th>가격</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>T-Shirt <strong> x  1</strong></td>
-                          <td>$150</td>
-                        </tr>
-                        <tr>
-                          <td>Polo T-Shirt <strong> x  1</strong></td>
-                          <td>$250</td>
-                        </tr>
-                        <tr>
-                          <td>Shoes <strong> x  1</strong></td>
-                          <td>$350</td>
+                        <tr th:each="cartItem : ${cartItems}">
+                          <td th:text="${cartItem.getProduct().getName()}">T-Shirt <strong> x1 </strong></td>
+                          <td th:text="|${cartItem.getCount()}개|">$150</td>
+                          <td th:text="|${cartItem.getCount() * cartItem.getProduct().getPrice()}원|">$150</td>
                         </tr>
                       </tbody>
                       <tfoot>
-                        <tr>
-                          <th>Subtotal</th>
-                          <td>$750</td>
-                        </tr>
-                         <tr>
-                          <th>Tax</th>
-                          <td>$35</td>
-                        </tr>
                          <tr>
                           <th>Total</th>
-                          <td>$785</td>
+                           <th th:text="|${totalCount}개|">20개</th>
+                          <th th:text="|${totalPrice}원|">$785</th>
                         </tr>
                       </tfoot>
                     </table>

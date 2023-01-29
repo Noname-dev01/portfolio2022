@@ -93,9 +93,19 @@
            <div class="col-md-12">
              <div class="aa-header-bottom-area">
                <!-- logo  -->
-               <div class="aa-logo">
+               <div class="aa-logo" sec:authorize="isAnonymous()">
                  <!-- Text based logo -->
-                 <a href="/dailyShop">
+                 <a th:href="@{/dailyShop}">
+                   <span class="fa fa-shopping-cart"></span>
+                   <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
+                 </a>
+                 <!-- img based logo -->
+                 <!-- <a href="home.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+               </div>
+               <!-- logo  -->
+               <div class="aa-logo" sec:authorize="isFullyAuthenticated()">
+                 <!-- Text based logo -->
+                 <a th:href="@{/dailyShop/main}">
                    <span class="fa fa-shopping-cart"></span>
                    <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
                  </a>
@@ -104,7 +114,7 @@
                </div>
                <!-- / logo  -->
                <!-- cart box -->
-               <div class="aa-cartbox">
+               <div class="aa-cartbox" sec:authorize="isFullyAuthenticated()">
                  <a class="aa-cart-link" href="#">
                    <span class="fa fa-shopping-basket"></span>
                    <span class="aa-cart-title">SHOPPING CART</span>

@@ -52,6 +52,7 @@ public class CartController {
 
             model.addAttribute("totalPrice",totalPrice);
             model.addAttribute("totalCount",memberCart.getCount());
+            model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member",member);
 
@@ -90,20 +91,8 @@ public class CartController {
             memberCart.setCount(memberCart.getCount()-cartItem.getCount());
             //장바구니 물건 삭제
             cartService.cartItemDelete(cartItemId);
-            //해당 유저의 장바구니 상품들
-            List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
 
-            //총 가격 += 수량 * 가격
-            int totalPrice = 0;
-            for (CartItem item : cartItemList) {
-                totalPrice += item.getCount() * item.getProduct().getPrice();
-            }
-            model.addAttribute("totalPrice",totalPrice);
-            model.addAttribute("totalCount",memberCart.getCount());
-            model.addAttribute("cartItems",cartItemList);
-            model.addAttribute("member",memberService.findMember(id));
-
-            return "dailyshop/memberCart";
+            return "redirect:/dailyShop/mypage/cart/{id}";
         }else {
             return "redirect:/dailyShop/main";
         }

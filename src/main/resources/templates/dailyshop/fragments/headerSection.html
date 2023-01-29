@@ -49,13 +49,13 @@
             <!-- / header top left -->
             <div class="aa-header-top-right">
               <ul class="aa-head-top-nav-right">
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/account}">My Account</a></li>
-                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/wishlist}">Wishlist</a></li>
-                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/cart/{id}(id=${memberId})}">My Cart</a></li>
+<!--                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/account}">My Account</a></li>-->
+<!--                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/wishlist}">Wishlist</a></li>-->
+                <li sec:authorize="isAnonymous()"><a th:href="@{/dailyShop/login}">로그인</a></li>
                 <li sec:authorize="isAnonymous()" class="hidden-xs"><a th:href="@{/dailyShop/join}">회원가입</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}" th:text="${authname}+'님'">사용자</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}">마이페이지</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/dailyShop/login}">로그인</a></li>
+                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/cart/{id}(id=${memberId})}">장바구니</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/logout}">로그아웃</a></li>
               </ul>
             </div>
@@ -73,9 +73,20 @@
         <div class="col-md-12">
           <div class="aa-header-bottom-area">
             <!-- logo  -->
-            <div class="aa-logo">
+            <div class="aa-logo" sec:authorize="isAuthenticated()">
               <!-- Text based logo -->
-              <a href="/dailyShop/main">
+              <a th:href="@{/dailyShop/main}">
+                <span class="fa fa-shopping-cart"></span>
+                <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
+              </a>
+              <!-- img based logo -->
+              <!-- <a href="home.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+            </div>
+            <!-- / logo  -->
+            <!-- logo  -->
+            <div class="aa-logo" sec:authorize="isAnonymous()">
+              <!-- Text based logo -->
+              <a th:href="@{/dailyShop}">
                 <span class="fa fa-shopping-cart"></span>
                 <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
               </a>
@@ -88,7 +99,7 @@
               <a class="aa-cart-link" href="#">
                 <span class="fa fa-shopping-basket"></span>
                 <span class="aa-cart-title">SHOPPING CART</span>
-<!--                <span class="aa-cart-notify" th:text="${cartItems.size()}">2</span>-->
+                <span class="aa-cart-notify" th:text="${cartListCount}">2</span>
               </a>
               <div class="aa-cartbox-summary">
                 <ul>
@@ -109,7 +120,7 @@
                       </span>
                   </li>
                 </ul>
-                <a class="aa-cartbox-checkout aa-primary-btn" href="/dailyShop/checkout">Checkout</a>
+                <a class="aa-cartbox-checkout aa-primary-btn" th:href="@{/dailyShop/checkout}">구매하기</a>
               </div>
             </div>
             <!-- / cart box -->

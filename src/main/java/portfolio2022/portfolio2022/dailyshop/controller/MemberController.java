@@ -11,12 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import portfolio2022.portfolio2022.dailyshop.domain.dto.JoinDto;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
+import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,6 +30,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final CartService cartService;
 
     @GetMapping("/login")
     public String loginForm(@RequestParam(value = "error",required = false)String error,
@@ -69,7 +74,19 @@ public class MemberController {
      */
     @GetMapping("/mypage/{id}")
     public String myPage(@PathVariable("id")Long id, Model model,@AuthenticationPrincipal MemberDetails memberDetails){
-        if (memberDetails.getMember().getId() == id){
+        Long loginMemberId = memberDetails.getMember().getId();
+        if (loginMemberId == id){
+            Member member = memberService.findMember(loginMemberId);
+            Cart memberCart = member.getCart();
+            List<CartItem> cartItems = cartService.allUserCartView(memberCart);
+            int totalPrice = 0;
+            for (CartItem cartItem : cartItems) {
+                totalPrice += cartItem.getCount() * cartItem.getProduct().getPrice();
+            }
+
+            model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("cartListCount", cartItems.size());
+            model.addAttribute("cartItems", cartItems);
             model.addAttribute("member",memberService.findMember(id));
             return "dailyshop/mypage";
         }else {
