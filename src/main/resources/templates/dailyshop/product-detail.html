@@ -120,19 +120,19 @@
                       <button type="submit" id="addCart" class="aa-add-to-cart-btn" href="#">장바구니 담기</button>
                       </form>
                     </div>
-<!--                    <div class="aa-prod-view-bottom">-->
-<!--                      <form method="post" th:action="@{/dailyShop/mypage/cart/{id}/{productId}(id=${member.id},productId=${product.id})}">-->
-<!--                        <select id="amount" name="amount">-->
-<!--                          <option selected="1" value="0">1</option>-->
-<!--                          <option value="1">2</option>-->
-<!--                          <option value="2">3</option>-->
-<!--                          <option value="3">4</option>-->
-<!--                          <option value="4">5</option>-->
-<!--                          <option value="5">6</option>-->
-<!--                        </select>-->
-<!--                        <button type="submit" class="aa-add-to-cart-btn" href="#">구매하기</button>-->
-<!--                      </form>-->
-<!--                    </div>-->
+                    <div class="aa-prod-view-bottom">
+                      <form method="post" th:action="@{/dailyShop/product/view/{productId}/member/{id}(id=${member.id},productId=${product.id})}">
+                        <select id="count" name="count">
+                          <option selected="1" value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                        </select>
+                        <button type="submit" class="aa-add-to-cart-btn">구매하기</button>
+                      </form>
+                    </div>
                     <script th:inline="javascript">
                       /* <![CDATA[ */
                       var leftproductcount = [[${product.stockQuantity}]]

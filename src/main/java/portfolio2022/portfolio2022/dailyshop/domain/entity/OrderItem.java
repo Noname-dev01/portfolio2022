@@ -18,6 +18,10 @@ public class OrderItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
@@ -27,8 +31,9 @@ public class OrderItem {
     private int orderCount;//주문 수량
 
     //==생성 메서드==//
-    public static OrderItem createOrderItem(Product product, int orderPrice, int orderCount){
+    public static OrderItem createOrderItem(Product product,Member member, int orderPrice, int orderCount){
         OrderItem orderItem = new OrderItem();
+        orderItem.setMember(member);
         orderItem.setProduct(product);
         orderItem.setOrderPrice(orderPrice);
         orderItem.setOrderCount(orderCount);

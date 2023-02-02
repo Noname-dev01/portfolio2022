@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.OrderItemRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.OrderRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
 
@@ -18,6 +19,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
     private final ProductRepository productRepository;
+    private final OrderItemRepository orderItemRepository;
 
     /**
      * 주문
@@ -30,15 +32,15 @@ public class OrderService {
         Product product = productRepository.findById(productId).get();
 
         //배송정보 생성
-        Delivery delivery = new Delivery();
-        delivery.setAddress(member.getAddress());
+//        Delivery delivery = new Delivery();
+//        delivery.setAddress(member.getAddress());
 
         //주문상품 생성
-        OrderItem orderItem = OrderItem.createOrderItem(product, product.getPrice(), count);
+        OrderItem orderItem = OrderItem.createOrderItem(product, member,product.getPrice(), count);
 
         //주문 생성
-        Order order = Order.createOrder(member, delivery, orderItem);
-
+//        Order order = Order.createOrder(member, delivery, orderItem);
+        Order order = Order.createOrder(member, orderItem);
         //주문 저장
         orderRepository.save(order);
 
@@ -52,6 +54,12 @@ public class OrderService {
     public void cancelOrder(Long orderId){
         Order order = orderRepository.findById(orderId).get();
         order.cancel();
+    }
+    /**
+     * 주문 조회
+     */
+    public List<OrderItem> findMemberOrderItems(Long id) {
+        return orderItemRepository.findOrderItemsByMemberId(id);
     }
 
     /**

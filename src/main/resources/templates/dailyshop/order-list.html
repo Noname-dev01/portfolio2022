@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="dailyshop/fragments/header :: header">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily Shop | Account Page</title>
+  <style>
+    td, th {
+      text-align: center;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- wpf loader Two -->
+<div id="wpf-loader-two">
+  <div class="wpf-loader-two-inner">
+    <span>Loading</span>
+  </div>
+</div>
+<!-- / wpf loader Two -->
+<!-- SCROLL TOP BUTTON -->
+<a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+<!-- END SCROLL TOP BUTTON -->
+
+
+<!-- Start header section -->
+<header th:replace="~{dailyshop/fragments/headerSection :: headerSection (authname=${member.getName()},memberId=${member.getId()},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
+<!-- / header section -->
+
+<!-- menu -->
+<section th:replace="dailyshop/fragments/menu :: menu" />
+<!-- / menu -->
+
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+  <img src="/dailyShop/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+  <div class="aa-catg-head-banner-area">
+    <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2>주문 내역</h2>
+        <ol class="breadcrumb">
+          <li><a href="/dailyShop">Home</a></li>
+          <li class="active">Orders</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / catg header banner section -->
+
+
+<!-- mypage -->
+<section id="aa-product-category">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+        <div class="aa-product-catg-content">
+          <div class="cart-view-area">
+            <div class="cart-view-table aa-wishlist-table">
+              <form action="">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th style="text-align: center;width: 5%;">번호</th>
+                      <th style="text-align: center;width: 5%;">상품 이미지</th>
+                      <th style="text-align: center;width: 5%;">상품명</th>
+                      <th style="text-align: center;width: 5%;">가격</th>
+                      <th style="text-align: center;width: 5%;">수량</th>
+                      <th style="text-align: center;width: 5%;">담은 날짜</th>
+                      <th style="text-align: center;width: 5%;">삭제</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="orderItem, i: ${orderItems}">
+                      <td th:text="${i.count}" style="vertical-align: middle;text-align: center;">번호</td>
+                      <td style="vertical-align: middle;text-align: center;"><img th:src="${orderItem.getProduct().getFilePath()}" style="width: 100%;"></td>
+                      <td th:text="${orderItem.getProduct().getName()}" style="vertical-align: middle;text-align: center;">상품명</a></td>
+                      <td th:text="${orderItem.getProduct().getPrice() * orderItem.getOrderCount()}" style="vertical-align: middle;text-align: center;">가격</td>
+                      <td th:text="${orderItem.getOrderCount()}" style="vertical-align: middle;text-align: center;">수량</td>
+                      <td th:text="${orderItem.getOrder().getOrderDate()}" style="vertical-align: middle;text-align: center;">담은 날짜</td>
+                      <td style="vertical-align: middle;text-align: center;"><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+          <hr>
+          <div class="row row-cols-1 row-cols-md-3 mb-3 text-center mt-3">
+            <div class="col">
+              <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                  <h4 class="my-0 fw-normal">총 수량</h4>
+                </div>
+                <form class="card-body" method="post">
+                  <h1 class="card-title pricing-card-title" th:text="|${member.getOrders().size()}개|">$0</h1>
+
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-md-3 mb-3 text-center mt-3">
+            <div class="col">
+              <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                  <h4 class="my-0 fw-normal">총 결제금액</h4>
+                </div>
+                <!--                                   onsubmit="return orderitem();"-->
+                <form class="card-body"  th:action="@{/user/cart/checkout/{id}(id=${member.getId()})}" method="post">
+                  <h1 class="card-title pricing-card-title" th:text="|원|">$0</h1>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+        <aside class="aa-sidebar">
+          <!-- single sidebar -->
+          <div class="aa-sidebar-widget">
+            <h3>마이페이지</h3>
+            <ul class="nav flex-md-column">
+              <li th:class="nav-item"><a class="nav-link active" th:href="@{/dailyShop/mypage/{id}(id=${member.getId()})}">마이페이지</a></li>
+              <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/cart/{id}(id=${member.getId()})}">장바구니</a></li>
+              <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/orderHistory/{id}(id=${member.getId()})}">주문내역</a></li>
+              <li th:class="nav-item"><a th:class="nav-link" href="">충전하기</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /mypage -->
+<!-- footer -->
+<footer th:replace="dailyshop/fragments/footer :: footer"/>
+<!--  / footer -->
+
+<!-- login Modal -->
+<div th:replace="dailyshop/fragments/loginModal :: loginModal"/>
+<!--/ login Modal -->
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/dailyShop/js/bootstrap.js"></script>
+<!-- SmartMenus jQuery plugin -->
+<script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.js"></script>
+<!-- SmartMenus jQuery Bootstrap Addon -->
+<script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.bootstrap.js"></script>
+<!-- To Slider JS -->
+<script src="/dailyShop/js/sequence.js"></script>
+<script src="/dailyShop/js/sequence-theme.modern-slide-in.js"></script>
+<!-- Product view slider -->
+<script type="text/javascript" src="/dailyShop/js/jquery.simpleGallery.js"></script>
+<script type="text/javascript" src="/dailyShop/js/jquery.simpleLens.js"></script>
+<!-- slick slider -->
+<script type="text/javascript" src="/dailyShop/js/slick.js"></script>
+<!-- Price picker slider -->
+<script type="text/javascript" src="/dailyShop/js/nouislider.js"></script>
+<!-- Custom js -->
+<script src="/dailyShop/js/custom.js"></script>
+
+
+</body>
+</html>
