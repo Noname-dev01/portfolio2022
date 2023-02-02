@@ -25,6 +25,7 @@
         <th scope="col">전화번호</th>
         <th scope="col">권한</th>
         <th scope="col">생성 날짜</th>
+        <th scope="col">충전하기</th>
         <th scope="col">권한 변경</th>
         <th scope="col">회원 탈퇴</th>
       </tr>
@@ -40,6 +41,7 @@
         <td style="text-align: left;" th:text="${member.phone}"></td>
         <td style="text-align: left;" th:text="${member.role}"></td>
         <td style="text-align: left;" th:text="${member.getCreateDate()}"></td>
+        <td style="text-align: center;"><a th:href="@{/dailyShop/admin/point/{id}(id=${member.id})}" style="color: black;"><fa class="fa fa-money"></fa></a></td>
         <td style="text-align: center;"><a th:href="@{/dailyShop/admin/members/role/modify/{id}(id=${member.id})}" style="color: black;"><fa class="fa fa-edit"></fa></a></td>
         <td style="text-align: center;"><a class="remove" th:href="@{/dailyShop/admin/members/delete/{id}(id=${member.id})}" style="color: black;"><fa class="fa fa-close"></fa></a></td>
       </tr>

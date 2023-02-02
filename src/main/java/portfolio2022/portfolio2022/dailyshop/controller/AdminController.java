@@ -1,8 +1,6 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
-import jdk.nashorn.api.scripting.ScriptUtils;
 import lombok.RequiredArgsConstructor;
-import org.h2.engine.Mode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -132,5 +130,22 @@ public class AdminController {
         }
         productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
         return "redirect:/dailyShop/admin/product/list";
+    }
+
+    /**
+     * 충전하기
+     */
+    @GetMapping("/admin/point/{id}")
+    public String chargePoint(@PathVariable("id")Long id,Model model){
+        model.addAttribute("member",memberService.findMember(id));
+
+        return "dailyshop/admin/member/point";
+    }
+
+    @PostMapping("/admin/point/{id}")
+    public String chargePoint(@PathVariable("id")Long id,int amount){
+        memberService.chargePoint(id, amount);
+
+        return "redirect:/dailyShop/admin/members";
     }
 }
