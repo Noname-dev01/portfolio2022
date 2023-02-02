@@ -1,0 +1,43 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="dailyshop/admin/common/head :: adminHead"></head>
+<body>
+<script type="text/javascript">
+    $(document).ready(function(){
+    });
+</script>
+<div th:replace="dailyshop/admin/common/top::header"></div>
+<div id="maininner"><!-- maininner (s)-->
+    <div class="cc-tab-con">
+        <a href="javascript:void(0);" class="cc-tab-item on">사용자관리</a>		<!--// on : 현재 위치 //-->
+        <a href="javascript:tabChange('2');" class="cc-tab-item">상품 추가</a>
+        <a href="javascript:tabChange('3');" class="cc-tab-item">상품 목록</a>
+    </div>
+    <div class="tbl_wrp">
+        <form class="form-horizontal" th:action="@{/dailyShop/admin/members/role/modify/{id}(id=${member.id})}" method="post">
+            <input th:type="hidden" name="id" th:value="${member.id}" />
+            <div class="form-group">
+                <label class="col-sm-2 control-label">아이디</label>
+                <span class="col-sm-10" th:text="${member.username}"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">현재 권한</label>
+                <span class="col-sm-10" th:text="${member.role}"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">권한</label>
+                <select th:field="${member.role}">
+                    <option value="ROLE_USER">ROLE_USER</option>
+                    <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <button type="Submit" class="btn btn-dark btn-lg">등록</button>
+                    <a class="btn btn-dark btn-lg" style="margin:10;" th:href="@{/dailyShop/admin/members}">목록 </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

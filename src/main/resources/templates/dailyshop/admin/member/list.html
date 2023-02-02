@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/dailyshop/admin/common/head :: adminHead"></head>
+<body>
+<script type="text/javascript">
+  $(document).ready(function(){
+  });
+
+</script>
+<div th:replace="/dailyshop/admin/common/top::header"></div>
+<div id="maininner"><!-- maininner (s)-->
+  <div class="cc-tab-con">
+    <a href="javascript:void(0);" class="cc-tab-item on">사용자 관리</a>		<!--// on : 현재 위치 //-->
+    <a href="javascript:tabChange('2');" class="cc-tab-item">상품 추가</a>
+    <a href="javascript:tabChange('3');" class="cc-tab-item">상품 목록</a>
+  </div>
+  <div class="tbl_wrp">
+    <table class="table">
+      <thead>
+      <tr class="table-info">
+        <th scope="col">아이디</th>
+        <th scope="col">이름</th>
+        <th scope="col">보유금액</th>
+        <th scope="col">이메일</th>
+        <th scope="col">주소</th>
+        <th scope="col">전화번호</th>
+        <th scope="col">권한</th>
+        <th scope="col">생성 날짜</th>
+        <th scope="col">권한 변경</th>
+        <th scope="col">회원 탈퇴</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="link_btn hover" th:each="member : ${members}">
+
+        <td style="text-align: left;" th:text="${member.username}"></td>
+        <td style="text-align: left;" th:text="${member.name}"></td>
+        <td style="text-align: left;" th:text="${member.coin}"></td>
+        <td style="text-align: left;" th:text="${member.email}"></td>
+        <td style="text-align: left;" th:text="${member.address}"></td>
+        <td style="text-align: left;" th:text="${member.phone}"></td>
+        <td style="text-align: left;" th:text="${member.role}"></td>
+        <td style="text-align: left;" th:text="${member.getCreateDate()}"></td>
+        <td style="text-align: center;"><a th:href="@{/dailyShop/admin/members/role/modify/{id}(id=${member.id})}" style="color: black;"><fa class="fa fa-edit"></fa></a></td>
+        <td style="text-align: center;"><a class="remove" th:href="@{/dailyShop/admin/members/delete/{id}(id=${member.id})}" style="color: black;"><fa class="fa fa-close"></fa></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

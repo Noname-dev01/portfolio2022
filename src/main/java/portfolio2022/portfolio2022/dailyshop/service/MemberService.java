@@ -3,20 +3,21 @@ package portfolio2022.portfolio2022.dailyshop.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.exception.DuplicateMemberException;
+import portfolio2022.portfolio2022.dailyshop.repository.CartRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
-    private final CartService cartService;
+    private final CartRepository cartRepository;
 
     /**
      * 회원 가입
@@ -26,7 +27,8 @@ public class MemberService {
         validateDuplicateMember(member); //중복 회원 검증
         Member memberEntity = memberRepository.save(member);
         if (Objects.equals(memberEntity.getRole(), "ROLE_USER")){
-            cartService.createCart(member);
+            Cart cart = Cart.createCart(member);
+            cartRepository.save(cart);
         }
         return member.getId();
     }
@@ -57,5 +59,30 @@ public class MemberService {
         memberUpdate.setEmail(member.getEmail());
         memberUpdate.setPhone(member.getPhone());
         memberUpdate.setAddress(member.getAddress());
+    }
+    /**
+     * 권한 정보 수정
+     */
+    @Transactional
+    public void memberRoleChange(Long id,String role){
+        Member memberUpdate = memberRepository.findById(id).get();
+        memberUpdate.setRole(role);
+    }
+
+    /**
+     * 회원 삭제
+     */
+    @Transactional
+    public void deleteMember(Long id){
+        memberRepository.deleteById(id);
+    }
+    /**
+     * 충전하기
+     */
+    @Transactional
+    public void chargePoint(Long id,int amount){
+        Member member = memberRepository.findById(id).get();
+        member.setCoin(member.getCoin()+amount);
+
     }
 }

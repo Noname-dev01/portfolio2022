@@ -29,6 +29,8 @@ public class Member {
     private String email;
     private String phone;
     private String role;
+
+    private int coin;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDateTime createDate;
 

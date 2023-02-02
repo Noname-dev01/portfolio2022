@@ -121,6 +121,13 @@ public class CartService {
     }
 
     /**
+     * 카트 삭제
+     */
+    public void cartDelete(Long id){
+        cartRepository.deleteById(id);
+    }
+
+    /**
      * 카트의 상품 전체 삭제 -> 매개변수는 유저 id
      */
     public void allCartItemDelete(Long id){
