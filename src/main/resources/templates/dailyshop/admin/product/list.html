@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/dailyshop/admin/common/head :: adminHead"></head>
+<body>
+<script type="text/javascript">
+    $(document).ready(function(){
+    });
+
+</script>
+<div th:replace="/dailyshop/admin/common/top::header"></div>
+<div id="maininner"><!-- maininner (s)-->
+    <div class="cc-tab-con">
+        <a href="javascript:tabChange('1');" class="cc-tab-item">사용자 관리</a>		<!--// on : 현재 위치 //-->
+        <a href="javascript:tabChange('2');" class="cc-tab-item">상품 추가</a>
+        <a href="javascript:void(0);" class="cc-tab-item on">상품 목록</a>
+    </div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    <div class="cart-view-table aa-wishlist-table">
+                        <form action="">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead style="text-align: center;">
+                                    <tr>
+                                        <th style="width: 5%;">번호</th>
+                                        <th style="width: 5%;">상품 이미지</th>
+                                        <th style="width: 5%;">상품명</th>
+                                        <th style="width: 5%;">카테고리</th>
+                                        <th style="width: 5%;">가격</th>
+                                        <th style="width: 5%;">재고 수량</th>
+                                        <th style="width: 5%;">수정</th>
+                                        <th style="width: 5%;">삭제</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="product : ${list}" style="text-align: center;">
+                                        <td style="vertical-align: middle;" th:text="${product.id}">번호</td>
+                                        <td style="vertical-align: middle;"><a href="#"><img th:src="${product.filePath}" alt="img" style="width: 100%;"></a></td>
+                                        <td style="vertical-align: middle;"><a class="aa-cart-title" href="#" th:text="${product.name}">상품명</a></td>
+                                        <td style="vertical-align: middle;" th:text="${product.category}">카테고리</td>
+                                        <td style="vertical-align: middle;" th:text="${product.price}">가격</td>
+                                        <td style="vertical-align: middle;" th:text="${product.stockQuantity}">재고 수량</td>
+                                        <td style="vertical-align: middle;"><a th:href="@{/dailyShop/admin/product/modify/{productId}(productId=${product.id})}"><fa class="fa fa-edit"></fa></a></td>
+                                        <td style="vertical-align: middle;"><a class="remove" th:href="@{/dailyShop/admin/product/delete(id=${product.id})}"><fa class="fa fa-close"></fa></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="aa-product-catg-pagination" th:if="${!list.isEmpty()}">
+                                    <nav style="text-align: center;" th:with="pageNumber = ${list.pageable.pageNumber},
+                                        pageSize = ${list.pageable.pageSize},
+                                        totalPages=${list.totalPages},
+                                        startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+                                        tempEndPage = ${startPage + pageSize - 1},
+                                        endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
+                                         aria-label="Page navigation">
+                                        <ul class="pagination" style="padding-left: 42%;">
+                                            <!-- 첫 페이지로 이동 -->
+                                            <li th:classappend="${pageNumber < pageSize} ? 'disabled'" class="page-item">
+                                                <a class="page-link" th:href="@{/dailyShop/product/list(page=0)}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">First</span>
+                                                </a>
+                                            </li>
+                                            <!-- 이전 페이지로 이동 -->
+                                            <li th:classappend="${list.first} ? 'disabled'" class="page-item">
+                                                <a class="page-link"
+                                                   th:href="${list.first} ? '#' : @{/dailyShop/product/list(page=${pageNumber - 1})}"
+                                                   aria-label="Previous">
+                                                    <span aria-hidden="true">&lt;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <!-- 특정 페이지로 이동 -->
+                                            <li th:each="page : ${#numbers.sequence(startPage,endPage)}"
+                                                th:classappend="${page == pageNumber + 1} ? 'active'"
+                                                class="page-item">
+                                                <a th:text="${page}" class="page-link" th:href="@{/dailyShop/product/list(page=${page - 1})}"></a>
+                                            </li>
+                                            <!-- 다음 페이지로 이동 -->
+                                            <li th:classappend="${list.last} ? 'disabled'" class="page-item" >
+                                                <a class="page-link" th:href="${list.last} ? '#' : @{/dailyShop/product/list(page=${pageNumber + 1})}" aria-label="Next">
+                                                    <span aria-hidden="true">&gt;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                            <!-- 마지막 페이지로 이동 -->
+                                            <li th:classappend=" ${T(java.lang.Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
+                                                <a class="page-link" th:href="@{/dailyShop/product/list(page=${totalPages - 1})}">
+                                                    <span>&raquo;</span>
+                                                    <span class="sr-only">Last</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

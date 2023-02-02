@@ -35,29 +35,57 @@ public class ProductController {
     private final CartService cartService;
 
     /**
-     * 상품 등록
+     * AdminController로 이동시킴
      */
-    @GetMapping("/product/register")
-    public String productSaveForm(){
-        return "dailyshop/product-register";
-    }
-    @PostMapping("/product/register")
-    public String productSave(Product product, MultipartFile file) throws IOException {
-        productService.productRegister(product, file);
-        return "redirect:/dailyShop/main";
-    }
+//    /**
+//     * 상품 등록
+//     */
+//    @GetMapping("/product/register")
+//    public String productSaveForm(){
+//        return "dailyshop/product-register";
+//    }
+//    @PostMapping("/product/register")
+//    public String productSave(Product product, MultipartFile file) throws IOException {
+//        productService.productRegister(product, file);
+//        return "redirect:/dailyShop/main";
+//    }
+//
+//    /**
+//     * 전체 상품 리스트
+//     */
+//    @GetMapping("/product/list")
+//    public String productList(Model model,
+//                              @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+//
+//        Page<Product> productList = productService.findProducts(pageable);
+//        model.addAttribute("list",productList);
+//        return "dailyshop/product-list";
+//    }
 
-    /**
-     * 전체 상품 리스트
-     */
-    @GetMapping("/product/list")
-    public String productList(Model model,
-                              @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
-
-        Page<Product> productList = productService.findProducts(pageable);
-        model.addAttribute("list",productList);
-        return "dailyshop/product-list";
-    }
+//    /**
+//     * 상품 삭제
+//     */
+//    @GetMapping ("/product/delete")
+//    public String productDelete(Long id){
+//        productService.productDelete(id);
+//        return "redirect:/dailyShop/product/list";
+//    }
+//    /**
+//     * 상품 수정
+//     */
+//    @GetMapping("/product/modify/{productId}")
+//    public String productModifyForm(@PathVariable("productId") Long productId,Model model){
+//        Product product = productService.findProduct(productId);
+//        model.addAttribute("product",product);
+//        return "dailyshop/product-modify";
+//    }
+//    @PostMapping("/product/modify/{productId}")
+//    public String productModify(@PathVariable Long productId,
+//                                @ModelAttribute ProductDto form,
+//                                MultipartFile file) throws IOException {
+//        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
+//        return "redirect:/dailyShop/product/list";
+//    }
 
     /**
      * 상품 상세 페이지
@@ -91,31 +119,6 @@ public class ProductController {
 
             return "dailyshop/product-detail";
         }
-    }
-
-    /**
-     * 상품 삭제
-     */
-    @GetMapping ("/product/delete")
-    public String productDelete(Long id){
-        productService.productDelete(id);
-        return "redirect:/dailyShop/product/list";
-    }
-    /**
-     * 상품 수정
-     */
-    @GetMapping("/product/modify/{productId}")
-    public String productModifyForm(@PathVariable("productId") Long productId,Model model){
-        Product product = productService.findProduct(productId);
-        model.addAttribute("product",product);
-        return "dailyshop/product-modify";
-    }
-    @PostMapping("/product/modify/{productId}")
-    public String productModify(@PathVariable Long productId,
-                                @ModelAttribute ProductDto form,
-                                MultipartFile file) throws IOException {
-        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
-        return "redirect:/dailyShop/product/list";
     }
 
     /**

@@ -1,14 +1,18 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
+import jdk.nashorn.api.scripting.ScriptUtils;
 import lombok.RequiredArgsConstructor;
+import org.h2.engine.Mode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import portfolio2022.portfolio2022.dailyshop.domain.dto.ProductDto;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
@@ -86,6 +90,47 @@ public class AdminController {
     @PostMapping("/admin/product/register")
     public String productSave(Product product, MultipartFile file) throws IOException {
         productService.productRegister(product, file);
-        return "redirect:/dailyShop/admin/product/register";
+        return "redirect:/dailyShop/admin/product/list";
+    }
+
+    /**
+     * 전체 상품 리스트
+     */
+    @GetMapping("/admin/product/list")
+    public String productList(Model model,
+                              @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable){
+
+        Page<Product> productList = productService.findProducts(pageable);
+        model.addAttribute("list",productList);
+        return "dailyshop/admin/product/list";
+    }
+
+    /**
+     * 상품 삭제
+     */
+    @GetMapping ("/admin/product/delete")
+    public String productDelete(Long id){
+        productService.productDelete(id);
+        return "redirect:/dailyShop/admin/product/list";
+    }
+
+    /**
+     * 상품 수정
+     */
+    @GetMapping("/admin/product/modify/{productId}")
+    public String productModifyForm(@PathVariable("productId") Long productId,Model model){
+        Product product = productService.findProduct(productId);
+        model.addAttribute("product",product);
+        return "dailyshop/admin/product/modify";
+    }
+    @PostMapping("/admin/product/modify/{productId}")
+    public String productModify(@PathVariable Long productId,
+                                @ModelAttribute ProductDto form,
+                                MultipartFile file) throws IOException {
+        if (file.isEmpty()){
+            return "redirect:/dailyShop/admin/product/modify/{productId}";
+        }
+        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
+        return "redirect:/dailyShop/admin/product/list";
     }
 }
