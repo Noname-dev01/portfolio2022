@@ -56,10 +56,22 @@ public class OrderService {
         order.cancel();
     }
     /**
-     * 주문 조회
+     * 주문 조회 (회원별 조회)
      */
     public List<OrderItem> findMemberOrderItems(Long id) {
         return orderItemRepository.findOrderItemsByMemberId(id);
+    }
+
+    /**
+     * 전체 주문 가격 조회
+     */
+    public int totalPrice(Long id){
+        List<OrderItem> orders = orderItemRepository.findOrderItemsByMemberId(id);
+        int totalPrice = 0;
+        for (OrderItem order : orders) {
+            totalPrice += order.getTotalPrice();
+        }
+        return totalPrice;
     }
 
     /**

@@ -79,10 +79,7 @@ public class MemberController {
             Member member = memberService.findMember(loginMemberId);
             Cart memberCart = member.getCart();
             List<CartItem> cartItems = cartService.allUserCartView(memberCart);
-            int totalPrice = 0;
-            for (CartItem cartItem : cartItems) {
-                totalPrice += cartItem.getCount() * cartItem.getProduct().getPrice();
-            }
+            int totalPrice = cartService.cartTotalPrice(id);
 
             model.addAttribute("totalPrice", totalPrice);
             model.addAttribute("cartListCount", cartItems.size());

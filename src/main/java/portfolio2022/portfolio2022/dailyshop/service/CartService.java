@@ -16,6 +16,7 @@ import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -126,6 +127,20 @@ public class CartService {
     public void cartDelete(Long id){
         cartRepository.deleteById(id);
     }
+    /**
+     * 카트 총 주문 가격 조회
+     */
+    public int cartTotalPrice(Long id){
+        Member member = memberRepository.findById(id).get();
+        Cart memberCart = member.getCart();
+        List<CartItem> cartItems = allUserCartView(memberCart);
+        int totalPrice = 0;
+        for (CartItem cartItem : cartItems) {
+            totalPrice += cartItem.getCount() * cartItem.getProduct().getPrice();
+        }
+        return totalPrice;
+    }
+
 
     /**
      * 카트의 상품 전체 삭제 -> 매개변수는 유저 id

@@ -45,10 +45,7 @@ public class CartController {
             List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
 
             //카트에 들어있는 상품들의 총 가격
-            int totalPrice = 0;
-            for (CartItem cartItem : cartItemList) {
-                totalPrice += cartItem.getCount() * cartItem.getProduct().getPrice();
-            }
+            int totalPrice = cartService.cartTotalPrice(id);
 
             model.addAttribute("totalPrice",totalPrice);
             model.addAttribute("totalCount",memberCart.getCount());

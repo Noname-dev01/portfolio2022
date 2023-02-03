@@ -6,5 +6,4 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Order;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Long>,OrderRepositoryQuery {
-    List<Order> findOrdersByMemberId(Long id);
 }

@@ -41,6 +41,7 @@ public class OrderController {
         if (Objects.equals(memberDetails.getMember().getId(), id)){
             List<OrderItem> orderItems = orderService.findMemberOrderItems(id);
 
+            model.addAttribute("totalPrice", orderService.totalPrice(id));
             model.addAttribute("orderItems",orderItems);
             model.addAttribute("member",memberService.findMember(id));
         }

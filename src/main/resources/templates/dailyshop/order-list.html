@@ -112,7 +112,7 @@
                 </div>
                 <!--                                   onsubmit="return orderitem();"-->
                 <form class="card-body"  th:action="@{/user/cart/checkout/{id}(id=${member.getId()})}" method="post">
-                  <h1 class="card-title pricing-card-title" th:text="|원|">$0</h1>
+                  <h1 class="card-title pricing-card-title" th:text="|${totalPrice}원|">$0</h1>
                 </form>
               </div>
             </div>

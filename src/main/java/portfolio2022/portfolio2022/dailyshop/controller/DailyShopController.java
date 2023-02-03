@@ -64,20 +64,16 @@ public class DailyShopController {
     public String home(Model model, @AuthenticationPrincipal MemberDetails memberDetails){
 
         try {
-            Long id = memberDetails.getMember().getId();
-                Member member = memberService.findMember(id);
-                //로그인 유저의 카트 가져오기
-                Cart memberCart = member.getCart();
-                //카트에 들어있는 아이템 모두 가져오기
-                List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+            Member member = memberService.findMember(memberDetails.getMember().getId());
+            //로그인 유저의 카트 가져오기
+            Cart memberCart = member.getCart();
+            //카트에 들어있는 아이템 모두 가져오기
+            List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
 
-                //카트에 들어있는 상품들의 총 가격
-                int totalPrice = 0;
-                for (CartItem cartItem : cartItemList) {
-                    totalPrice += cartItem.getCount() * cartItem.getProduct().getPrice();
-                }
+            //카트에 들어있는 상품들의 총 가격
+            int totalPrice = cartService.cartTotalPrice(memberDetails.getMember().getId());
 
-                model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("totalPrice", totalPrice);
                 model.addAttribute("totalCount", memberCart.getCount());
                 model.addAttribute("cartListCount", cartItemList.size());
                 model.addAttribute("cartItems", cartItemList);
@@ -99,19 +95,14 @@ public class DailyShopController {
     @GetMapping("/checkout")
     public String checkout(Model model,@AuthenticationPrincipal MemberDetails memberDetails){
 
-        Long loginMemberId = memberDetails.getMember().getId();
-        Member member = memberService.findMember(loginMemberId);
-        Cart memberCart = member.getCart();
-        List<CartItem> cartItems = cartService.allUserCartView(memberCart);
-        int totalPrice = 0;
-        for (CartItem cartItem : cartItems) {
-            totalPrice += cartItem.getCount() * cartItem.getProduct().getPrice();
-        }
+        Member member = memberService.findMember(memberDetails.getMember().getId());
+        List<CartItem> cartItems = cartService.allUserCartView(member.getCart());
 
-        model.addAttribute("totalPrice",totalPrice);
+
+        model.addAttribute("totalPrice",cartService.cartTotalPrice(memberDetails.getMember().getId()));
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("cartListCount", cartItems.size());
-        model.addAttribute("totalCount", memberCart.getCount());
+        model.addAttribute("totalCount", member.getCart().getCount());
         model.addAttribute("member",member);
         return "dailyshop/checkout";
     }
