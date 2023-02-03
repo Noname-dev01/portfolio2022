@@ -49,14 +49,38 @@ public class OrderController {
     }
 
     /**
-     * 상세페이지 주문하기
+     * 상세페이지에서 주문하기
      */
     @Transactional
     @PostMapping("/product/view/{productId}/member/{id}")
     public String buyProduct(@PathVariable("productId")Long productId, @PathVariable("id")Long id, @AuthenticationPrincipal MemberDetails memberDetails,int count){
         if (Objects.equals(memberDetails.getMember().getId(), id)){
-            orderService.order(id, productId, count);
+            //주문 상품 조회
+            Product product = productService.findProduct(productId);
+            //회원 조회
+            Member member = memberService.findMember(id);
+            //재고 확인
+            if (product.getStockQuantity() == 0 || product.getStockQuantity() < count){
+                return "redirect:/dailyShop/main";
+            }
+            if (member.getCoin() < product.getPrice() * count){
+                return "redirect:/dailyShop/mypage/{id}"; //충전하기 페이지로 이동하게 해야됨 일단은 마이페이지로 이동하게 해둠
+            }else {
+                //회원 포인트에서 결제금액만큼 차감
+                member.setCoin(member.getCoin() - product.getPrice() * count);
+                orderService.order(id, productId, count);
+                return "redirect:/dailyShop/mypage/orderHistory/{id}";
+            }
         }
+        return "redirect:/dailyShop/main";
+    }
+    /**
+     * 주문 취소하기
+     */
+    @PostMapping("/mypage/orderHistory/{id}/{orderId}")
+    public String cancelOrder(@PathVariable("orderId")Long orderId,@PathVariable("id")Long id){
+        orderService.cancelOrder(id,orderId);
+
         return "redirect:/dailyShop/main";
     }
 

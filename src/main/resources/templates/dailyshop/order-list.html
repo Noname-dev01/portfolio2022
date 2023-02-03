@@ -82,7 +82,11 @@
                       <td th:text="${orderItem.getProduct().getPrice() * orderItem.getOrderCount()}" style="vertical-align: middle;text-align: center;">가격</td>
                       <td th:text="${orderItem.getOrderCount()}" style="vertical-align: middle;text-align: center;">수량</td>
                       <td th:text="${orderItem.getOrder().getOrderDate()}" style="vertical-align: middle;text-align: center;">담은 날짜</td>
-                      <td style="vertical-align: middle;text-align: center;"><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                      <td style="vertical-align: middle;text-align: center;">
+                        <form th:action="@{/dailyShop/mypage/orderHistory/{id}/{orderId}(id=${member.getId()},orderId=${orderItem.getOrder().getId()})}" th:method="POST">
+                        <button class="remove" type="submit"><fa class="fa fa-close"></fa></button>
+                        </form>
+                      </td>
                     </tr>
                     </tbody>
                   </table>
