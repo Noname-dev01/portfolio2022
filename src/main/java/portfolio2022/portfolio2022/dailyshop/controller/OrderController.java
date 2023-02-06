@@ -78,10 +78,22 @@ public class OrderController {
      * 주문 취소하기
      */
     @PostMapping("/mypage/orderHistory/{id}/{orderId}")
-    public String cancelOrder(@PathVariable("orderId")Long orderId,@PathVariable("id")Long id){
-        orderService.cancelOrder(id,orderId);
-
-        return "redirect:/dailyShop/main";
+    public String cancelOrder(@PathVariable("id")Long id,@PathVariable("orderId")Long orderId,@AuthenticationPrincipal MemberDetails memberDetails){
+        if (Objects.equals(memberDetails.getMember().getId(), id)) {
+                Order order = orderService.findOrder(orderId);
+                orderService.cancelOrder(order);
+            }
+        return "redirect:/dailyShop/mypage/orderHistory/{id}";
     }
 
+    /**
+     * 주문내역 삭제하기
+     */
+    @GetMapping("/mypage/orderHistory/delete/{id}/{orderId}")
+    public String deleteOrder(@PathVariable("orderId") Long orderId,@PathVariable("id") Long id,@AuthenticationPrincipal MemberDetails memberDetails){
+        if (Objects.equals(memberDetails.getMember().getId(), id)) {
+            orderService.deleteOrder(orderId);
+        }
+        return "redirect:/dailyShop/mypage/orderHistory/{id}";
+    }
 }

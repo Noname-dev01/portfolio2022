@@ -3,8 +3,10 @@ package portfolio2022.portfolio2022.dailyshop.domain.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,8 @@ public class Order {
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
-    private LocalDateTime orderDate; //주문시간
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate orderDate; //주문시간
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문 상태 [ORDER, CANCEL]
@@ -67,7 +70,7 @@ public class Order {
             order.addOrderItem(orderItem);
         }
         order.setStatus(OrderStatus.ORDER);
-        order.setOrderDate(LocalDateTime.now());
+        order.setOrderDate(LocalDate.now());
         return order;
     }
 
@@ -80,15 +83,17 @@ public class Order {
 //        if (delivery.getStatus() == DeliveryStatus.COMP){
 //            throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
 //        }
+        if (getStatus().equals(OrderStatus.ORDER)){
         this.setStatus(OrderStatus.CANCEL);
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
+        }
         }
     }
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
     //== 조회 로직 ==//

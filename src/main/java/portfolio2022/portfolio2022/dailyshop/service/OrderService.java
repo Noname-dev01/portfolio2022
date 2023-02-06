@@ -51,9 +51,8 @@ public class OrderService {
      * 주문 취소
      */
     @Transactional
-    public void cancelOrder(Long id, Long orderId){
-        Order order = orderRepository.findById(orderId).get();
-        orderRepository.deleteById(orderId);
+    public void cancelOrder(Order cancelOrder){
+        Order order = orderRepository.findById(cancelOrder.getId()).get();
         order.cancel();
     }
     /**
@@ -70,7 +69,9 @@ public class OrderService {
         List<OrderItem> orders = orderItemRepository.findOrderItemsByMemberId(id);
         int totalPrice = 0;
         for (OrderItem order : orders) {
-            totalPrice += order.getTotalPrice();
+            if (order.getOrder().getStatus() == OrderStatus.ORDER) {
+                totalPrice += order.getTotalPrice();
+            }
         }
         return totalPrice;
     }
@@ -80,5 +81,30 @@ public class OrderService {
      */
     public List<Order> findOrders(OrderSearch orderSearch){
         return orderRepository.findAll(orderSearch);
+    }
+
+    /**
+     * 주문 한개 찾기
+     */
+    public Order findOrder(Long orderId){
+        return orderRepository.findById(orderId).get();
+    }
+
+    /**
+     * 주문 상품 한개 찾기
+     */
+    public OrderItem findOrderItem(Long orderItemId) {
+        return orderItemRepository.findById(orderItemId).get();
+    }
+
+    /**
+     * 주문 삭제
+     */
+    @Transactional
+    public void deleteOrder(Long orderId){
+        Order order = orderRepository.findById(orderId).get();
+        if (order.getStatus() == OrderStatus.CANCEL){
+            orderRepository.deleteById(orderId);
+        }
     }
 }

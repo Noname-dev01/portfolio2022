@@ -45,6 +45,7 @@ public class OrderItem {
     //== 비즈니스 로직 ==//
     public void cancel() {
         getProduct().addStock(orderCount);
+        getMember().setCoin(getMember().getCoin()+getTotalPrice());
     }
 
     //== 조회 로직 ==//

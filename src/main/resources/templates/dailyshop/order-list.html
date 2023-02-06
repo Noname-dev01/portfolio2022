@@ -60,38 +60,61 @@
         <div class="aa-product-catg-content">
           <div class="cart-view-area">
             <div class="cart-view-table aa-wishlist-table">
-              <form action="">
                 <div class="table-responsive">
                   <table class="table">
                     <thead>
                     <tr>
-                      <th style="text-align: center;width: 5%;">번호</th>
-                      <th style="text-align: center;width: 5%;">상품 이미지</th>
-                      <th style="text-align: center;width: 5%;">상품명</th>
+                      <th style="text-align: center;width: 6%;">번호</th>
+                      <th style="text-align: center;width: 12%;">상품 이미지</th>
+                      <th style="text-align: center;width: 7%;">상품명</th>
                       <th style="text-align: center;width: 5%;">가격</th>
-                      <th style="text-align: center;width: 5%;">수량</th>
-                      <th style="text-align: center;width: 5%;">담은 날짜</th>
-                      <th style="text-align: center;width: 5%;">삭제</th>
+                      <th style="text-align: center;width: 6%;">수량</th>
+                      <th style="text-align: center;width: 10%;">주문 상태</th>
+                      <th style="text-align: center;width: 10%;">담은 날짜</th>
+                      <th style="text-align: center;width: 11%;">주문 취소</th>
+                      <th style="text-align: center;width: 6%;">삭제</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="orderItem, i: ${orderItems}">
                       <td th:text="${i.count}" style="vertical-align: middle;text-align: center;">번호</td>
                       <td style="vertical-align: middle;text-align: center;"><img th:src="${orderItem.getProduct().getFilePath()}" style="width: 100%;"></td>
-                      <td th:text="${orderItem.getProduct().getName()}" style="vertical-align: middle;text-align: center;">상품명</a></td>
+                      <td th:text="${orderItem.getProduct().getName()}" style="vertical-align: middle;text-align: center;">상품명</td>
                       <td th:text="${orderItem.getProduct().getPrice() * orderItem.getOrderCount()}" style="vertical-align: middle;text-align: center;">가격</td>
                       <td th:text="${orderItem.getOrderCount()}" style="vertical-align: middle;text-align: center;">수량</td>
+                      <td th:text="${orderItem.getOrder().getStatus()}" style="vertical-align: middle;text-align: center;">주문 상태</td>
                       <td th:text="${orderItem.getOrder().getOrderDate()}" style="vertical-align: middle;text-align: center;">담은 날짜</td>
-                      <td style="vertical-align: middle;text-align: center;">
-                        <form th:action="@{/dailyShop/mypage/orderHistory/{id}/{orderId}(id=${member.getId()},orderId=${orderItem.getOrder().getId()})}" th:method="POST">
-                        <button class="remove" type="submit"><fa class="fa fa-close"></fa></button>
+                      <td th:if="${orderItem.getOrder().getStatus()} == ${orderItem.getOrder().getStatus().CANCEL}" style="vertical-align: middle;text-align: center;">취소 완료</td>
+                      <td style="vertical-align: middle;text-align: center;" th:unless="${orderItem.getOrder().getStatus()} == ${orderItem.getOrder().getStatus().CANCEL}">
+                        <form onsubmit="return cancel();" th:action="@{/dailyShop/mypage/orderHistory/{id}/{orderId}(id=${member.getId()},orderId=${orderItem.getOrder().getId()})}" th:method="POST">
+                          <button type="submit">주문 취소</button>
                         </form>
+                      <td style="vertical-align: middle;text-align: center;"><a class="remove" onclick="deleteOrder()" th:href="@{/dailyShop/mypage/orderHistory/delete/{id}/{orderId}(id=${member.getId()},orderId=${orderItem.getOrder().getId()})}"><fa class="fa fa-close"></fa></a></td>
+                        <script th:inline="javascript">
+                          /*<![CDATA[*/
+                          const status = [[${orderItem.getOrder().getStatus()}]];
+                          const order = [[${orderItem.getOrder().getStatus().ORDER}]];
+                          function deleteOrder(){
+                            if (status == order){
+                              alert("주문 취소 후에 내역 삭제를 할수 있습니다. 주문 취소부터 해주세요")
+                              return true
+                            }else {
+                              alert("주문내역이 삭제되었습니다.")
+                            }
+                          }
+                          function cancel(){
+                            if (status == order){
+                              alert("주문 취소가 완료되었습니다.")
+                              return true
+                            }
+                          }
+                          /*]]>*/
+                        </script>
                       </td>
                     </tr>
                     </tbody>
                   </table>
                 </div>
-              </form>
             </div>
           </div>
           <hr>
@@ -99,20 +122,7 @@
             <div class="col">
               <div class="card mb-4 rounded-3 shadow-sm">
                 <div class="card-header py-3">
-                  <h4 class="my-0 fw-normal">총 수량</h4>
-                </div>
-                <form class="card-body" method="post">
-                  <h1 class="card-title pricing-card-title" th:text="|${member.getOrders().size()}개|">$0</h1>
-
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="row row-cols-1 row-cols-md-3 mb-3 text-center mt-3">
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                  <h4 class="my-0 fw-normal">총 결제금액</h4>
+                  <h4 class="my-0 fw-normal">총 구매 금액</h4>
                 </div>
                 <!--                                   onsubmit="return orderitem();"-->
                 <form class="card-body"  th:action="@{/user/cart/checkout/{id}(id=${member.getId()})}" method="post">
