@@ -31,18 +31,54 @@
                                     <label th:for="price">가격<span>*</span></label><br>
                                     <input type="text" name="price"><br>
                                     <label th:for="category">카테고리<span>*</span></label><br>
-                                    <select name="category" >
+                                    <select onchange="optionChange();" name="category" class="category" id="category">
+                                        <option>==카테고리 선택==</option>
                                         <option value="MEN" >Men</option>
                                         <option value="WOMEN">Women</option>
                                         <option value="KIDS">Kids</option>
                                         <option value="SPORTS">Sports</option>
                                         <option value="DIGITAL">Digital</option>
-                                        <option value="Furniture">Furniture</option>
+                                    </select><br>
+                                    <label th:for="subCategory">서브 카테고리<span>*</span></label><br>
+                                    <select name="subCategory" class="subCategory" id="subCategory">
+                                        <option>==서브 카테고리 선택==</option>
                                     </select><br>
                                     <label th:for="stockQuantity">재고 수량<span>*</span></label><br>
                                     <input type="text" name="stockQuantity"><br>
+                                    <label th:for="descriptionSimple">설명 요약<span>*</span></label><br>
+                                    <input type="text" name="descriptionSimple" style="width: 60%;"><br>
+                                    <label th:for="descriptionDetail">상세 설명<span>*</span></label><br>
+                                    <textarea type="text" style="width: 60%;height: 35%;" name="descriptionDetail"></textarea><br>
                                     <button type="submit" class="aa-browse-btn">등록</button>
                                 </form>
+                                <script>
+                                    function optionChange() {
+                                        var common = ['Casual','Sports','Formal','Outer','Shirts','Pants','Shoes','ACC'];
+                                        var sports = ['Sports'];
+                                        var digital = ['Camera','Mobile','Tablet','Laptop','ACC'];
+                                        var v = $('#category').val();
+                                        var o;
+
+                                        if (v == 'MEN'){
+                                            o = common;
+                                        }else if (v == 'WOMEN'){
+                                            o = common;
+                                        }else if (v == 'KIDS'){
+                                            o = common;
+                                        }else if (v == 'SPORTS'){
+                                            o = sports;
+                                        }else if (v == 'DIGITAL'){
+                                            o = digital;
+                                        }else {
+                                            o = common;
+                                        }
+                                        $('#subCategory').empty();
+                                        $('#subCategory').append( '<option>==서브 카테고리 선택==</option>' );
+                                        for (var i = 0; i < o.length; i++){
+                                            $('#subCategory').append( '<option>' + o[ i ] + '</option>' );
+                                        }
+                                    }
+                                </script>
                             </div>
                         </div>
                     </div>

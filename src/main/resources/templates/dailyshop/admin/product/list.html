@@ -27,7 +27,9 @@
                                         <th style="width: 5%;">번호</th>
                                         <th style="width: 5%;">상품 이미지</th>
                                         <th style="width: 5%;">상품명</th>
+                                        <th style="width: 5%;">설명 요약</th>
                                         <th style="width: 5%;">카테고리</th>
+                                        <th style="width: 5%;">서브 카테고리</th>
                                         <th style="width: 5%;">가격</th>
                                         <th style="width: 5%;">재고 수량</th>
                                         <th style="width: 5%;">수정</th>
@@ -39,7 +41,9 @@
                                         <td style="vertical-align: middle;" th:text="${product.id}">번호</td>
                                         <td style="vertical-align: middle;"><a href="#"><img th:src="${product.filePath}" alt="img" style="width: 100%;"></a></td>
                                         <td style="vertical-align: middle;"><a class="aa-cart-title" href="#" th:text="${product.name}">상품명</a></td>
+                                        <td style="vertical-align: middle;" th:text="${product.descriptionSimple}">설명 요약</td>
                                         <td style="vertical-align: middle;" th:text="${product.category}">카테고리</td>
+                                        <td style="vertical-align: middle;" th:text="${product.subCategory}">서브 카테고리</td>
                                         <td style="vertical-align: middle;" th:text="${product.price}">가격</td>
                                         <td style="vertical-align: middle;" th:text="${product.stockQuantity}">재고 수량</td>
                                         <td style="vertical-align: middle;"><a th:href="@{/dailyShop/admin/product/modify/{productId}(productId=${product.id})}"><fa class="fa fa-edit"></fa></a></td>

@@ -24,24 +24,70 @@
               <h4>상품 수정</h4>
               <form role="form" th:object="${product}" class="aa-login-form" method="post"
                     enctype="multipart/form-data">
-                <label th:for="name">상품 이름<span>*</span></label>
-                <input type="text" name="name" th:field="*{name}">
-                <label th:for="file">상품 이미지<span>*</span></label>
-                <input type="file" name="file">
+                <label th:for="name">상품 이름<span>*</span></label><br>
+                <input type="text" name="name" th:field="*{name}"><br>
+                <label th:for="file">상품 이미지<span>*</span></label><br>
+                <input type="file" name="file" id="file"><br>
                 <img th:src="*{filePath}"><br>
-                <label th:for="price">가격<span>*</span></label>
-                <input type="text" name="price" th:field="*{price}">
+                <label th:for="price">가격<span>*</span></label><br>
+                <input type="text" name="price" th:field="*{price}"><br>
                 <label th:for="category">카테고리<span>*</span></label><br>
-                <select name="category" th:field="*{category}">
-                  <option value="MEN">MEN</option>
-                  <option value="WOMEN">WOMEN</option>
-                  <option value="SPORTS">SPORTS</option>
+                <select onchange="optionChange();" name="category" id="category" class="category">
+                  <option value="null">==카테고리 선택==</option>
+                  <option value="MEN" >Men</option>
+                  <option value="WOMEN">Women</option>
+                  <option value="KIDS">Kids</option>
+                  <option value="SPORTS">Sports</option>
                   <option value="DIGITAL">Digital</option>
                 </select><br>
-                <label th:for="stockQuantity">재고 수량<span>*</span></label>
-                <input type="text" name="stockQuantity" th:field="*{stockQuantity}">
-                <button type="submit" class="aa-browse-btn">수정</button>
+                <label th:for="subCategory">서브 카테고리<span>*</span></label><br>
+                <select name="subCategory" id="subCategory" class="subCategory">
+                  <option value="null">==서브 카테고리 선택==</option>
+                </select><br>
+                <label th:for="stockQuantity">재고 수량<span>*</span></label><br>
+                <input type="text" name="stockQuantity" th:field="*{stockQuantity}"><br>
+                <label th:for="descriptionSimple">설명 요약<span>*</span></label><br>
+                <input type="text" name="descriptionSimple" style="width: 60%;" th:field="*{descriptionSimple}"><br>
+                <label th:for="descriptionDetail">설명 상세<span>*</span></label><br>
+                <textarea type="text" style="width: 60%;height: 35%;" name="descriptionDetail" th:field="*{descriptionDetail}"></textarea><br>
+                <button onclick="modifyProduct();" type="submit" class="aa-browse-btn">수정</button><br>
               </form>
+              <script>
+                function modifyProduct(){
+                  var fileCheck = document.getElementById("file").value;
+                  if (!fileCheck){
+                    alert("이미지를 선택해주세요")
+                  }
+                }
+              </script>
+              <script>
+                function optionChange() {
+                  var common = ['Casual','Sports','Formal','Outer','Shirts','Pants','Shoes','ACC'];
+                  var sports = ['Sports'];
+                  var digital = ['Camera','Mobile','Tablet','Laptop','ACC'];
+                  var v = $('#category').val();
+                  var o;
+
+                  if (v == 'MEN'){
+                    o = common;
+                  }else if (v == 'WOMEN'){
+                    o = common;
+                  }else if (v == 'KIDS'){
+                    o = common;
+                  }else if (v == 'SPORTS'){
+                    o = sports;
+                  }else if (v == 'DIGITAL'){
+                    o = digital;
+                  }else {
+                    o = common;
+                  }
+                  $('#subCategory').empty();
+                  $('#subCategory').append( '<option>==서브 카테고리 선택==</option>' );
+                  for (var i = 0; i < o.length; i++){
+                    $('#subCategory').append( '<option>' + o[ i ] + '</option>' );
+                  }
+                }
+              </script>
             </div>
           </div>
         </div>

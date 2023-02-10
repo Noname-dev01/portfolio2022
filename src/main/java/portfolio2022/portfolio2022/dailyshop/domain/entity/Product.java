@@ -25,7 +25,11 @@ public class Product {
     private int stockQuantity;
     private String fileName;
     private String filePath;
+    private String descriptionSimple;
+    @Column(length = 4000)
+    private String descriptionDetail;
     private String category;
+    private String subCategory;
     @OneToMany(mappedBy = "product")
     private List<CartItem> cartItems = new ArrayList<>();
     @DateTimeFormat(pattern = "yyyy-mm-dd")

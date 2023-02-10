@@ -128,7 +128,7 @@ public class AdminController {
         if (file.isEmpty()){
             return "redirect:/dailyShop/admin/product/modify/{productId}";
         }
-        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getStockQuantity());
+        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getSubCategory(),form.getStockQuantity(),form.getDescriptionSimple(),form.getDescriptionDetail());
         return "redirect:/dailyShop/admin/product/list";
     }
 

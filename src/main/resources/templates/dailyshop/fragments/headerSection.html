@@ -57,6 +57,7 @@
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}" th:text="|보유 포인트 : ${member.getCoin()}원|">사용자</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}">마이페이지</a></li>
                 <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/cart/{id}(id=${memberId})}">장바구니</a></li>
+                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/orderHistory/{id}(id=${memberId})}">주문내역</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="hidden-xs"><a th:href="@{/dailyShop/admin/home}">관리자 페이지</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/logout}">로그아웃</a></li>
               </ul>

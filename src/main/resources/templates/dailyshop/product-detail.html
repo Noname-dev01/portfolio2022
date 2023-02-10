@@ -58,18 +58,7 @@
                   <div class="aa-product-view-slider">                                
                     <div id="demo-1" class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
-                        <div class="simpleLens-big-image-container"><a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image"><img th:src="@{${product.getFilePath()}}" class="simpleLens-big-image"></a></div>
-                      </div>
-                      <div class="simpleLens-thumbnails-container">
-                          <a data-big-image="img/view-slider/medium/polo-shirt-1.png" data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="/dailyShop/img/view-slider/thumbnail/polo-shirt-1.png">
-                          </a>                                    
-                          <a data-big-image="img/view-slider/medium/polo-shirt-3.png" data-lens-image="img/view-slider/large/polo-shirt-3.png" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="/dailyShop/img/view-slider/thumbnail/polo-shirt-3.png">
-                          </a>
-                          <a data-big-image="img/view-slider/medium/polo-shirt-4.png" data-lens-image="img/view-slider/large/polo-shirt-4.png" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="/dailyShop/img/view-slider/thumbnail/polo-shirt-4.png">
-                          </a>
+                        <div class="simpleLens-big-image-container"><img th:src="@{${product.getFilePath()}}" class="simpleLens-big-image"></a></div>
                       </div>
                     </div>
                   </div>
@@ -79,10 +68,14 @@
                   <div class="aa-product-view-content">
                     <h3 th:text="${product.getName()}">T-Shirt</h3>
                     <div class="aa-price-block">
-                      <span class="aa-product-view-price" th:text="|${product.getPrice()}원|">$34.99</span>
-                      <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
+                      <p>가격: <span class="aa-product-view-price" th:text="|${product.getPrice()}원|">$34.99</span></p>
+                      <p class="aa-product-avilability">주문가능/품절:
+                        <span th:if="${product.getStockQuantity() >= 1}">주문가능</span>
+                        <span th:unless="${product.getStockQuantity()>=1}"><del>품절</del></span>
+                      </p>
+                      <p >재고 수량: <span th:text="|${product.getStockQuantity()}개|">0개</span></p>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
+                    <p th:text="${product.getDescriptionSimple()}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
                     <h4>Size</h4>
                     <div class="aa-prod-view-size">
                       <a href="#">S</a>
@@ -121,7 +114,7 @@
                       </form>
                     </div>
                     <div class="aa-prod-view-bottom">
-                      <form method="post" th:action="@{/dailyShop/product/view/{productId}/member/{id}(id=${member.id},productId=${product.id})}">
+                      <form onsubmit="orderProduct();" method="post" th:action="@{/dailyShop/product/view/{productId}/member/{id}(id=${member.id},productId=${product.id})}">
                         <select id="count" name="count">
                           <option selected="1" value="1">1</option>
                           <option value="2">2</option>
@@ -151,6 +144,26 @@
                           return true
                         }
                       }
+
+                      function orderProduct() {
+                        var count = document.getElementById("count").value
+                        var memberCoin = [[${member.getCoin()}]];
+                        var productPrice = [[${product.Price}]];
+                        if (isNaN(count)){
+                          alert("수량을 선택해주세요")
+                          return false
+                        }else if (count > leftproductcount || memberCoin < count * productPrice) {
+                          if (count > leftproductcount) {
+                            alert("재고 수량이 부족합니다.")
+                          } else if (memberCoin < count * productPrice) {
+                            alert("잔액이 부족합니다.")
+                          }
+                          return false
+                        }else {
+                          alert("주문 되었습니다.")
+                          return true
+                        }
+                      }
                     </script>
                   </div>
                 </div>
@@ -165,16 +178,7 @@
               <!-- Tab panes -->
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="description">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                  <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod, culpa!</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor qui eius esse!</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, modi!</li>
-                  </ul>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, iusto earum voluptates autem esse molestiae ipsam, atque quam amet similique ducimus aliquid voluptate perferendis, distinctio!</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis ea, voluptas! Aliquam facere quas cumque rerum dolore impedit, dicta ducimus repellat dignissimos, fugiat, minima quaerat necessitatibus? Optio adipisci ab, obcaecati, porro unde accusantium facilis repudiandae.</p>
+                  <p th:text="${product.getDescriptionDetail()}">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                 </div>
                 <div class="tab-pane fade " id="review">
                  <div class="aa-product-review-area">
