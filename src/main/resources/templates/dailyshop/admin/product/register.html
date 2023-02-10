@@ -25,11 +25,11 @@
                                 <form role="form" class="aa-login-form" method="post"
                                       enctype="multipart/form-data">
                                     <label th:for="name">상품 이름<span>*</span></label><br>
-                                    <input type="text" name="name"><br>
+                                    <input type="text" name="name" id="name"><br>
                                     <label th:for="file">상품 이미지<span>*</span></label><br>
-                                    <input type="file" name="file" ><br>
+                                    <input type="file" name="file" id="file"><br>
                                     <label th:for="price">가격<span>*</span></label><br>
-                                    <input type="text" name="price"><br>
+                                    <input type="text" name="price" id="price"><br>
                                     <label th:for="category">카테고리<span>*</span></label><br>
                                     <select onchange="optionChange();" name="category" class="category" id="category">
                                         <option>==카테고리 선택==</option>
@@ -44,11 +44,11 @@
                                         <option>==서브 카테고리 선택==</option>
                                     </select><br>
                                     <label th:for="stockQuantity">재고 수량<span>*</span></label><br>
-                                    <input type="text" name="stockQuantity"><br>
+                                    <input type="text" name="stockQuantity" id="stockQuantity"><br>
                                     <label th:for="descriptionSimple">설명 요약<span>*</span></label><br>
-                                    <input type="text" name="descriptionSimple" style="width: 60%;"><br>
+                                    <input type="text" name="descriptionSimple" id="descriptionSimple" style="width: 60%;"><br>
                                     <label th:for="descriptionDetail">상세 설명<span>*</span></label><br>
-                                    <textarea type="text" style="width: 60%;height: 35%;" name="descriptionDetail"></textarea><br>
+                                    <textarea type="text" style="width: 60%;height: 35%;" id="descriptionDetail" name="descriptionDetail"></textarea><br>
                                     <button type="submit" class="aa-browse-btn">등록</button>
                                 </form>
                                 <script>
