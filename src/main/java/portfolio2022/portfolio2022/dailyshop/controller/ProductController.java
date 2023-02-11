@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
+import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.CategoryService;
@@ -64,10 +65,10 @@ public class ProductController {
      * 카테고리별 상품 리스트
      */
     @GetMapping("/product/category/list")
-    public String productListByCategory(Model model,Pageable pageable,String category,@AuthenticationPrincipal MemberDetails memberDetails){
+    public String productListByCategory(@ModelAttribute("productListCond")ProductListCond productListCond,String category,Model model, Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
 
         Long loginId = memberDetails.getMember().getId();
-        model.addAttribute("productsByCategory",productService.findByCategory(category,pageable));
+        model.addAttribute("productsByCategory",productService.findByCategory(category,pageable,productListCond));
         model.addAttribute("member", memberService.findMember(loginId));
         return "dailyshop/product-list-category";
     }

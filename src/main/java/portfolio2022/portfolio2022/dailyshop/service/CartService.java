@@ -1,7 +1,6 @@
 package portfolio2022.portfolio2022.dailyshop.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
@@ -11,12 +10,10 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.CartItemRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.CartRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
-import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
-import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
+import portfolio2022.portfolio2022.dailyshop.repository.product.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

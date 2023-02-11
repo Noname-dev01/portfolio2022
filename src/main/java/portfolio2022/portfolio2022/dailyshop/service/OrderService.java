@@ -7,7 +7,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.order.OrderItemRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.order.OrderRepository;
-import portfolio2022.portfolio2022.dailyshop.repository.ProductRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.product.ProductRepository;
 
 import java.util.List;
 
