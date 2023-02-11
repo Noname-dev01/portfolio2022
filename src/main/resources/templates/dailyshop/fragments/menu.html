@@ -19,69 +19,50 @@
             <li><a href="/dailyShop/main">Home</a></li>
             <li><a th:href="@{/dailyShop/product/category/list(category='MEN')}">Men <span class="caret"></span></a>
               <ul class="dropdown-menu" >
-                <li><a href="#">Casual</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="#">Formal</a></li>
-                <li><a href="#">Outer</a></li>
-                <li><a href="#">Shirts</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Shoes</a></li>
-                <li><a href="#">Bag&Acc<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">BAG</a></li>
-                    <li><a href="#">ACC</a></li>
-                    <li><a href="#">Wallet</a></li>
-                  </ul>
-                </li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='Casual')}">Casual</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='Sports')}">Sports</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='Formal')}">Formal</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='Outer')}">Outer</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='Shirts')}">Shirts</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='Pants')}">Pants</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='Shoes')}">Shoes</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='MEN',subCategory='ACC')}">Bag&Acc<span class="caret"></span></a></li>
               </ul>
             </li>
             <li><a th:href="@{/dailyShop/product/category/list(category='WOMEN')}">Women <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Casual</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="#">Formal</a></li>
-                <li><a href="#">Outer</a></li>
-                <li><a href="#">Shirts</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Shoes</a></li>
-                <li><a href="#">Bag&Acc<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">BAG</a></li>
-                    <li><a href="#">ACC</a></li>
-                    <li><a href="#">Wallet</a></li>
-                  </ul>
-                </li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='Casual')}">Casual</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='Sports')}">Sports</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='Formal')}">Formal</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='Outer')}">Outer</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='Shirts')}">Shirts</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='Pants')}">Pants</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='Shoes')}">Shoes</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='WOMEN',subCategory='ACC')}">Bag&Acc<span class="caret"></span></a></li>
               </ul>
             </li>
             <li><a th:href="@{/dailyShop/product/category/list(category='KIDS')}">Kids <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Casual</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="#">Formal</a></li>
-                <li><a href="#">Outer</a></li>
-                <li><a href="#">Shirts</a></li>
-                <li><a href="#">Pants</a></li>
-                <li><a href="#">Shoes</a></li>
-                <li><a href="#">Bag&Acc<span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">BAG</a></li>
-                    <li><a href="#">ACC</a></li>
-                    <li><a href="#">Wallet</a></li>
-                  </ul>
-                </li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='Casual')}">Casual</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='Sports')}">Sports</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='Formal')}">Formal</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='Outer')}">Outer</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='Shirts')}">Shirts</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='Pants')}">Pants</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='Shoes')}">Shoes</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='KIDS',subCategory='ACC')}">Bag&Acc<span class="caret"></span></a></li>
               </ul>
             </li>
             <li><a th:href="@{/dailyShop/product/category/list(category='SPORTS')}">Sports</a></li>
             <li><a th:href="@{/dailyShop/product/category/list(category='DIGITAL')}">Digital <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Camera</a></li>
-                <li><a href="#">Mobile</a></li>
-                <li><a href="#">Tablet</a></li>
-                <li><a href="#">Laptop</a></li>
-                <li><a href="#">Accesories</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='DIGITAL',subCategory='Camera')}">Camera</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='DIGITAL',subCategory='Mobile')}">Mobile</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='DIGITAL',subCategory='Tablet')}">Tablet</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='DIGITAL',subCategory='Laptop')}">Laptop</a></li>
+                <li><a th:href="@{/dailyShop/product/subcategory/list(category='DIGITAL',subCategory='ACC')}">Accesories</a></li>
               </ul>
             </li>
-            <li><a th:href="@{/dailyShop/product/category/list(category='FURNITURE')}">Furniture</a></li>
             <li><a href="/dailyShop/contact">Contact</a></li>
             <li><a href="#">Pages <span class="caret"></span></a>
               <ul class="dropdown-menu">

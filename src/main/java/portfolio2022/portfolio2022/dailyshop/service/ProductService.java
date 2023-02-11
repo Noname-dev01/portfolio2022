@@ -101,4 +101,11 @@ public class ProductService {
     public Page<Product> findByCategory(String category,Pageable pageable){
         return productRepository.findByCategory(category,pageable);
     }
+
+    /**
+     * 서브 카테고리별 상품 조회
+     */
+    public Page<Product> findBySubCategory(String category,String subCategory,Pageable pageable){
+        return productRepository.findByCategoryAndSubCategory(category,subCategory,pageable);
+    }
 }

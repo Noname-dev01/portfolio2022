@@ -73,8 +73,21 @@ public class ProductController {
     @GetMapping("/product/category/list")
     public String productListByCategory(Model model,Pageable pageable,String category,@AuthenticationPrincipal MemberDetails memberDetails){
 
-        model.addAttribute("products",productService.findByCategory(category,pageable));
-        model.addAttribute("member",memberDetails.getMember());
+        Long loginId = memberDetails.getMember().getId();
+        model.addAttribute("productsByCategory",productService.findByCategory(category,pageable));
+        model.addAttribute("member", memberService.findMember(loginId));
         return "dailyshop/product-list-test";
     }
+
+    /**
+     * 서브 카테고리별 상품 리스트
+     */
+    @GetMapping("/product/subcategory/list")
+    public String productListBySubCategory(Model model,Pageable pageable,String category,String subCategory,@AuthenticationPrincipal MemberDetails memberDetails){
+        Long loginId = memberDetails.getMember().getId();
+        model.addAttribute("productsBySubCategory",productService.findBySubCategory(category,subCategory,pageable));
+        model.addAttribute("member",memberService.findMember(loginId));
+        return "dailyshop/product-list-subcategory";
+    }
+
 }
