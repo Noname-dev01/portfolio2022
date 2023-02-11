@@ -7,5 +7,6 @@ public class ProductListCond {
 
     private int limit;
     private String category;
+    private String subCategory;
     private String orderBy;
 }

@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
-import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,17 +99,10 @@ public class ProductService {
     /**
      * 카테고리별 상품 조회
      */
-    public Page<Product> findByCategory(String category,Pageable pageable,ProductListCond productListCond){
+    public Page<Product> findBySubCategory(String category, String subCategory, Pageable pageable, ProductListCond productListCond){
         if (productListCond.getLimit() <= 0){
             productListCond.setLimit(50);
         }
-        return productRepository.findByCategory(category,pageable,productListCond);
-    }
-
-    /**
-     * 서브 카테고리별 상품 조회
-     */
-    public Page<Product> findBySubCategory(String category,String subCategory,Pageable pageable){
-        return productRepository.findByCategoryAndSubCategory(category,subCategory,pageable);
+        return productRepository.findByCategoryAndSubCategory(category,subCategory,pageable,productListCond);
     }
 }
