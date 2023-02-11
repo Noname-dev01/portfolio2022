@@ -6,7 +6,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.OrderStatus;
 @Data
 public class OrderSearch {
 
-    private String memberName;
+    private String productName;
     private OrderStatus orderStatus;
 
 }

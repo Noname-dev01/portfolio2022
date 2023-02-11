@@ -6,10 +6,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.*;
@@ -32,13 +29,13 @@ public class OrderController {
      * 주문 내역 조회
      */
     @GetMapping("/mypage/orderHistory/{id}")
-    public String orderList(@PathVariable("id")Long id, @AuthenticationPrincipal MemberDetails memberDetails,Model model){
+    public String orderList(@ModelAttribute("orderSearch")OrderSearch orderSearch, @PathVariable("id")Long id, @AuthenticationPrincipal MemberDetails memberDetails, Model model){
         if (Objects.equals(memberDetails.getMember().getId(), id)){
             Member member = memberService.findMember(id);
             Cart memberCart = member.getCart();
             List<CartItem> cartItems = cartService.allUserCartView(memberCart);
             int cartTotalPrice = cartService.cartTotalPrice(id);
-            List<OrderItem> orderItems = orderService.findMemberOrderItems(id);
+            List<OrderItem> orderItems = orderService.findMemberOrderItems(orderSearch,id);
 
             model.addAttribute("cartItems",cartItems);
             model.addAttribute("cartTotalPrice",cartTotalPrice);

@@ -61,6 +61,23 @@
           <div class="cart-view-area">
             <div class="cart-view-table aa-wishlist-table">
                 <div class="table-responsive">
+                  <div>
+                    <form th:object="${orderSearch}" class="form-inline">
+                      <div class="form-group mb-2">
+                        <input type="text" th:field="*{productName}" class="form-control" placeholder="회원명"/>
+                      </div>
+                      <div class="form-group mx-sm-1 mb-2">
+                        <select th:field="*{orderStatus}" class="form-control">
+                          <option value="">주문상태</option>
+                          <option th:each="status : ${T(portfolio2022.portfolio2022.dailyshop.domain.entity.OrderStatus).values()}"
+                                  th:value="${status}"
+                                  th:text="${status}">option
+                          </option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary mb-2">검색</button>
+                    </form>
+                  </div>
                   <table class="table">
                     <thead>
                     <tr>
