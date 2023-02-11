@@ -1,27 +1,20 @@
 package portfolio2022.portfolio2022.dailyshop.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import portfolio2022.portfolio2022.dailyshop.domain.dto.ProductDto;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.CategoryService;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -76,7 +69,7 @@ public class ProductController {
         Long loginId = memberDetails.getMember().getId();
         model.addAttribute("productsByCategory",productService.findByCategory(category,pageable));
         model.addAttribute("member", memberService.findMember(loginId));
-        return "dailyshop/product-list-test";
+        return "dailyshop/product-list-category";
     }
 
     /**
