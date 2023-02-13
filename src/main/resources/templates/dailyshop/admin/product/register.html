@@ -30,8 +30,16 @@
                                     <input type="file" name="file" id="file"><br>
                                     <label th:for="price">가격<span>*</span></label><br>
                                     <input type="text" name="price" id="price"><br>
+                                    <label th:for="badge">뱃지<span>*</span></label><br>
+                                    <select name="badge" class="custom-select-sm" id="badge" >
+                                        <option>==뱃지 선택==</option>
+                                        <option value="NORMAL" >NORMAL</option>
+                                        <option value="HOT">HOT</option>
+                                        <option value="SALE">SALE</option>
+                                        <option value="SOLD_OUT">SOLD_OUT</option>
+                                    </select><br>
                                     <label th:for="category">카테고리<span>*</span></label><br>
-                                    <select onchange="optionChange();" name="category" class="category" id="category">
+                                    <select onchange="optionChange();" name="category" class="custom-select-sm" id="category">
                                         <option>==카테고리 선택==</option>
                                         <option value="MEN" >Men</option>
                                         <option value="WOMEN">Women</option>
@@ -40,7 +48,7 @@
                                         <option value="DIGITAL">Digital</option>
                                     </select><br>
                                     <label th:for="subCategory">서브 카테고리<span>*</span></label><br>
-                                    <select name="subCategory" class="subCategory" id="subCategory">
+                                    <select name="subCategory" class="custom-select-sm" id="subCategory">
                                         <option>==서브 카테고리 선택==</option>
                                     </select><br>
                                     <label th:for="stockQuantity">재고 수량<span>*</span></label><br>

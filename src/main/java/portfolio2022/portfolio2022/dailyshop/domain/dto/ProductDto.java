@@ -12,4 +12,5 @@ public class ProductDto {
     private int stockQuantity;
     private String descriptionSimple;
     private String descriptionDetail;
+    private String badge;
 }

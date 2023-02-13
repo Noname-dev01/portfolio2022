@@ -82,6 +82,7 @@ public class AdminController {
      */
     @GetMapping("/admin/product/register")
     public String productSaveForm(){
+
         return "dailyshop/admin/product/register";
     }
 
@@ -128,7 +129,7 @@ public class AdminController {
         if (file.isEmpty()){
             return "redirect:/dailyShop/admin/product/modify/{productId}";
         }
-        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getSubCategory(),form.getStockQuantity(),form.getDescriptionSimple(),form.getDescriptionDetail());
+        productService.productModify(productId,form.getName(),file,form.getPrice(),form.getCategory(),form.getSubCategory(),form.getStockQuantity(),form.getDescriptionSimple(),form.getDescriptionDetail(),form.getBadge());
         return "redirect:/dailyShop/admin/product/list";
     }
 

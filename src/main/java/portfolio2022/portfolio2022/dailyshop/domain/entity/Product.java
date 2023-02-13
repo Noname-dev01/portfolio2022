@@ -32,6 +32,7 @@ public class Product {
     private String subCategory;
     @OneToMany(mappedBy = "product")
     private List<CartItem> cartItems = new ArrayList<>();
+    private String badge; //상품 뱃지[SOLD_OUT,SALE,HOT,NORMAL]
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate createDate; // 상품 등록일
 

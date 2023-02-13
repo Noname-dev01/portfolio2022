@@ -57,7 +57,7 @@
                 <form th:object="${productListCond}" class="form-inline">
                   <div class="form-group mx-sm-1 mb-2">
                   <label for="orderBy">Sort by</label>
-                  <select name="orderBy" id="orderBy" th:field="*{orderBy}">
+                  <select name="orderBy" id="orderBy" th:field="*{orderBy}" class="custom-select-sm">
                     <option value="new" selected="new">최신순</option>
                     <option value="lowPrice">낮은가격순</option>
                     <option value="highPrice">높은가격순</option>
@@ -67,7 +67,7 @@
                   <input class="hidden" th:type="hidden" th:field="*{subCategory}" >
                   <div class="form-group mx-sm-1 mb-2">
                   <label for="limit">Show</label>
-                  <select name="limit" id="limit" th:field="*{limit}">
+                  <select name="limit" id="limit" th:field="*{limit}" class="custom-select-sm">
                     <option value="12" selected="12">12</option>
                     <option value="24">24</option>
                     <option value="36">36</option>
@@ -104,7 +104,10 @@
                     <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                            
                   </div>
                   <!-- product badge -->
-                  <span class="aa-badge aa-sale" href="#">SALE!</span>
+                  <span th:if="${product.badge == 'SALE'}" class="aa-badge aa-sale" href="#">SALE!</span>
+                  <span th:if="${product.badge == 'SOLD_OUT'}" class="aa-badge aa-sold-out" href="#">Sold Out!</span>
+                  <span th:if="${product.badge == 'HOT'}" class="aa-badge aa-hot" href="#">HOT!</span>
+                  <span th:if="${product.badge == 'NORMAL'}"></span>
                 </li>
               </ul>
             </div>

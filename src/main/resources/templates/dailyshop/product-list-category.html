@@ -57,7 +57,7 @@
                 <form th:object="${productListCond}" class="form-inline">
                   <div class="form-group mx-sm-1 mb-2">
                   <label for="orderBy">Sort by</label>
-                  <select name="orderBy" id="orderBy" th:field="*{orderBy}">
+                  <select name="orderBy" id="orderBy" th:field="*{orderBy}" class="custom-select-sm">
                     <option value="new" selected="new">최신순</option>
                     <option value="lowPrice">낮은가격순</option>
                     <option value="highPrice">높은가격순</option>
@@ -66,7 +66,7 @@
                   <input class="hidden" th:type="hidden" th:field="*{category}">
                   <div class="form-group mx-sm-1 mb-2">
                   <label for="limit">Show</label>
-                  <select name="limit" id="limit" th:field="*{limit}">
+                  <select name="limit" id="limit" th:field="*{limit}" class="custom-select-sm">
                     <option value="12" selected="12">12</option>
                     <option value="24">24</option>
                     <option value="36">36</option>
@@ -91,19 +91,18 @@
                 <li th:each="product:${productsByCategory}">
                   <figure>
                     <a class="aa-product-img" href="#"><img th:src="${product.filePath}" alt="polo shirt img"></a>
-                    <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                    <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#" th:text="${product.name}">This is Title</a></h4>
                       <span class="aa-product-price" th:text="${product.price}">$45.50</span><span class="aa-product-price"><del>$65.50</del></span>
-                      <p class="aa-product-descrip">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam accusamus facere iusto, autem soluta amet sapiente ratione inventore nesciunt a, maxime quasi consectetur, rerum illum.</p>
+                      <p class="aa-product-descrip" th:text="${product.descriptionDetail}"></p>
                     </figcaption>
-                  </figure>                         
-                  <div class="aa-product-hvr-content">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                            
-                  </div>
+                  </figure>
                   <!-- product badge -->
-                  <span class="aa-badge aa-sale" href="#">SALE!</span>
+                  <span th:if="${product.badge == 'SALE'}" class="aa-badge aa-sale" href="#">SALE!</span>
+                  <span th:if="${product.badge == 'SOLD_OUT'}" class="aa-badge aa-sold-out" href="#">Sold Out!</span>
+                  <span th:if="${product.badge == 'HOT'}" class="aa-badge aa-hot" href="#">HOT!</span>
+                  <span th:if="${product.badge == 'NORMAL'}"></span>
                 </li>
               </ul>
             </div>
@@ -142,77 +141,6 @@
                 <li><a th:href="@{/dailyShop/product/category/list(category='SPORTS')}">Sports</a></li>
                 <li><a th:href="@{/dailyShop/product/category/list(category='DIGITAL')}">Digital</a></li>
               </ul>
-            </div>
-            <!-- single sidebar -->
-            <div class="aa-sidebar-widget">
-              <h3>Tags</h3>
-              <div class="tag-cloud">
-                <a href="#">Fashion</a>
-                <a href="#">Ecommerce</a>
-                <a href="#">Shop</a>
-                <a href="#">Hand Bag</a>
-                <a href="#">Laptop</a>
-                <a href="#">Head Phone</a>
-                <a href="#">Pen Drive</a>
-              </div>
-            </div>
-            <!-- single sidebar -->
-            <div class="aa-sidebar-widget">
-              <h3>Recently Views</h3>
-              <div class="aa-recently-views">
-                <ul>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-1.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                   <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>                                      
-                </ul>
-              </div>                            
-            </div>
-            <!-- single sidebar -->
-            <div class="aa-sidebar-widget">
-              <h3>Top Rated Products</h3>
-              <div class="aa-recently-views">
-                <ul>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-1.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                   <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>                                      
-                </ul>
-              </div>                            
             </div>
           </aside>
         </div>
