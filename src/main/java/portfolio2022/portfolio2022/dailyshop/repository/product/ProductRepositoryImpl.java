@@ -24,11 +24,24 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
     }
 
     @Override
+    public Page<Product> findByCategory(String category, Pageable pageable, ProductListCond productListCond) {
+        List<Product> result = query
+                .select(product)
+                .from(product)
+                .where(product.category.eq(category),priceRange(productListCond))
+                .limit(productListCond.getLimit())
+                .orderBy(orderByPrice(productListCond))
+                .fetch();
+
+        return new PageImpl<>(result);
+    }
+
+    @Override
     public Page<Product> findByCategoryAndSubCategory(String category, String subCategory, Pageable pageable, ProductListCond productListCond) {
         List<Product> result = query
                 .select(product)
                 .from(product)
-                .where(product.category.eq(category),subCategory(subCategory))
+                .where(product.category.eq(category),subCategory(subCategory),priceRange(productListCond))
                 .limit(productListCond.getLimit())
                 .orderBy(orderByPrice(productListCond))
                 .fetch();
@@ -42,6 +55,12 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
         return product.subCategory.eq(subCategory);
     }
 
+    private BooleanExpression priceRange(ProductListCond productListCond) {
+        if (productListCond == null){
+            return null;
+        }
+        return product.price.between(productListCond.getMinPrice(),productListCond.getMaxPrice());
+    }
 
     private OrderSpecifier<?> orderByPrice(ProductListCond productListCond) {
         if (Objects.equals(productListCond.getOrderBy(), "new")){

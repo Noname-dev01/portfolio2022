@@ -9,4 +9,6 @@ public class ProductListCond {
     private String category;
     private String subCategory;
     private String orderBy;
+    private int minPrice;
+    private int maxPrice;
 }

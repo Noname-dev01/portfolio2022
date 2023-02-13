@@ -63,7 +63,8 @@
                     <option value="highPrice">높은가격순</option>
                   </select>
                   </div>
-                  <input class="hidden" th:type="hidden" th:field="*{category}">
+                  <input class="hidden" th:type="hidden" th:field="*{category}" >
+                  <input class="hidden" th:type="hidden" th:field="*{subCategory}" >
                   <div class="form-group mx-sm-1 mb-2">
                   <label for="limit">Show</label>
                   <select name="limit" id="limit" th:field="*{limit}">

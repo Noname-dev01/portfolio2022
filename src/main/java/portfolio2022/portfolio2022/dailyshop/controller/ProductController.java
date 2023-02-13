@@ -65,11 +65,23 @@ public class ProductController {
      * 카테고리별 상품 리스트
      */
     @GetMapping("/product/category/list")
-    public String productListByCategory(@ModelAttribute("productListCond") ProductListCond productListCond, String category, String subCategory, Model model, Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
+    public String productListByCategory(@ModelAttribute("productListCond") ProductListCond productListCond, String category, Model model, Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
+
+        Long loginId = memberDetails.getMember().getId();
+        model.addAttribute("productsByCategory",productService.findByCategory(category,pageable,productListCond));
+        model.addAttribute("member", memberService.findMember(loginId));
+        return "dailyshop/product-list-category";
+    }
+
+    /**
+     * 서브 카테고리별 상품 리스트
+     */
+    @GetMapping("/product/subCategory/list")
+    public String productListBysubCategory(@ModelAttribute("productListCond") ProductListCond productListCond, String category, String subCategory, Model model, Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
 
         Long loginId = memberDetails.getMember().getId();
         model.addAttribute("productsByCategory",productService.findBySubCategory(category,subCategory,pageable,productListCond));
         model.addAttribute("member", memberService.findMember(loginId));
-        return "dailyshop/product-list-category";
+        return "dailyshop/product-list-subcategory";
     }
 }
