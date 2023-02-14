@@ -6,6 +6,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.StringUtils;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 
 import javax.persistence.EntityManager;
@@ -48,6 +49,30 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
         return new PageImpl<>(result);
     }
 
+    @Override
+    public Page<Product> productSearch(String searchKeyword, Pageable pageable, ProductSearchCond productSearchCond) {
+        List<Product> result = query
+                .select(product)
+                .from(product)
+                .where(productNameLike(searchKeyword).or(categoryLike(searchKeyword.toUpperCase())))
+                .limit(productSearchCond.getLimit())
+                .orderBy(productByPrice(productSearchCond))
+                .fetch();
+        return new PageImpl<>(result);
+    }
+
+    private BooleanExpression productNameLike(String searchKeyword){
+        if (!StringUtils.hasText(searchKeyword)){
+            return null;
+        }
+        return product.name.contains(searchKeyword);
+    }
+    private BooleanExpression categoryLike(String searchKeyword){
+        if (!StringUtils.hasText(searchKeyword)){
+            return null;
+        }
+        return product.category.contains(searchKeyword);
+    }
     private BooleanExpression subCategory(String subCategory) {
         if (subCategory == null){
             return null;
@@ -68,6 +93,17 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
         } else if (Objects.equals(productListCond.getOrderBy(), "lowPrice")) {
             return product.price.asc();
         }else if (Objects.equals(productListCond.getOrderBy(), "highPrice")){
+            return product.price.desc();
+        }else {
+            return product.id.desc();
+        }
+    }
+    private OrderSpecifier<?> productByPrice(ProductSearchCond productSearchCond) {
+        if (Objects.equals(productSearchCond.getOrderBy(), "new")){
+            return product.id.desc();
+        } else if (Objects.equals(productSearchCond.getOrderBy(), "lowPrice")) {
+            return product.price.asc();
+        }else if (Objects.equals(productSearchCond.getOrderBy(), "highPrice")){
             return product.price.desc();
         }else {
             return product.id.desc();

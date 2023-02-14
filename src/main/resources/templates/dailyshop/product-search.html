@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <head th:replace="dailyshop/fragments/header :: header">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daily Shop | Product</title>
+  </head>
+  <!-- !Important notice -->
+  <!-- Only for product page body tag have to added .productPage class -->
+  <body class="productPage">  
+   <!-- wpf loader Two -->
+    <div id="wpf-loader-two">          
+      <div class="wpf-loader-two-inner">
+        <span>Loading</span>
+      </div>
+    </div> 
+    <!-- / wpf loader Two -->       
+ <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+   <!-- Start header section -->
+   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (member=${member},authname=${member.getName()},memberId=${member.getId()},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
+   <!-- / header section -->
+
+   <!-- menu -->
+   <section th:replace="dailyshop/fragments/menu :: menu" />
+   <!-- / menu -->
+
+  <!-- catg header banner section -->
+  <section id="aa-catg-head-banner">
+   <img src="/dailyShop/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+   <div class="aa-catg-head-banner-area">
+     <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2>Search</h2>
+        <ol class="breadcrumb">
+          <li><a href="/dailyShop">Home</a></li>
+          <li class="active">product</li>
+        </ol>
+      </div>
+     </div>
+   </div>
+  </section>
+  <!-- / catg header banner section -->
+
+  <!-- product category -->
+  <section id="aa-product-category">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+          <div class="aa-product-catg-content">
+            <div class="aa-product-catg-head">
+              <div class="aa-product-catg-head-left">
+                <form th:object="${productSearchCond}" class="form-inline">
+                  <div class="form-group mx-sm-1 mb-2">
+                  <label for="orderBy">Sort by</label>
+                  <select name="orderBy" id="orderBy" th:field="*{orderBy}" class="custom-select-sm">
+                    <option value="new" selected="new">최신순</option>
+                    <option value="lowPrice">낮은가격순</option>
+                    <option value="highPrice">높은가격순</option>
+                  </select>
+                  </div>
+                  <input class="hidden" th:type="hidden" th:field="*{searchKeyword}">
+                  <div class="form-group mx-sm-1 mb-2">
+                  <label for="limit">Show</label>
+                  <select name="limit" id="limit" th:field="*{limit}" class="custom-select-sm">
+                    <option value="12" selected="12">12</option>
+                    <option value="24">24</option>
+                    <option value="36">36</option>
+                  </select>
+                  </div>
+                  <div class="form-group mx-sm-1 mb-2">
+                    <label>Price</label>
+                    <span><input type="text" th:field="*{minPrice}" title="minPrice" maxlength="10" style="width: 25%;">~ </span>
+                    <span><input type="text" th:field="*{maxPrice}" title="maxPrice" maxlength="10" style="width: 25%;"> 원</span>
+                  </div>
+                  <button type="submit" class="aa-filter-btn" style="margin-left: -16%;">검색</button>
+                </form>
+              </div>
+              <div class="aa-product-catg-head-right">
+                <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
+                <a id="list-catg" href="#"><span class="fa fa-list"></span></a>
+              </div>
+            </div>
+            <div class="aa-product-catg-body">
+              <ul class="aa-product-catg">
+                <!-- start single product item -->
+                <li th:each="product:${productSearch}">
+                  <figure>
+                    <a class="aa-product-img" href="#"><img th:src="${product.filePath}" alt="polo shirt img"></a>
+                    <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
+                    <figcaption>
+                      <h4 class="aa-product-title"><a href="#" th:text="${product.name}">This is Title</a></h4>
+                      <span class="aa-product-price" th:text="${product.price}">$45.50</span><span class="aa-product-price"><del>$65.50</del></span>
+                      <p class="aa-product-descrip" th:text="${product.descriptionDetail}"></p>
+                    </figcaption>
+                  </figure>
+                  <!-- product badge -->
+                  <span th:if="${product.badge == 'SALE'}" class="aa-badge aa-sale" href="#">SALE!</span>
+                  <span th:if="${product.badge == 'SOLD_OUT'}" class="aa-badge aa-sold-out" href="#">Sold Out!</span>
+                  <span th:if="${product.badge == 'HOT'}" class="aa-badge aa-hot" href="#">HOT!</span>
+                  <span th:if="${product.badge == 'NORMAL'}"></span>
+                </li>
+              </ul>
+            </div>
+            <div class="aa-product-catg-pagination">
+              <nav>
+                <ul class="pagination">
+                  <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li>
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+          <aside class="aa-sidebar">
+            <!-- single sidebar -->
+            <div class="aa-sidebar-widget">
+              <h3>Category</h3>
+              <ul class="aa-catg-nav">
+                <li><a th:href="@{/dailyShop/product/category/list(category='MEN')}">Men</a></li>
+                <li><a th:href="@{/dailyShop/product/category/list(category='WOMEN')}">Women</a></li>
+                <li><a th:href="@{/dailyShop/product/category/list(category='KIDS')}">Kids</a></li>
+                <li><a th:href="@{/dailyShop/product/category/list(category='SPORTS')}">Sports</a></li>
+                <li><a th:href="@{/dailyShop/product/category/list(category='DIGITAL')}">Digital</a></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+  <!-- / product category -->
+
+   <!-- footer -->
+   <footer th:replace="dailyshop/fragments/footer :: footer"/>
+   <!--  / footer -->
+
+   <!-- login Modal -->
+   <div th:replace="dailyshop/fragments/loginModal :: loginModal"/>
+   <!--/ login Modal -->
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/dailyShop/js/bootstrap.js"></script>
+  <!-- SmartMenus jQuery plugin -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.js"></script>
+  <!-- SmartMenus jQuery Bootstrap Addon -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.bootstrap.js"></script>
+  <!-- To Slider JS -->
+  <script src="/dailyShop/js/sequence.js"></script>
+  <script src="/dailyShop/js/sequence-theme.modern-slide-in.js"></script>
+  <!-- Product view slider -->
+  <script type="text/javascript" src="/dailyShop/js/jquery.simpleGallery.js"></script>
+  <script type="text/javascript" src="/dailyShop/js/jquery.simpleLens.js"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="/dailyShop/js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="/dailyShop/js/nouislider.js"></script>
+  <!-- Custom js -->
+  <script src="/dailyShop/js/custom.js"></script>
+  
+
+  </body>
+</html>

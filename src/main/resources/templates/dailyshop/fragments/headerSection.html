@@ -129,8 +129,8 @@
             <!-- / cart box -->
             <!-- search box -->
             <div class="aa-search-box">
-              <form action="">
-                <input type="text" name="" id="" placeholder="Search here ex. 'man' ">
+              <form th:action="@{/dailyShop/product/search}">
+                <input type="text" name="searchKeyword" id="searchKeyword" placeholder="통합 검색(ex:상품명 또는 카테고리 검색 가능합니다)">
                 <button type="submit"><span class="fa fa-search"></span></button>
               </form>
             </div>

@@ -10,6 +10,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
+import portfolio2022.portfolio2022.dailyshop.repository.product.ProductSearchCond;
 
 import java.io.File;
 import java.io.IOException;
@@ -121,5 +122,18 @@ public class ProductService {
             productListCond.setMaxPrice(1000000);
         }
         return productRepository.findByCategoryAndSubCategory(category,subCategory,pageable,productListCond);
+    }
+
+    /**
+     * 홈에서 검색 기능
+     */
+    public Page<Product> ProductSearch(String searchKeyword, Pageable pageable, ProductSearchCond productSearchCond){
+        if (productSearchCond.getLimit() <= 0){
+            productSearchCond.setLimit(50);
+        }
+        if (productSearchCond.getMaxPrice() <=0){
+            productSearchCond.setMaxPrice(1000000);
+        }
+        return productRepository.productSearch(searchKeyword,pageable,productSearchCond);
     }
 }

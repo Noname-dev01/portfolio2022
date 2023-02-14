@@ -10,6 +10,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
+import portfolio2022.portfolio2022.dailyshop.repository.product.ProductSearchCond;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.CategoryService;
@@ -83,5 +84,17 @@ public class ProductController {
         model.addAttribute("productsByCategory",productService.findBySubCategory(category,subCategory,pageable,productListCond));
         model.addAttribute("member", memberService.findMember(loginId));
         return "dailyshop/product-list-subcategory";
+    }
+
+    /**
+     * 홈에서 검색 기능
+     */
+    @GetMapping("/product/search")
+    public String productSearch(@ModelAttribute("productSearchCond") ProductSearchCond productSearchCond, Pageable pageable, String searchKeyword, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
+
+        Long loginId = memberDetails.getMember().getId();
+        model.addAttribute("member",memberService.findMember(loginId));
+        model.addAttribute("productSearch",productService.ProductSearch(searchKeyword,pageable,productSearchCond));
+        return "dailyshop/product-search";
     }
 }
