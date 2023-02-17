@@ -76,15 +76,16 @@ public class MemberController {
     public String myPage(@PathVariable("id")Long id, Model model,@AuthenticationPrincipal MemberDetails memberDetails){
         Long loginMemberId = memberDetails.getMember().getId();
         if (loginMemberId == id){
-            Member member = memberService.findMember(loginMemberId);
-            Cart memberCart = member.getCart();
-            List<CartItem> cartItems = cartService.allUserCartView(memberCart);
-            int totalPrice = cartService.cartTotalPrice(id);
+            Member member = memberService.findMember(memberDetails.getMember().getId());
+            Cart memberCart = cartService.findMemberCart(member.getId());
+            List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+            int totalPrice = cartService.cartTotalPrice(member.getId());
 
             model.addAttribute("totalPrice", totalPrice);
-            model.addAttribute("cartListCount", cartItems.size());
-            model.addAttribute("cartItems", cartItems);
-            model.addAttribute("member",memberService.findMember(id));
+            model.addAttribute("totalCount", memberCart.getCount());
+            model.addAttribute("cartListCount", cartItemList.size());
+            model.addAttribute("cartItems", cartItemList);
+            model.addAttribute("member", member);
             return "dailyshop/mypage";
         }else {
             return "redirect:/dailyShop/main";
@@ -98,7 +99,16 @@ public class MemberController {
     public String memberModify(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
         //로그인 한 유저와 수정 페이지에 접속하는 id가 같아야 함
         if (memberDetails.getMember().getId() == id){
-            model.addAttribute("member",memberService.findMember(id));
+            Member member = memberService.findMember(memberDetails.getMember().getId());
+            Cart memberCart = cartService.findMemberCart(member.getId());
+            List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+            int totalPrice = cartService.cartTotalPrice(member.getId());
+
+            model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("totalCount", memberCart.getCount());
+            model.addAttribute("cartListCount", cartItemList.size());
+            model.addAttribute("cartItems", cartItemList);
+            model.addAttribute("member", member);
             return "/dailyshop/member-modify";
         }else {
             return "redirect:/dailyShop/main";

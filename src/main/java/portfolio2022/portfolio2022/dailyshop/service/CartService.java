@@ -3,6 +3,7 @@ package portfolio2022.portfolio2022.dailyshop.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
@@ -11,6 +12,7 @@ import portfolio2022.portfolio2022.dailyshop.repository.CartItemRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.CartRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductRepository;
+import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +139,6 @@ public class CartService {
         }
         return totalPrice;
     }
-
 
     /**
      * 카트의 상품 전체 삭제 -> 매개변수는 유저 id

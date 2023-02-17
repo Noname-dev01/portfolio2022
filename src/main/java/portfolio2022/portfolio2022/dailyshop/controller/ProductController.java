@@ -39,21 +39,17 @@ public class ProductController {
     public String productView(@PathVariable("productId") Long id, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
         if (memberDetails.getMember() != null){
             //회원
-            Member member = memberDetails.getMember();
+            Member member = memberService.findMember(memberDetails.getMember().getId());
+            Cart memberCart = cartService.findMemberCart(member.getId());
+            List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+            int totalPrice = cartService.cartTotalPrice(member.getId());
 
-            Member loginMember = memberService.findMember(member.getId());
-
-            int cartCount = 0;
-            Cart memberCart = cartService.findMemberCart(loginMember.getId());
-            List<CartItem> cartItems = cartService.allUserCartView(memberCart);
-
-            for (CartItem cartItem : cartItems) {
-                cartCount += cartItem.getCount();
-            }
-
-            model.addAttribute("cartCount",cartCount);
+            model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("totalCount", memberCart.getCount());
+            model.addAttribute("cartListCount", cartItemList.size());
+            model.addAttribute("cartItems", cartItemList);
+            model.addAttribute("member", member);
             model.addAttribute("product",productService.findProduct(id));
-            model.addAttribute("member", memberService.findMember(member.getId()));
             return "dailyshop/product-detail";
 
         }else {
@@ -67,10 +63,17 @@ public class ProductController {
      */
     @GetMapping("/product/category/list")
     public String productListByCategory(@ModelAttribute("productListCond") ProductListCond productListCond, String category, Model model, Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
+        Member member = memberService.findMember(memberDetails.getMember().getId());
+        Cart memberCart = cartService.findMemberCart(member.getId());
+        List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+        int totalPrice = cartService.cartTotalPrice(member.getId());
 
-        Long loginId = memberDetails.getMember().getId();
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalCount", memberCart.getCount());
+        model.addAttribute("cartListCount", cartItemList.size());
+        model.addAttribute("cartItems", cartItemList);
+        model.addAttribute("member", member);
         model.addAttribute("productsByCategory",productService.findByCategory(category,pageable,productListCond));
-        model.addAttribute("member", memberService.findMember(loginId));
         return "dailyshop/product-list-category";
     }
 
@@ -79,10 +82,17 @@ public class ProductController {
      */
     @GetMapping("/product/subCategory/list")
     public String productListBysubCategory(@ModelAttribute("productListCond") ProductListCond productListCond, String category, String subCategory, Model model, Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
+        Member member = memberService.findMember(memberDetails.getMember().getId());
+        Cart memberCart = cartService.findMemberCart(member.getId());
+        List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+        int totalPrice = cartService.cartTotalPrice(member.getId());
 
-        Long loginId = memberDetails.getMember().getId();
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalCount", memberCart.getCount());
+        model.addAttribute("cartListCount", cartItemList.size());
+        model.addAttribute("cartItems", cartItemList);
+        model.addAttribute("member", member);
         model.addAttribute("productsByCategory",productService.findBySubCategory(category,subCategory,pageable,productListCond));
-        model.addAttribute("member", memberService.findMember(loginId));
         return "dailyshop/product-list-subcategory";
     }
 
@@ -92,9 +102,18 @@ public class ProductController {
     @GetMapping("/product/search")
     public String productSearch(@ModelAttribute("productSearchCond") ProductSearchCond productSearchCond, Pageable pageable, String searchKeyword, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
 
-        Long loginId = memberDetails.getMember().getId();
-        model.addAttribute("member",memberService.findMember(loginId));
+        Member member = memberService.findMember(memberDetails.getMember().getId());
+        Cart memberCart = cartService.findMemberCart(member.getId());
+        List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+        int totalPrice = cartService.cartTotalPrice(member.getId());
+
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalCount", memberCart.getCount());
+        model.addAttribute("cartListCount", cartItemList.size());
+        model.addAttribute("cartItems", cartItemList);
+        model.addAttribute("member", member);
         model.addAttribute("productSearch",productService.ProductSearch(searchKeyword,pageable,productSearchCond));
         return "dailyshop/product-search";
     }
+
 }
