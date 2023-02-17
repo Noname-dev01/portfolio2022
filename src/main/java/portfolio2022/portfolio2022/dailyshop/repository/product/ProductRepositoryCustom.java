@@ -13,4 +13,6 @@ public interface ProductRepositoryCustom {
     Page<Product> findByCategoryAndSubCategory(String category, String subCategory, Pageable pageable, ProductListCond productSubListCond);
 
     Page<Product> productSearch(String searchKeyword,Pageable pageable,ProductSearchCond productSearchCond);
+
+    List<Product> findRelatedProducts(String subCategory,Long productId);
 }

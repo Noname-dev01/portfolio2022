@@ -127,7 +127,7 @@ public class ProductService {
     /**
      * 홈에서 검색 기능
      */
-    public Page<Product> ProductSearch(String searchKeyword, Pageable pageable, ProductSearchCond productSearchCond){
+    public Page<Product> productSearch(String searchKeyword, Pageable pageable, ProductSearchCond productSearchCond){
         if (productSearchCond.getLimit() <= 0){
             productSearchCond.setLimit(50);
         }
@@ -135,5 +135,12 @@ public class ProductService {
             productSearchCond.setMaxPrice(1000000);
         }
         return productRepository.productSearch(searchKeyword,pageable,productSearchCond);
+    }
+
+    /**
+     * 상세페이지 관련 상품 기능
+     */
+    public List<Product> relatedProducts(String subString,Long productId){
+        return productRepository.findRelatedProducts(subString,productId);
     }
 }

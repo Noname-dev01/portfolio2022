@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductSearchCond;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
@@ -36,20 +37,24 @@ public class ProductController {
      * 상품 상세 페이지
      */
     @GetMapping("/product/view/{productId}")
-    public String productView(@PathVariable("productId") Long id, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
+    public String productView(@PathVariable("productId") Long productId, Model model, @AuthenticationPrincipal MemberDetails memberDetails){
         if (memberDetails.getMember() != null){
             //회원
             Member member = memberService.findMember(memberDetails.getMember().getId());
             Cart memberCart = cartService.findMemberCart(member.getId());
             List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
             int totalPrice = cartService.cartTotalPrice(member.getId());
+            Product product = productService.findProduct(productId);
+
+            List<Product> relatedProducts = productService.relatedProducts(product.getSubCategory(),productId);
 
             model.addAttribute("totalPrice", totalPrice);
             model.addAttribute("totalCount", memberCart.getCount());
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
-            model.addAttribute("product",productService.findProduct(id));
+            model.addAttribute("relatedProducts",relatedProducts);
+            model.addAttribute("product",productService.findProduct(productId));
             return "dailyshop/product-detail";
 
         }else {
@@ -112,7 +117,7 @@ public class ProductController {
         model.addAttribute("cartListCount", cartItemList.size());
         model.addAttribute("cartItems", cartItemList);
         model.addAttribute("member", member);
-        model.addAttribute("productSearch",productService.ProductSearch(searchKeyword,pageable,productSearchCond));
+        model.addAttribute("productSearch",productService.productSearch(searchKeyword,pageable,productSearchCond));
         return "dailyshop/product-search";
     }
 

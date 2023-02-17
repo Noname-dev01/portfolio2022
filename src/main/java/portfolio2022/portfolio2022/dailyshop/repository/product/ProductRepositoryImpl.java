@@ -61,6 +61,16 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
         return new PageImpl<>(result);
     }
 
+    @Override
+    public List<Product> findRelatedProducts(String subCategory,Long productId) {
+        return query
+                .select(product)
+                .from(product)
+                .where(product.subCategory.eq(subCategory),product.id.ne(productId))
+                .limit(8)
+                .fetch();
+    }
+
     private BooleanExpression productNameLike(String searchKeyword){
         if (!StringUtils.hasText(searchKeyword)){
             return null;
