@@ -11,16 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import portfolio2022.portfolio2022.dailyshop.domain.dto.ProductDto;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.CartService;
+import portfolio2022.portfolio2022.dailyshop.service.ChargeListService;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,6 +30,7 @@ public class AdminController {
     private final MemberService memberService;
     private final CartService cartService;
     private final ProductService productService;
+    private final ChargeListService chargeListService;
 
     /**
      * 관리자 페이지 메인
@@ -148,5 +149,27 @@ public class AdminController {
         memberService.chargePoint(id, amount);
 
         return "redirect:/dailyShop/admin/members";
+    }
+
+    /**
+     * 충전 요청 전체 리스트
+     */
+    @GetMapping("/admin/charge/list")
+    public String adminChargeList(Model model){
+        List<ChargeList> chargeListAll = chargeListService.findChargeListAll();
+
+        model.addAttribute("chargeListAll",chargeListAll);
+        return "dailyshop/admin/member/charge-list";
+    }
+    @PostMapping("/admin/charge/{chargeListId}")
+    public String adminChargeCheck(@PathVariable("chargeListId")Long chargeListId){
+        chargeListService.chargeOkay(chargeListId);
+        return "redirect:/dailyShop/admin/charge/list";
+    }
+
+    @GetMapping("/admin/charge/delete/{id}")
+    public String deleteCharge(@PathVariable("id")Long id){
+        chargeListService.deleteChargeList(id);
+        return "redirect:/dailyShop/admin/charge/list";
     }
 }

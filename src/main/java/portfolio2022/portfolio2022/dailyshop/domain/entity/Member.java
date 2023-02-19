@@ -31,6 +31,11 @@ public class Member {
     private String role;
 
     private int coin;
+
+
+    @OneToMany(mappedBy = "member")
+    private List<ChargeList> chargeList = new ArrayList<>();
+
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDateTime createDate;
 

@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeList;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeStatus;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.exception.DuplicateMemberException;
 import portfolio2022.portfolio2022.dailyshop.repository.CartRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.ChargeListRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
 import java.util.List;
@@ -18,6 +21,7 @@ import java.util.Objects;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
+    private final ChargeListRepository chargeListRepository;
 
     /**
      * 회원 가입
@@ -77,12 +81,31 @@ public class MemberService {
         memberRepository.deleteById(id);
     }
     /**
-     * 충전하기
+     * 관리자 권한으로 충전하기
      */
     @Transactional
     public void chargePoint(Long id,int amount){
         Member member = memberRepository.findById(id).get();
         member.setCoin(member.getCoin()+amount);
 
+    }
+    /**
+     * 회원이 충전요청 하기
+     */
+    @Transactional
+    public void mypageCharge(Long id,int amount){
+        Member member = memberRepository.findById(id).get();
+        ChargeList chargeList = new ChargeList();
+        chargeList.setMember(member);
+        chargeList.setChargeStatus(ChargeStatus.READY);
+        chargeList.setChargeAmount(amount);
+        chargeListRepository.save(chargeList);
+    }
+
+    /**
+     * 충전 요청 결과 리스트
+     */
+    public List<ChargeList> memberChargeList(Long id){
+        return chargeListRepository.findChargeListByMemberId(id);
     }
 }

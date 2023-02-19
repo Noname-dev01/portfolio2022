@@ -132,7 +132,8 @@
                                <li th:class="nav-item"><a class="nav-link active" th:href="@{/dailyShop/mypage/{id}(id=${member.getId()})}">마이페이지</a></li>
                                <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/cart/{id}(id=${member.getId()})}">장바구니</a></li>
                                <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/orderHistory/{id}(id=${member.getId()})}">주문내역</a></li>
-                               <li th:class="nav-item"><a th:class="nav-link" href="">충전하기</a></li>
+                               <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/charge/{id}(id=${member.getId()})}">충전하기</a></li>
+                               <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/charge/list}">충전 내역 조회</a></li>
                            </ul>
                        </div>
                    </aside>
