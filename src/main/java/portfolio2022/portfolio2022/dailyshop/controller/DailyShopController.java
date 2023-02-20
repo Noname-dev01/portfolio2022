@@ -43,27 +43,12 @@ public class DailyShopController {
     }
 
     /**
-     * 로그인 안했을때
+     * 메인 화면(로그인 안하면 카트 기능, 마이페이지 기능 사용 불가)
      */
     @GetMapping
-    public String homePageAnonymous(Model model,@AuthenticationPrincipal MemberDetails memberDetails){
-        model.addAttribute("products", productService.findProducts());
-        try {
-            Long id = memberDetails.getMember().getId();
-            model.addAttribute("member",memberService.findMember(id));
-        }catch (NullPointerException e){
-            return "dailyshop/index";
-        }
-        return "dailyshop/index";
-    }
-
-    /**
-     * 로그인 후 이동 화면
-     */
-    @GetMapping("/main")
     public String home(Model model, @AuthenticationPrincipal MemberDetails memberDetails){
-
-        try {
+        //로그인 했을 경우
+        if (memberDetails != null) {
             Member member = memberService.findMember(memberDetails.getMember().getId());
             Cart memberCart = cartService.findMemberCart(member.getId());
             List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
@@ -74,14 +59,15 @@ public class DailyShopController {
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
+            model.addAttribute("products", productService.findProducts());
 
-        }catch (NullPointerException e){
-            return "redirect:/dailyShop/login";
+            return "dailyshop/login/home";
+        }else {
+            //로그인 안했을 경우
+            model.addAttribute("products", productService.findProducts());
+            return "dailyshop/login/home";
         }
 
-
-        model.addAttribute("products", productService.findProducts());
-        return "dailyshop/login/home";
     }
     @GetMapping("/contact")
     public String contact(){

@@ -22,7 +22,7 @@
   <!-- END SCROLL TOP BUTTON -->
 
    <!-- Start header section -->
-   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (member=${member},authname=${member.getName()},memberId=${member.getId()},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
+   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (member=${member},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
    <!-- / header section -->
 
    <!-- menu -->
@@ -146,77 +146,6 @@
                 <li><a th:href="@{/dailyShop/product/category/list(category='SPORTS')}">Sports</a></li>
                 <li><a th:href="@{/dailyShop/product/category/list(category='DIGITAL')}">Digital</a></li>
               </ul>
-            </div>
-            <!-- single sidebar -->
-            <div class="aa-sidebar-widget">
-              <h3>Tags</h3>
-              <div class="tag-cloud">
-                <a href="#">Fashion</a>
-                <a href="#">Ecommerce</a>
-                <a href="#">Shop</a>
-                <a href="#">Hand Bag</a>
-                <a href="#">Laptop</a>
-                <a href="#">Head Phone</a>
-                <a href="#">Pen Drive</a>
-              </div>
-            </div>
-            <!-- single sidebar -->
-            <div class="aa-sidebar-widget">
-              <h3>Recently Views</h3>
-              <div class="aa-recently-views">
-                <ul>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-1.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                   <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>                                      
-                </ul>
-              </div>                            
-            </div>
-            <!-- single sidebar -->
-            <div class="aa-sidebar-widget">
-              <h3>Top Rated Products</h3>
-              <div class="aa-recently-views">
-                <ul>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                  <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-1.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>
-                   <li>
-                    <a href="#" class="aa-cartbox-img"><img alt="img" src="/dailyShop/img/woman-small-2.jpg"></a>
-                    <div class="aa-cartbox-info">
-                      <h4><a href="#">Product Name</a></h4>
-                      <p>1 x $250</p>
-                    </div>                    
-                  </li>                                      
-                </ul>
-              </div>                            
             </div>
           </aside>
         </div>

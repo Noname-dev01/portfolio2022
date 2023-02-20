@@ -48,13 +48,14 @@ public class SecurityConfig {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/dailyShop/main/**","/dailyShop/mypage/**").authenticated()
+                .antMatchers("/dailyShop/mypage/**").authenticated()
+                .antMatchers("/dailyShop/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
         .and()
                 .formLogin()
                 .loginPage("/dailyShop/login")//인증이 필요하면 여기로 이동
                 .loginProcessingUrl("/dailyShop/login_proc")//스프링 시큐리티가 로그인 자동 진행
-                .defaultSuccessUrl("/dailyShop/main")//로그인이 정상적이면 여기로 이동
+                .defaultSuccessUrl("/dailyShop")//로그인이 정상적이면 여기로 이동
                 .authenticationDetailsSource(authenticationDetailsSource)
                 .successHandler(customAuthenticationSuccessHandler)
                 .failureHandler(customAuthenticationFailureHandler)

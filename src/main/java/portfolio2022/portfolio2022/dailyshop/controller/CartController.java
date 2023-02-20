@@ -55,7 +55,7 @@ public class CartController {
 
             return "dailyshop/memberCart";
         }else {
-         return "redirect:/dailyShop/main";
+         return "redirect:/dailyShop";
         }
     }
 
@@ -70,7 +70,7 @@ public class CartController {
 
         cartService.addCart(member,product,amount);
 
-        return "redirect:/dailyShop/main";
+        return "redirect:/dailyShop";
     }
 
     /**
@@ -91,7 +91,7 @@ public class CartController {
 
             return "redirect:/dailyShop/mypage/cart/{id}";
         }else {
-            return "redirect:/dailyShop/main";
+            return "redirect:/dailyShop";
         }
     }
 
@@ -111,9 +111,9 @@ public class CartController {
             //장바구니 물건 삭제
             cartService.cartItemDelete(cartItemId);
 
-            return "redirect:/dailyShop/main";
+            return "redirect:/dailyShop";
         }else {
-            return "redirect:/dailyShop/main";
+            return "redirect:/dailyShop";
         }
     }
 }

@@ -22,7 +22,7 @@
   <!-- END SCROLL TOP BUTTON -->
 
    <!-- Start header section -->
-   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (member=${member},authname=${member.getName()},memberId=${member.getId()},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
+   <header th:replace="~{dailyshop/fragments/headerSection :: headerSection (member=${member},totalPrice=${totalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
    <!-- / header section -->
 
    <!-- menu -->
@@ -99,7 +99,7 @@
                     </figcaption>
                   </figure>
                   <!-- product badge -->
-                  <span th:if="${product.badge() == 'SALE'}" class="aa-badge aa-sale" href="#">SALE!</span>
+                  <span th:if="${product.badge == 'SALE'}" class="aa-badge aa-sale" href="#">SALE!</span>
                   <span th:if="${product.badge == 'SOLD_OUT'}" class="aa-badge aa-sold-out" href="#">Sold Out!</span>
                   <span th:if="${product.badge == 'HOT'}" class="aa-badge aa-hot" href="#">HOT!</span>
                   <span th:if="${product.badge == 'NORMAL'}"></span>

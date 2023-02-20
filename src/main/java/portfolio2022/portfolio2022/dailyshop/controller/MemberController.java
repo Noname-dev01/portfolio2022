@@ -90,7 +90,7 @@ public class MemberController {
             model.addAttribute("member", member);
             return "dailyshop/mypage";
         }else {
-            return "redirect:/dailyShop/main";
+            return "redirect:/dailyShop";
         }
     }
 
@@ -113,7 +113,7 @@ public class MemberController {
             model.addAttribute("member", member);
             return "/dailyshop/member-modify";
         }else {
-            return "redirect:/dailyShop/main";
+            return "redirect:/dailyShop";
         }
     }
 

@@ -53,11 +53,11 @@
 <!--                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/wishlist}">Wishlist</a></li>-->
                 <li sec:authorize="isAnonymous()"><a th:href="@{/dailyShop/login}">로그인</a></li>
                 <li sec:authorize="isAnonymous()" class="hidden-xs"><a th:href="@{/dailyShop/join}">회원가입</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}" th:text="${authname}+'님'">사용자</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}" th:text="|보유 포인트 : ${member.getCoin()}원|">사용자</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${memberId})}">마이페이지</a></li>
-                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/cart/{id}(id=${memberId})}">장바구니</a></li>
-                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/orderHistory/{id}(id=${memberId})}">주문내역</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${member.getId()})}" th:text="${member.getName()}+'님'">사용자</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${member.getId()})}" th:text="|보유 포인트 : ${member.getCoin()}원|">사용자</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/mypage/{id}(id=${member.getId()})}">마이페이지</a></li>
+                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/cart/{id}(id=${member.getId()})}">장바구니</a></li>
+                <li sec:authorize="isAuthenticated()" class="hidden-xs"><a th:href="@{/dailyShop/mypage/orderHistory/{id}(id=${member.getId()})}">주문내역</a></li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')" class="hidden-xs"><a th:href="@{/dailyShop/admin/home}">관리자 페이지</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/dailyShop/logout}">로그아웃</a></li>
               </ul>
@@ -76,18 +76,7 @@
         <div class="col-md-12">
           <div class="aa-header-bottom-area">
             <!-- logo  -->
-            <div class="aa-logo" sec:authorize="isAuthenticated()">
-              <!-- Text based logo -->
-              <a th:href="@{/dailyShop/main}">
-                <span class="fa fa-shopping-cart"></span>
-                <p>daily<strong>Shop</strong> <span>Your Shopping Partner</span></p>
-              </a>
-              <!-- img based logo -->
-              <!-- <a href="home.html"><img src="img/logo.jpg" alt="logo img"></a> -->
-            </div>
-            <!-- / logo  -->
-            <!-- logo  -->
-            <div class="aa-logo" sec:authorize="isAnonymous()">
+            <div class="aa-logo">
               <!-- Text based logo -->
               <a th:href="@{/dailyShop}">
                 <span class="fa fa-shopping-cart"></span>

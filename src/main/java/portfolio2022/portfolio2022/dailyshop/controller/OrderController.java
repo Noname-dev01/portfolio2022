@@ -60,7 +60,7 @@ public class OrderController {
             Member member = memberService.findMember(id);
             //재고 확인
             if (product.getStockQuantity() == 0 || product.getStockQuantity() < count){
-                return "redirect:/dailyShop/main";
+                return "redirect:/dailyShop";
             }
             if (member.getCoin() < product.getPrice() * count){
                 return "redirect:/dailyShop/mypage/{id}"; //충전하기 페이지로 이동하게 해야됨 일단은 마이페이지로 이동하게 해둠
@@ -71,7 +71,7 @@ public class OrderController {
                 return "redirect:/dailyShop/mypage/orderHistory/{id}";
             }
         }
-        return "redirect:/dailyShop/main";
+        return "redirect:/dailyShop";
     }
     /**
      * 주문 취소하기
