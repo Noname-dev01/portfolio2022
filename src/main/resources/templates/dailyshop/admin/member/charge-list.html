@@ -1,5 +1,10 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/dailyshop/admin/common/head :: adminHead"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/dailyshop/admin/common/head :: adminHead">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daily Shop | Admin Page</title>
+</head>
 <body>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -35,31 +40,30 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <tr style="text-align: center;display: none;">
+                                        <td style="vertical-align: middle;">1</td>
+                                        <td style="vertical-align: middle;">example</td>
+                                        <td style="vertical-align: middle;">예시</td>
+                                        <td style="vertical-align: middle;">99999</td>
+                                        <td style="vertical-align: middle;">2023-02-20...</td>
+                                        <td style="vertical-align: middle;text-align: center;">
+                                            <form>
+                                                <button type="submit">승인</button>
+                                            </form></td>
+                                        <td style="vertical-align: middle;text-align: center;"><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                                    </tr>
                                     <tr th:each="chargeList: ${chargeListAll}" style="text-align: center;">
-                                        <td style="vertical-align: middle;" th:text="${chargeList.id}">번호</td>
-                                        <td style="vertical-align: middle;" th:text="${chargeList.member.username}">회원 아이디</td>
-                                        <td style="vertical-align: middle;" th:text="${chargeList.member.name}">회원 이름</td>
-                                        <td style="vertical-align: middle;" th:text="${chargeList.chargeAmount}">충전할 금액</td>
-                                        <td style="vertical-align: middle;" th:text="${chargeList.createDate}">요청 날짜</td>
-                                        <td th:if="${chargeList.chargeStatus} == ${chargeList.chargeStatus.COMPLETE}" style="vertical-align: middle;text-align: center;">승인 완료</td>
-                                        <td style="vertical-align: middle;text-align: center;" th:unless="${chargeList.chargeStatus} == ${chargeList.chargeStatus.COMPLETE}">
-                                            <form onsubmit="return successCharge();" th:action="@{/dailyShop/admin/charge/{chargeListId}(chargeListId=${chargeList.id})}" th:method="POST">
+                                        <td style="vertical-align: middle;" th:text="${chargeList.getId()}">번호</td>
+                                        <td style="vertical-align: middle;" th:text="${chargeList.getMember().getUsername()}">회원 아이디</td>
+                                        <td style="vertical-align: middle;" th:text="${chargeList.getMember().getName()}">회원 이름</td>
+                                        <td style="vertical-align: middle;" th:text="${chargeList.getChargeAmount()}">충전할 금액</td>
+                                        <td style="vertical-align: middle;" th:text="${chargeList.getCreateDate()}">요청 날짜</td>
+                                        <td th:if="${chargeList.getChargeStatus()} == ${chargeList.getChargeStatus().COMPLETE}" style="vertical-align: middle;text-align: center;">승인 완료</td>
+                                        <td style="vertical-align: middle;text-align: center;" th:if="${chargeList.getChargeStatus()} == ${chargeList.getChargeStatus().READY}">
+                                            <form th:action="@{/dailyShop/admin/charge/{chargeListId}(chargeListId=${chargeList.getId()})}" th:method="POST">
                                                 <input type="submit" value="승인">
-                                            </form>
-                                        <td style="vertical-align: middle;text-align: center;"><a class="remove" th:href="@{/dailyShop/admin/charge/delete/{id}(id=${chargeList.id})}"><fa class="fa fa-close"></fa></a></td>
-                                        <script th:inline="javascript">
-                                            /*<![CDATA[*/
-                                            let chargeStatus = [[${chargeList.getChargeStatus()}]];
-                                            let ready = [[${chargeList.getChargeStatus().COMPLETE}]];
-                                            function successCharge(){
-                                                if (chargeStatus == ready){
-                                                    alert("승인 완료되었습니다.")
-                                                    return true
-                                                }
-                                            }
-                                            /*]]>*/
-                                        </script>
-                                        </td>
+                                            </form></td>
+                                        <td style="vertical-align: middle;text-align: center;"><a class="remove" th:href="@{/dailyShop/admin/charge/delete/{id}(id=${chargeList.getId()})}"><fa class="fa fa-close"></fa></a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -70,6 +74,5 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

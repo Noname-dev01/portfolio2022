@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeList;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeStatus;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.repository.ChargeListRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 public class ChargeListService {
 
     private final ChargeListRepository chargeListRepository;
+    private final MemberRepository memberRepository;
 
     /**
      * 충전 내역 전체 조회
