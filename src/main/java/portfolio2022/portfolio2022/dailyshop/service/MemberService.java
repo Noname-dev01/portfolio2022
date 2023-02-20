@@ -9,7 +9,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeStatus;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.exception.DuplicateMemberException;
 import portfolio2022.portfolio2022.dailyshop.repository.CartRepository;
-import portfolio2022.portfolio2022.dailyshop.repository.ChargeListRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.chargeList.ChargeListRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
 import java.util.List;

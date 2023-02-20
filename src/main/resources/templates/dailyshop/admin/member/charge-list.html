@@ -25,8 +25,22 @@
             <div class="col-md-12">
                 <div class="cart-view-area">
                     <div class="cart-view-table aa-wishlist-table">
-                        <form action="">
                             <div class="table-responsive">
+                                <div>
+                                    <form th:object="${chargeListSearch}" class="form-inline">
+                                        <div class="form-group mb-2">
+                                            <input type="text" th:field="*{searchKeyword}" class="form-control" placeholder="회원아이디 또는 회원이름"/>
+                                        </div>
+                                        <div class="form-group mx-sm-1 mb-2">
+                                            <select th:field="*{chargeStatus}" class="form-control custom-select-sm">
+                                                <option value="">=====승인 상태=====</option>
+                                                <option value="READY">승인 대기중</option>
+                                                <option value="COMPLETE">승인 완료</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="aa-filter-btn-admin" style="background-color: #ff6666;border: 1px solid #ff6666;color: #fff;font-size: 15px;height: 30px;width: 80px;">검색</button>
+                                    </form>
+                                </div>
                                 <table class="table">
                                     <thead style="text-align: center;">
                                     <tr>

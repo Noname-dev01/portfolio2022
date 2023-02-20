@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeList;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeStatus;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
-import portfolio2022.portfolio2022.dailyshop.repository.ChargeListRepository;
+import portfolio2022.portfolio2022.dailyshop.repository.chargeList.ChargeListRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.MemberRepository;
 
 import java.util.List;
@@ -24,6 +23,13 @@ public class ChargeListService {
      */
     public List<ChargeList> findChargeListAll(){
         return chargeListRepository.findAll();
+    }
+
+    /**
+     * 충전 내역 검색 기능
+     */
+    public List<ChargeList> findChargeListSearch(ChargeListSearch chargeListSearch){
+        return chargeListRepository.findChargeListBySearch(chargeListSearch);
     }
 
     /**
