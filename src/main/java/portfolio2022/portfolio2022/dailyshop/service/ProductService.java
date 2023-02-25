@@ -27,6 +27,7 @@ public class ProductService {
 
     /**
      * 상품 등록
+     *
      */
     @Transactional
     public Long productRegister(Product product, MultipartFile file) throws IOException {
@@ -67,7 +68,7 @@ public class ProductService {
     @Transactional
     public void productModify(Long id, String name, MultipartFile file, int price, String category, String subCategory, int stockQuantity, String descriptionSimple, String descriptionDetail,String badge) throws IOException {
         Product findProduct = productRepository.findById(id).get();
-        transferFileSetting(file, findProduct);
+//        transferFileSetting(file, findProduct);
         findProduct.setName(name);
         findProduct.setPrice(price);
         findProduct.setCategory(category);

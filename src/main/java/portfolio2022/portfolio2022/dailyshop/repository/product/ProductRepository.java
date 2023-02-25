@@ -10,5 +10,4 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product,Long>,ProductRepositoryCustom {
 
     Product findProductById(Long id);
-
 }

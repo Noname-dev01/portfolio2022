@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="dailyshop/fragments/header :: header">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily Shop | Account Page</title>
+  <style>
+    td, th {
+      text-align: center;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- wpf loader Two -->
+<div id="wpf-loader-two">
+  <div class="wpf-loader-two-inner">
+    <span>Loading</span>
+  </div>
+</div>
+<!-- / wpf loader Two -->
+<!-- SCROLL TOP BUTTON -->
+<a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+<!-- END SCROLL TOP BUTTON -->
+
+
+<!-- Start header section -->
+<header th:replace="~{dailyshop/fragments/headerSection :: headerSection (member = ${member},totalPrice=${cartTotalPrice},totalCount=${totalCount},cartItems=${cartItems},cartListCount=${cartListCount})}"/>
+<!-- / header section -->
+
+<!-- menu -->
+<section th:replace="dailyshop/fragments/menu :: menu" />
+<!-- / menu -->
+
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+  <img src="/dailyShop/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+  <div class="aa-catg-head-banner-area">
+    <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2>고객센터</h2>
+        <ol class="breadcrumb">
+          <li><a href="/dailyShop">Home</a></li>
+          <li class="active">QnA</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / catg header banner section -->
+
+
+<!-- mypage -->
+<section id="aa-product-category">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+        <div class="aa-product-catg-content">
+          <div class="cart-view-area">
+            <div class="cart-view-table aa-wishlist-table">
+                <div class="table-responsive">
+                  <div>
+                    <form class="form-inline">
+                      <div class="form-group mb-2">
+                        <input type="text"  class="form-control" placeholder="제목"/>
+                      </div>
+                      <button type="submit" class="aa-filter-btn">검색</button>
+                    </form>
+                  </div>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th style="text-align: center;width: 6%;">번호</th>
+                      <th style="text-align: center;width: 12%;">제목</th>
+                      <th style="text-align: center;width: 6%;">작성자</th>
+                      <th style="text-align: center;width: 6%;">날짜</th>
+                      <th style="text-align: center;width: 6%;">자세히</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="post, i:${postsList}">
+                      <td style="vertical-align: middle;text-align: center;" th:text="${i.count}">번호</td>
+                      <td style="vertical-align: middle;text-align: center;" th:text="${post.getTitle()}">제목</td>
+                      <td style="vertical-align: middle;text-align: center;" th:text="${post.getWriter()}">작성자</td>
+                      <td style="vertical-align: middle;text-align: center;"th:text="${post.getCreatedDate()}">날짜</td>
+                      <td style="vertical-align: middle;text-align: center;">
+                        <button type="button" onclick="location.href='#'" class="aa-filter-btn">자세히</button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+          <hr>
+          <button onclick="location.href='/dailyShop/mypage/posts/register'" class="aa-filter-btn">글쓰기</button>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
+        <aside class="aa-sidebar">
+          <!-- single sidebar -->
+          <div class="aa-sidebar-widget">
+            <h3>마이페이지</h3>
+            <ul class="nav flex-md-column">
+              <li th:class="nav-item"><a class="nav-link active" th:href="@{/dailyShop/mypage/{id}(id=${member.getId()})}">마이페이지</a></li>
+              <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/cart/{id}(id=${member.getId()})}">장바구니</a></li>
+              <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/orderHistory/{id}(id=${member.getId()})}">주문내역</a></li>
+              <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/charge/{id}(id=${member.getId()})}">충전하기</a></li>
+              <li th:class="nav-item"><a th:class="nav-link" th:href="@{/dailyShop/mypage/charge/list}">충전 내역 조회</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /mypage -->
+<!-- footer -->
+<footer th:replace="dailyshop/fragments/footer :: footer"/>
+<!--  / footer -->
+
+<!-- login Modal -->
+<div th:replace="dailyshop/fragments/loginModal :: loginModal"/>
+<!--/ login Modal -->
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/dailyShop/js/bootstrap.js"></script>
+<!-- SmartMenus jQuery plugin -->
+<script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.js"></script>
+<!-- SmartMenus jQuery Bootstrap Addon -->
+<script type="text/javascript" src="/dailyShop/js/jquery.smartmenus.bootstrap.js"></script>
+<!-- To Slider JS -->
+<script src="/dailyShop/js/sequence.js"></script>
+<script src="/dailyShop/js/sequence-theme.modern-slide-in.js"></script>
+<!-- Product view slider -->
+<script type="text/javascript" src="/dailyShop/js/jquery.simpleGallery.js"></script>
+<script type="text/javascript" src="/dailyShop/js/jquery.simpleLens.js"></script>
+<!-- slick slider -->
+<script type="text/javascript" src="/dailyShop/js/slick.js"></script>
+<!-- Price picker slider -->
+<script type="text/javascript" src="/dailyShop/js/nouislider.js"></script>
+<!-- Custom js -->
+<script src="/dailyShop/js/custom.js"></script>
+
+
+</body>
+</html>

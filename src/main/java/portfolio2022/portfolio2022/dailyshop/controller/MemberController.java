@@ -176,5 +176,16 @@ public class MemberController {
         model.addAttribute("member",member);
         return "dailyshop/mypage-charge-list";
     }
+    /**
+     * 고객센터
+     */
+    @GetMapping("/mypage/qna/list")
+    public String qnaList(@AuthenticationPrincipal MemberDetails memberDetails,Model model){
+        Long loginId = memberDetails.getMember().getId();
+        Member member = memberService.findMember(loginId);
+
+        model.addAttribute("member", member);
+        return "posts-list";
+    }
 }
 
