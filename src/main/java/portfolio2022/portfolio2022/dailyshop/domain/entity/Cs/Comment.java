@@ -6,6 +6,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
@@ -38,4 +40,10 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @PrePersist
+    public void createDate(){
+        this.createdDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+        this.modifiedDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+    }
 }

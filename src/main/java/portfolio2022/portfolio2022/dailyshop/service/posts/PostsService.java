@@ -8,7 +8,6 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Cs.Posts;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.repository.cs.PostsRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -23,7 +22,7 @@ public class PostsService {
     }
 
     @Transactional
-    public void productRegister(Member member,String title,String content){
+    public void postRegister(Member member,String title,String content){
         Posts posts = new Posts();
         posts.setTitle(title);
         posts.setMember(member);
@@ -31,5 +30,13 @@ public class PostsService {
         posts.setView(0);
         posts.setWriter(member.getUsername());
         postsRepository.save(posts);
+    }
+
+    public Posts findPost(Long postId){return postsRepository.findById(postId).get();}
+
+    @Transactional
+    public void viewPlus(Long postId){
+        Posts post = postsRepository.findById(postId).get();
+        post.setView(post.getView()+1);
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:replace="dailyshop/fragments/header :: header">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,46 +59,54 @@
     <div class="row">
       <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
         <div class="aa-product-catg-content">
-          <div class="cart-view-area">
-            <div class="cart-view-table aa-wishlist-table">
-                <div class="table-responsive">
-                  <div>
-                    <form class="form-inline">
-                      <div class="form-group mb-2">
-                        <input type="text"  class="form-control" placeholder="제목"/>
-                      </div>
-                      <button type="submit" class="aa-filter-btn">검색</button>
+                  <div id="posts_list">
+                    <div class="col-md-12">
+                    <form class="card">
+                    <div class="card-header d-flex justify-content-between"style="display: flex;justify-content: space-between;">
+                    <label th:for="id" th:text="|번호 : ${post.getId()}|">번호</label>
+                    <label th:for="createdDate" th:text="|작성날짜 : ${post.getCreatedDate()}|">작성날짜</label>
+                    </div>
+                    <div class="card-header d-flex justify-content-between" style="display: flex;justify-content: space-between;">
+                    <label th:for="writer" th:text="|작성자 : ${post.getWriter()}|">작성자</label>
+                    <label th:for="view" th:text="|조회수 : ${post.getView()}|"><i class=" bi bi-eye-fill"></i></label>
+                    </div>
+                    <div class="card-body">
+                    <label for="title">제목</label>
+                    <input type="text" class="form-control" id="title" th:value="${post.getTitle()}" readonly>
+                    <br/>
+                    <label for="content">내용</label>
+                    <textarea rows="5" class="form-control" id="content" readonly th:text="${post.getContent()}"></textarea>
+                    </div>
                     </form>
+                    </div>
                   </div>
-                  <table class="table">
-                    <thead>
-                    <tr>
-                      <th style="text-align: center;width: 6%;">번호</th>
-                      <th style="text-align: center;width: 12%;">제목</th>
-                      <th style="text-align: center;width: 6%;">작성자</th>
-                      <th style="text-align: center;width: 6%;">날짜</th>
-                      <th style="text-align: center;width: 6%;">조회수</th>
-                      <th style="text-align: center;width: 6%;">자세히</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="post, i:${postsList}">
-                      <td style="vertical-align: middle;text-align: center;" th:text="${post.getId()}">번호</td>
-                      <td style="vertical-align: middle;text-align: center;" th:text="${post.getTitle()}">제목</td>
-                      <td style="vertical-align: middle;text-align: center;" th:text="${post.getWriter()}">작성자</td>
-                      <td style="vertical-align: middle;text-align: center;"th:text="${post.getCreatedDate()}">날짜</td>
-                      <td style="vertical-align: middle;text-align: center;"th:text="${post.getView()}">조회수</td>
-                      <td style="vertical-align: middle;text-align: center;">
-                        <a th:href="@{/dailyShop/mypage/posts/view/{postId}(postId = ${post.getId()})}" style="padding-top: 2%;cursor: pointer;display: block;text-align: center;margin-left: 25%;" class="aa-filter-btn">자세히</a>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
+          <div class="card">
+            <div class="card-header bi bi-chat-dots" th:if="${post.getComments().size() >= 1}"><i class="fa fa-comments"></i>Comments</div>
+            <ul class="list-group-flush">
+            <li class="list-group-item" th:each="comment:${comments}" th:if="${post.getComments().size() >= 1}">
+            <span>
+            <span style="font-size: small" th:text="${comment.getMember().getUsername()}">{{nickname}}</span>
+            <span style="font-size: xx-small" th:text="${comment.getCreatedDate()}">{{createdDate}}</span>&nbsp;
+            <button class="badge bi bi-trash" th:onclick="|location.href='@{/dailyShop/mypage/comment/delete/{postId}/{commentId}(commentId=${comment.getId()},postId=${comment.getPosts().getId()})}'|"> 삭제</button>
+            </span><br>
+            <span th:text="${comment.getComment()}">댓글 내용</span>
+            </li>
+            <div><br/>
+              <div class="card">
+                <div class="card-header bi bi-chat-right-dots"><i class="fa fa-comment">Write a Comment</i></div>
+                <form th:action="@{/dailyShop/mypage/posts/view/{postId}/comment (postId = ${post.id})}" method="post">
+                <input type="hidden" id="postsId" value="{{posts.id}}">
+                <div class="card-body" sec:authorize="isAuthenticated()">
+                <textarea id="comment" name="comment" class="form-control" rows="4" placeholder="댓글을 입력하세요"></textarea>
                 </div>
-            </div>
+                <div class="card-footer" sec:authorize="isAuthenticated()">
+                <button type="submit" id="btn-comment-save"class="btn btn-outline-primary bi bi-pencil-square"> 등록</button>
+                </div>
+                <div sec:authorize="isAnonymous()" class="card-body" style="font-size: small"><a href="/auth/login">로그인</a>을 하시면 댓글을 등록할 수 있습니다.</div>
+                </form>
+              </div></div>
+            </ul>
           </div>
-          <hr>
-          <button onclick="location.href='/dailyShop/mypage/posts/register'" class="aa-browse-btn">글쓰기</button>
         </div>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
