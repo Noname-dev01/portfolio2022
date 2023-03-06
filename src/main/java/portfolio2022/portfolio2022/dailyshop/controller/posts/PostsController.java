@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cs.Comment;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Cs.Posts;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
+import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 import portfolio2022.portfolio2022.dailyshop.service.posts.CommentService;
 import portfolio2022.portfolio2022.dailyshop.service.posts.PostsService;
@@ -27,6 +30,7 @@ public class PostsController {
     private final PostsService postsService;
     private final MemberService memberService;
     private final CommentService commentService;
+    private final CartService cartService;
 
     /**
      * 게시판 리스트
@@ -36,7 +40,14 @@ public class PostsController {
         Long loginId = memberDetails.getMember().getId();
         Member member = memberService.findMember(loginId);
         List<Posts> postsList = postsService.postsAllView();
+        Cart memberCart = cartService.findMemberCart(member.getId());
+        List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+        int totalPrice = cartService.cartTotalPrice(member.getId());
 
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalCount", memberCart.getCount());
+        model.addAttribute("cartListCount", cartItemList.size());
+        model.addAttribute("cartItems", cartItemList);
         model.addAttribute("member",member);
         model.addAttribute("postsList",postsList);
         return "dailyshop/posts/posts-list";
@@ -49,7 +60,14 @@ public class PostsController {
     public String postRegister(Model model,@AuthenticationPrincipal MemberDetails memberDetails){
         Long loginId = memberDetails.getMember().getId();
         Member member = memberService.findMember(loginId);
+        Cart memberCart = cartService.findMemberCart(member.getId());
+        List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+        int totalPrice = cartService.cartTotalPrice(member.getId());
 
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalCount", memberCart.getCount());
+        model.addAttribute("cartListCount", cartItemList.size());
+        model.addAttribute("cartItems", cartItemList);
         model.addAttribute("member",member);
         return "dailyshop/posts/posts-register";
     }
@@ -93,7 +111,14 @@ public class PostsController {
         Posts post = postsService.findPost(postId);
         postsService.viewPlus(postId);
         List<Comment> comments = commentService.findCommentByPostId(postId);
+        Cart memberCart = cartService.findMemberCart(member.getId());
+        List<CartItem> cartItemList = cartService.allUserCartView(memberCart);
+        int totalPrice = cartService.cartTotalPrice(member.getId());
 
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("totalCount", memberCart.getCount());
+        model.addAttribute("cartListCount", cartItemList.size());
+        model.addAttribute("cartItems", cartItemList);
         model.addAttribute("member",member);
         model.addAttribute("post",post);
         model.addAttribute("comments",comments);
