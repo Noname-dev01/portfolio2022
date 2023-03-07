@@ -53,6 +53,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//h2 database
 	implementation 'com.h2database:h2'
+	//mariadb
+	compile("org.mariadb.jdbc:mariadb-java-client")
 }
 
 tasks.named('test') {
