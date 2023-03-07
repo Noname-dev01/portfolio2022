@@ -97,7 +97,7 @@ public class ProductService {
         file.transferTo(saveFile);
 
         findProduct.setFileName(originalFilename);
-        findProduct.setFilePath("/files/"+fileName);
+        findProduct.setFilePath(projectPath+"/"+fileName);
     }
     /**
      * 카테고리별 상품 조회
