@@ -80,7 +80,7 @@ public class ProductService {
     }
 
     private void transferFileSetting(MultipartFile file, Product findProduct) throws IOException {
-        String projectPath = System.getProperty("user.dir") + "/portfolio2022/src/main/resources/static/files";
+        String projectPath = System.getProperty("user.dir") + "/img/files";
 //        String projectPath = System.getProperty("file.dir");
 
         String originalFilename = file.getOriginalFilename();
