@@ -35,13 +35,13 @@ deploy:
       all_branches: true
 
   - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: portfolio2022-build
-    key: portfolio2022.zip
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: portfolio2022-build # S3 버킷
+    key: portfolio2022.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
-    application: portfolio2022
-    deployment_group: portfolio2022-group
+    application: portfolio2022 # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
+    deployment_group: portfolio2022-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
 
