@@ -34,6 +34,17 @@ deploy:
     on:
       all_branches: true
 
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: portfolio2022-build
+    key: portfolio2022.zip
+    bundle_type: zip
+    application: portfolio2022
+    deployment_group: portfolio2022-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+
 # CI 실행 완료 시 메일로 알람
 notifications:
   email:
