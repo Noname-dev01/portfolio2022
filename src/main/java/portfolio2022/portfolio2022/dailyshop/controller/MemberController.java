@@ -111,7 +111,7 @@ public class MemberController {
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
-            return "/dailyshop/member-modify";
+            return "dailyshop/member-modify";
         }else {
             return "redirect:/dailyShop";
         }
