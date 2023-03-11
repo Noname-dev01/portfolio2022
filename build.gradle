@@ -13,7 +13,7 @@ plugins {
 }
 
 group = 'portfolio2022'
-version = '1.0.2-SNAPSHOT'
+version = '1.0.2-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = '11'
 
 configurations {
