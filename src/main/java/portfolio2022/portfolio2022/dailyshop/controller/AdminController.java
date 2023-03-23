@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -83,10 +85,16 @@ public class AdminController {
         return "dailyshop/admin/product/register";
     }
 
-    @PostMapping("/admin/product/register")
-    public String productSave(Product product, MultipartFile file) throws IOException {
-        productService.productRegister(product, file);
-        return "redirect:/dailyShop/admin/product/list";
+//    @PostMapping("/admin/product/register")
+//    public String productSave(Product product, MultipartFile file) throws IOException {
+//        productService.productRegister(product, file);
+//        return "redirect:/dailyShop/admin/product/list";
+//    }
+    @ResponseBody
+    @PostMapping(value = "/admin/product/register",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Long productSave(HttpServletRequest request,Product product,@RequestParam(value = "file") MultipartFile file) throws IOException {
+        Long productId = productService.productRegister(product, file);
+        return productId;
     }
 
     /**

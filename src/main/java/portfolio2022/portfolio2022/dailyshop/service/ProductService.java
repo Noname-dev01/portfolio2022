@@ -1,6 +1,7 @@
 package portfolio2022.portfolio2022.dailyshop.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductSearchCond;
+import portfolio2022.portfolio2022.dailyshop.service.S3.S3Uploader;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,16 +26,21 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CartService cartService;
-
+    @Autowired
+    private S3Uploader s3Uploader;
     /**
      * 상품 등록
      *
      */
     @Transactional
     public Long productRegister(Product product, MultipartFile file) throws IOException {
-        transferFileSetting(file, product);
+//        transferFileSetting(file, product);
+        System.out.println("Diary service saveDiary");
+        if (!file.isEmpty()){
+            String storedFileName = s3Uploader.upload(file, "images");
+            product.setFilePath(storedFileName);
+        }
         Product saveProduct = productRepository.save(product);
-
         return saveProduct.getId();
     }
     /**
