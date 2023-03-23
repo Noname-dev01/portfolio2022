@@ -26,8 +26,9 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CartService cartService;
-    @Autowired
-    private S3Uploader s3Uploader;
+
+    private final S3Uploader s3Uploader;
+
     /**
      * 상품 등록
      *
@@ -35,7 +36,6 @@ public class ProductService {
     @Transactional
     public Long productRegister(Product product, MultipartFile file) throws IOException {
 //        transferFileSetting(file, product);
-        System.out.println("Diary service saveDiary");
         if (!file.isEmpty()){
             String storedFileName = s3Uploader.upload(file, "images");
             product.setFilePath(storedFileName);
