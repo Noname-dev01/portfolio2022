@@ -26,8 +26,8 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CartService cartService;
-
-    private final S3Uploader s3Uploader;
+    @Autowired
+    private S3Uploader s3Uploader;
 
     /**
      * 상품 등록
