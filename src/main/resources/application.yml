@@ -1,10 +1,10 @@
 cloud:
   aws:
-    stack:
-      auto: false
-    s3:
-      bucket: portfolio2022-image
     region:
       static: ap-northeast-2
+    s3:
+      bucket: portfolio2022-image
+    stack:
+      auto: false
     credentials:
-      instance-profile: true
+      instanceProfile: true
