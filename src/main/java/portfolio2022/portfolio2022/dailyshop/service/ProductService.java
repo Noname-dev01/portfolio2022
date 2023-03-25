@@ -11,6 +11,7 @@ import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductSearchCond;
+import portfolio2022.portfolio2022.s3upload.S3Uploader;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,13 +25,19 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CartService cartService;
+    private final S3Uploader s3Uploader;
     /**
      * 상품 등록
      *
      */
     @Transactional
     public Long productRegister(Product product, MultipartFile file) throws IOException {
-        transferFileSetting(file, product);
+//        transferFileSetting(file, product);
+        if (!file.isEmpty()){
+            String storedFileName = s3Uploader.upload(file, "images");
+            product.setFilePath(storedFileName);
+//            product.setFileName(file.getOriginalFilename());
+        }
         Product saveProduct = productRepository.save(product);
         return saveProduct.getId();
     }

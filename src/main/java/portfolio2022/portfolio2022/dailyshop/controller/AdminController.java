@@ -91,8 +91,8 @@ public class AdminController {
 //        return "redirect:/dailyShop/admin/product/list";
 //    }
     @ResponseBody
-    @PostMapping(value = "/admin/product/register",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Long productSave(HttpServletRequest request,Product product,@RequestParam(value = "file") MultipartFile file) throws IOException {
+    @PostMapping(value = "/admin/product/register")
+    public Long productSave(Product product,@RequestParam("file") MultipartFile file) throws IOException {
         Long productId = productService.productRegister(product, file);
         return productId;
     }
