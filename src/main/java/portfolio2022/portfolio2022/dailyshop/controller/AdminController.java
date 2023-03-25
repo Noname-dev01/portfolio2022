@@ -92,9 +92,9 @@ public class AdminController {
 //    }
     @ResponseBody
     @PostMapping(value = "/admin/product/register")
-    public Long productSave(Product product,@RequestParam("file") MultipartFile file) throws IOException {
-        Long productId = productService.productRegister(product, file);
-        return productId;
+    public String productSave(Product product,@RequestParam("file") MultipartFile file) throws IOException {
+        productService.productRegister(product, file);
+        return "redirect:/dailyShop/admin/product/list";
     }
 
     /**

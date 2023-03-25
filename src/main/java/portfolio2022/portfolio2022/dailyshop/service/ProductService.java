@@ -36,7 +36,7 @@ public class ProductService {
         if (!file.isEmpty()){
             String storedFileName = s3Uploader.upload(file, "images");
             product.setFilePath(storedFileName);
-//            product.setFileName(file.getOriginalFilename());
+            product.setFileName(file.getOriginalFilename());
         }
         Product saveProduct = productRepository.save(product);
         return saveProduct.getId();
