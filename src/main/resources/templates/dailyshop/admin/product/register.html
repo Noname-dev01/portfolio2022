@@ -58,28 +58,9 @@
                                     <input type="text" name="descriptionSimple" id="descriptionSimple" style="width: 60%;"><br>
                                     <label th:for="descriptionDetail">상세 설명<span>*</span></label><br>
                                     <textarea type="text" style="width: 60%;height: 35%;" id="descriptionDetail" name="descriptionDetail"></textarea><br>
-                                    <button type="button" class="aa-browse-btn" id="btn-save">등록</button>
+                                    <button type="submit" class="aa-browse-btn">등록</button>
                                 </form>
                                 <script>
-                                    $('#btn-save').on('click', uploadFile);
-
-                                    function uploadFile(){
-                                        var file = $('#file')[0].files[0];
-                                        var formData = new FormData();
-                                        formData.append('file',file)
-
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: '/dailyShop/admin/product/register',
-                                            data: formData,
-                                            processData: false,
-                                            contentType: false
-                                        }).done(function (file) {
-                                            alert("등록되었습니다.")
-                                        }).fail(function (error){
-                                            alert(error);
-                                        })
-                                    }
 
                                     function optionChange() {
                                         var common = ['Casual','Sports','Formal','Outer','Shirts','Pants','Shoes','ACC'];
