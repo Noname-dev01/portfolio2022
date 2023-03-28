@@ -85,11 +85,6 @@ public class AdminController {
         return "dailyshop/admin/product/register";
     }
 
-//    @PostMapping("/admin/product/register")
-//    public String productSave(Product product, MultipartFile file) throws IOException {
-//        productService.productRegister(product, file);
-//        return "redirect:/dailyShop/admin/product/list";
-//    }
     @PostMapping(value = "/admin/product/register")
     public String productSave(Product product,@RequestParam("file") MultipartFile file) throws IOException {
         productService.productRegister(product, file);
