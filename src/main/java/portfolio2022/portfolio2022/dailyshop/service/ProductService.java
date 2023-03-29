@@ -112,7 +112,7 @@ public class ProductService {
             productListCond.setLimit(50);
         }
         if (productListCond.getMaxPrice() <=0){
-            productListCond.setMaxPrice(1000000);
+            productListCond.setMaxPrice(10000000);
         }
         return productRepository.findByCategory(category,pageable,productListCond);
     }
@@ -125,7 +125,7 @@ public class ProductService {
             productListCond.setLimit(50);
         }
         if (productListCond.getMaxPrice() <=0){
-            productListCond.setMaxPrice(1000000);
+            productListCond.setMaxPrice(10000000);
         }
         return productRepository.findByCategoryAndSubCategory(category,subCategory,pageable,productListCond);
     }

@@ -90,7 +90,7 @@
                 <!-- start single product item -->
                 <li th:each="product:${productSearch}">
                   <figure>
-                    <a class="aa-product-img" href="#"><img th:src="${product.filePath}" alt="polo shirt img"></a>
+                    <a class="aa-product-img" href="#"><img th:src="${product.filePath}" style="width: 100%;" alt="polo shirt img"></a>
                     <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#" th:text="${product.name}">This is Title</a></h4>
