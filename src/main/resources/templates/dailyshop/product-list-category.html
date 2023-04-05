@@ -106,22 +106,44 @@
                 </li>
               </ul>
             </div>
-            <div class="aa-product-catg-pagination">
-              <nav>
+            <div class="aa-product-catg-pagination" th:if="${!productsByCategory.isEmpty()}">
+              <nav th:with="pageNumber = ${productsByCategory.pageable.pageNumber},
+                            pageSize = ${productsByCategory.pageable.pageSize},
+                            totalPages = ${productsByCategory.totalPages},
+                            startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+                            tempEndPage = ${startPage + pageSize -1},
+                            endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
+                            aria-label="Page navigation">
                 <ul class="pagination">
-                  <li>
-                    <a href="#" aria-label="Previous">
+                  <li th:classappend="${pageNumber < pageSize} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="@{/dailyShop/product/category/list(page=0)}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">First</span>
                     </a>
                   </li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
+                  <li th:classappend="${productsByCategory.first} ? 'disabled'" class="page-item">
+                    <a class="page-link"
+                      th:href="${productsByCategory.first} ? '#' : @{/dailyShop/product/category/list(page=${pageNumber - 1})}"
+                       aria-label="Previous">
+                      <span aria-hidden="true">&lt;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li th:each="page : ${#numbers.sequence(startPage,endPage)}"
+                      th:classappend="${page == pageNumber + 1} ? 'active'"
+                      class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{/dailyShop/product/category/list(page=${page - 1})}"></a>
+                  </li>
+                  <li th:classappend="${productsByCategory.last} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${productsByCategory.last} ? '#' : @{/dailyShop/product/category/list(page=${pageNumber + 1})}" aria-label="Next">
+                      <span aria-hidden="true">&gt;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                  <li th:classappend=" ${T(java.lang.Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="@{/dailyShop/product/category/list(page=${totalPages - 1})}">
+                      <span>&raquo;</span>
+                      <span class="sr-only">Last</span>
                     </a>
                   </li>
                 </ul>
