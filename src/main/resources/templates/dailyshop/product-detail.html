@@ -127,7 +127,7 @@
                         <button type="submit" class="aa-add-to-cart-btn">구매하기</button>
                       </form>
                     </div>
-                    <div class="aa-prod-view-bottom">
+                    <div class="aa-prod-view-bottom" sec:authorize="isAnonymous()">
                       <button onclick="location.href='/dailyShop/login'" type="submit" class="aa-add-to-cart-btn">구매하기</button>
                     </div>
                     <script th:inline="javascript" sec:authorize="isAuthenticated()">
@@ -270,7 +270,7 @@
                     <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${relatedProduct.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
                      <figcaption>
                       <h4 class="aa-product-title"><a href="#" th:text="${relatedProduct.getName()}">Polo T-Shirt</a></h4>
-                      <span class="aa-product-price" th:text="${relatedProduct.getPrice()}">$45.50</span><span class="aa-product-price"><del>$65.50</del></span>
+                      <span class="aa-product-price" th:text="${relatedProduct.getPrice()}">$45.50</span>
                     </figcaption>
                   </figure>                     
                   <div class="aa-product-hvr-content">
