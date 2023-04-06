@@ -109,7 +109,7 @@ public class ProductService {
      */
     public Page<Product> findByCategory(String category, Pageable pageable, ProductListCond productListCond){
         if (productListCond.getSize() <= 0){
-            productListCond.setSize(50);
+            productListCond.setSize(12);
         }
         if (productListCond.getMaxPrice() <=0){
             productListCond.setMaxPrice(10000000);
@@ -122,7 +122,7 @@ public class ProductService {
      */
     public Page<Product> findBySubCategory(String category, String subCategory, Pageable pageable, ProductListCond productListCond){
         if (productListCond.getSize() <= 0){
-            productListCond.setSize(50);
+            productListCond.setSize(12);
         }
         if (productListCond.getMaxPrice() <=0){
             productListCond.setMaxPrice(10000000);
@@ -135,7 +135,7 @@ public class ProductService {
      */
     public Page<Product> productSearch(String searchKeyword, Pageable pageable, ProductSearchCond productSearchCond){
         if (productSearchCond.getLimit() <= 0){
-            productSearchCond.setLimit(50);
+            productSearchCond.setLimit(12);
         }
         if (productSearchCond.getMaxPrice() <=0){
             productSearchCond.setMaxPrice(1000000);
