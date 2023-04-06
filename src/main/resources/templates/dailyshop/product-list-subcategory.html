@@ -95,7 +95,7 @@
                     <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#" th:text="${product.name}">This is Title</a></h4>
-                      <span class="aa-product-price" th:text="${product.price}">$45.50</span>
+                      <span class="aa-product-price" th:text="|${product.price}원|">$45.50</span>
                       <p class="aa-product-descrip">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam accusamus facere iusto, autem soluta amet sapiente ratione inventore nesciunt a, maxime quasi consectetur, rerum illum.</p>
                     </figcaption>
                   </figure>                         

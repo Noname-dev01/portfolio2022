@@ -36,7 +36,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
 //                .limit(productListCond.getLimit())
-//                .orderBy(orderByPrice(productListCond))
+                .orderBy(orderByPrice(productListCond))
                 .fetch();
 
         JPAQuery<Long> countQuery = query

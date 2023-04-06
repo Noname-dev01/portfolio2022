@@ -45,7 +45,7 @@
                                         <td style="vertical-align: middle;" th:text="${product.descriptionSimple}">설명 요약</td>
                                         <td style="vertical-align: middle;" th:text="${product.category}">카테고리</td>
                                         <td style="vertical-align: middle;" th:text="${product.subCategory}">서브 카테고리</td>
-                                        <td style="vertical-align: middle;" th:text="${product.price}">가격</td>
+                                        <td style="vertical-align: middle;" th:text="|${product.price}원|">가격</td>
                                         <td style="vertical-align: middle;" th:text="${product.stockQuantity}">재고 수량</td>
                                         <td style="vertical-align: middle;"><a th:href="@{/dailyShop/admin/product/modify/{productId}(productId=${product.id})}"><fa class="fa fa-edit"></fa></a></td>
                                         <td style="vertical-align: middle;"><a class="remove" th:href="@{/dailyShop/admin/product/delete(id=${product.id})}"><fa class="fa fa-close"></fa></a></td>

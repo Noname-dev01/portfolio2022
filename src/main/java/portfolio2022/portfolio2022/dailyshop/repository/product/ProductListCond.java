@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ProductListCond {
 
-    private int limit;
+    private int size;
     private String category;
     private String subCategory;
     private String orderBy;

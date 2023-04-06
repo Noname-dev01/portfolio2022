@@ -65,8 +65,8 @@
                   </div>
                   <input class="hidden" th:type="hidden" th:field="*{category}">
                   <div class="form-group mx-sm-1 mb-2">
-                  <label for="limit">Show</label>
-                  <select name="limit" id="limit" th:field="*{limit}" class="custom-select-sm">
+                  <label for="size">Show</label>
+                  <select name="size" id="size" th:field="*{size}" class="custom-select-sm">
                     <option value="12" selected="12">12</option>
                     <option value="24">24</option>
                     <option value="36">36</option>
@@ -94,7 +94,7 @@
                     <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#" th:text="${product.name}">This is Title</a></h4>
-                      <span class="aa-product-price" th:text="${product.price}">$45.50</span>
+                      <span class="aa-product-price" th:text="|${product.price}원|">$45.50</span>
                       <p class="aa-product-descrip" th:text="${product.descriptionDetail}"></p>
                     </figcaption>
                   </figure>
