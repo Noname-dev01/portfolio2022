@@ -2,10 +2,12 @@ package portfolio2022.portfolio2022.dailyshop.repository.product;
 
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.util.StringUtils;
 import portfolio2022.portfolio2022.dailyshop.domain.entity.Product;
 
@@ -24,17 +26,25 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
         this.query = new JPAQueryFactory(em);
     }
 
+
     @Override
     public Page<Product> findByCategory(String category, Pageable pageable, ProductListCond productListCond) {
         List<Product> result = query
                 .select(product)
                 .from(product)
                 .where(product.category.eq(category),priceRange(productListCond))
-                .limit(productListCond.getLimit())
-                .orderBy(orderByPrice(productListCond))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+//                .limit(productListCond.getLimit())
+//                .orderBy(orderByPrice(productListCond))
                 .fetch();
 
-        return new PageImpl<>(result);
+        JPAQuery<Long> countQuery = query
+                .select(product.count())
+                .from(product)
+                .where(product.category.eq(category), priceRange(productListCond));
+
+        return PageableExecutionUtils.getPage(result,pageable,countQuery::fetchOne);
     }
 
     @Override
