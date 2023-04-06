@@ -53,7 +53,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .select(product)
                 .from(product)
                 .where(product.category.eq(category),subCategory(subCategory),priceRange(productListCond))
-                .limit(productListCond.getLimit())
+                .limit(productListCond.getSize())
                 .orderBy(orderByPrice(productListCond))
                 .fetch();
         return new PageImpl<>(result);
