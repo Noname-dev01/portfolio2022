@@ -130,7 +130,15 @@
                     </a>
                   </li>
                   <li th:classappend="${productsByCategory.first} ? 'disabled'" class="page-item">
-                    <a class="page-link"
+                    <a th:if="${productListCond.orderBy != null}"
+                       class="page-link"
+                       th:href="${productsByCategory.first} ? '#' : @{/dailyShop/product/category/list(orderBy=${productListCond.orderBy},
+                       category=${productListCond.category},size=${productListCond.size},minPrice=${productListCond.minPrice},
+                       maxPrice=${productListCond.maxPrice},page=0)}" aria-label="Previous">
+                      <span aria-hidden="true">&lt;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a th:unless="${productListCond.orderBy != null}" class="page-link"
                       th:href="${productsByCategory.first} ? '#' : @{/dailyShop/product/category/list(category=${productListCond.category},page=${pageNumber - 1})}"
                        aria-label="Previous">
                       <span aria-hidden="true">&lt;</span>
@@ -140,16 +148,29 @@
                   <li th:each="page : ${#numbers.sequence(startPage,endPage)}"
                       th:classappend="${page == pageNumber + 1} ? 'active'"
                       class="page-item">
-                    <a th:text="${page}" class="page-link" th:href="@{/dailyShop/product/category/list(category=${productListCond.category},page=${page - 1})}"></a>
+                    <a th:if="${productListCond.orderBy != null}" th:text="${page}" class="page-link" th:href="@{/dailyShop/product/category/list(orderBy=${productListCond.orderBy},
+                    category=${productListCond.category},size=${productListCond.size},minPrice=${productListCond.minPrice},
+                       maxPrice=${productListCond.maxPrice},page=${page - 1})}"></a>
+                    <a th:unless="${productListCond.orderBy != null}" th:text="${page}" class="page-link" th:href="@{/dailyShop/product/category/list(category=${productListCond.category},page=${page - 1})}"></a>
                   </li>
                   <li th:classappend="${productsByCategory.last} ? 'disabled'" class="page-item">
-                    <a class="page-link" th:href="${productsByCategory.last} ? '#' : @{/dailyShop/product/category/list(category=${productListCond.category},page=${pageNumber + 1})}" aria-label="Next">
+                    <a th:if="${productListCond.orderBy != null}" class="page-link" th:href="${productsByCategory.last} ? '#' : @{/dailyShop/product/category/list(orderBy=${productListCond.orderBy},
+                    category=${productListCond.category},size=${productListCond.size},minPrice=${productListCond.minPrice},maxPrice=${productListCond.maxPrice},page=${pageNumber + 1})}" aria-label="Next">
+                      <span aria-hidden="true">&gt;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                    <a th:unless="${productListCond.orderBy != null}" class="page-link" th:href="${productsByCategory.last} ? '#' : @{/dailyShop/product/category/list(category=${productListCond.category},page=${pageNumber + 1})}" aria-label="Next">
                       <span aria-hidden="true">&gt;</span>
                       <span class="sr-only">Next</span>
                     </a>
                   </li>
                   <li th:classappend=" ${T(java.lang.Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'" class="page-item">
-                    <a class="page-link" th:href="@{/dailyShop/product/category/list(category=${productListCond.category},page=${totalPages - 1})}">
+                    <a th:if="${productListCond.orderBy != null}" class="page-link" th:href="@{/dailyShop/product/category/list(orderBy=${productListCond.orderBy},
+                    category=${productListCond.category},size=${productListCond.size},minPrice=${productListCond.minPrice},maxPrice=${productListCond.maxPrice},page=${totalPages - 1})}">
+                      <span>&raquo;</span>
+                      <span class="sr-only">Last</span>
+                    </a>
+                    <a th:unless="${productListCond.orderBy != null}" class="page-link" th:href="@{/dailyShop/product/category/list(category=${productListCond.category},page=${totalPages - 1})}">
                       <span>&raquo;</span>
                       <span class="sr-only">Last</span>
                     </a>
