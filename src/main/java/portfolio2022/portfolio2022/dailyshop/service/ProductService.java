@@ -108,8 +108,8 @@ public class ProductService {
      * 카테고리별 상품 조회
      */
     public Page<Product> findByCategory(String category, Pageable pageable, ProductListCond productListCond){
-        if (productListCond.getLimit() <= 0){
-            productListCond.setLimit(50);
+        if (productListCond.getSize() <= 0){
+            productListCond.setSize(50);
         }
         if (productListCond.getMaxPrice() <=0){
             productListCond.setMaxPrice(10000000);
@@ -121,8 +121,8 @@ public class ProductService {
      * 서브 카테고리별 상품 조회
      */
     public Page<Product> findBySubCategory(String category, String subCategory, Pageable pageable, ProductListCond productListCond){
-        if (productListCond.getLimit() <= 0){
-            productListCond.setLimit(50);
+        if (productListCond.getSize() <= 0){
+            productListCond.setSize(50);
         }
         if (productListCond.getMaxPrice() <=0){
             productListCond.setMaxPrice(10000000);
