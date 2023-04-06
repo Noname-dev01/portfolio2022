@@ -72,7 +72,7 @@ public class ProductController {
      * 카테고리별 상품 리스트
      */
     @GetMapping("/product/category/list")
-    public String productListByCategory(@ModelAttribute("productListCond") ProductListCond productListCond, String category, Model model, @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
+    public String productListByCategory(@ModelAttribute("productListCond") ProductListCond productListCond, @RequestParam("category") String category, Model model, @PageableDefault(sort = "id",direction = Sort.Direction.DESC) Pageable pageable, @AuthenticationPrincipal MemberDetails memberDetails){
         if (memberDetails != null) {
             Member member = memberService.findMember(memberDetails.getMember().getId());
             Cart memberCart = cartService.findMemberCart(member.getId());
