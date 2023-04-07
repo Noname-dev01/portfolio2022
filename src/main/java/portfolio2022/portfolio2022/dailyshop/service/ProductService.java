@@ -55,6 +55,12 @@ public class ProductService {
         return productRepository.findById(id).get();
     }
     /**
+     * 카테고리별 Top8 상품 조회
+     */
+    public List<Product> findTop8Product(){
+        return productRepository.findTop8ByProduct();
+    }
+    /**
      * 상품 삭제
      * 지우려는 상품을 카트 상품에서도 삭제
      */

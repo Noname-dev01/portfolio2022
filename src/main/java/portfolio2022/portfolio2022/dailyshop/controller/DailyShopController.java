@@ -59,12 +59,12 @@ public class DailyShopController {
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
-            model.addAttribute("products", productService.findProducts());
+            model.addAttribute("products", productService.findTop8Product());
 
             return "dailyshop/login/home";
         }else {
             //로그인 안했을 경우
-            model.addAttribute("products", productService.findProducts());
+            model.addAttribute("products", productService.findTop8Product());
             return "dailyshop/login/home";
         }
 

@@ -15,4 +15,6 @@ public interface ProductRepositoryCustom {
     Page<Product> productSearch(String searchKeyword,Pageable pageable,ProductSearchCond productSearchCond);
 
     List<Product> findRelatedProducts(String subCategory,Long productId);
+
+    List<Product> findTop8ByProduct();
 }
