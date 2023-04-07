@@ -2,6 +2,9 @@ package portfolio2022.portfolio2022.dailyshop.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -46,7 +49,7 @@ public class DailyShopController {
      * 메인 화면(로그인 안하면 카트 기능, 마이페이지 기능 사용 불가)
      */
     @GetMapping
-    public String home(Model model, @AuthenticationPrincipal MemberDetails memberDetails){
+    public String home(Model model, @AuthenticationPrincipal MemberDetails memberDetails, @PageableDefault(size = 8) Pageable pageable){
         //로그인 했을 경우
         if (memberDetails != null) {
             Member member = memberService.findMember(memberDetails.getMember().getId());
@@ -59,12 +62,12 @@ public class DailyShopController {
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
-            model.addAttribute("products", productService.findTop8Product());
+            model.addAttribute("products", productService.findProducts(pageable));
 
             return "dailyshop/login/home";
         }else {
             //로그인 안했을 경우
-            model.addAttribute("products", productService.findTop8Product());
+            model.addAttribute("products", productService.findProducts(pageable));
             return "dailyshop/login/home";
         }
 

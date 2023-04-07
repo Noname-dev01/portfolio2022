@@ -91,15 +91,6 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .fetch();
     }
 
-    @Override
-    public List<Product> findTop8ByProduct() {
-        return query
-                .select(product)
-                .from(product)
-                .limit(8)
-                .fetch();
-    }
-
     private BooleanExpression productNameLike(String searchKeyword){
         if (!StringUtils.hasText(searchKeyword)){
             return null;
