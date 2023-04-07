@@ -158,7 +158,7 @@
                   <li th:classappend="${productSearch.last} ? 'disabled'" >
                     <a th:if="${productSearchCond.orderBy != null}"
                        th:href="${productSearch.last} ? '#' : @{/dailyShop/product/search(orderBy=${productSearchCond.orderBy},
-                    searchKeyword=${productSearchCond.searchKeyword},size=${productListCond.size},minPrice=${productSearchCond.minPrice},
+                    searchKeyword=${productSearchCond.searchKeyword},size=${productSearchCond.size},minPrice=${productSearchCond.minPrice},
                     maxPrice=${productSearchCond.maxPrice},page=${pageNumber + 1})}"
                        aria-label="Next">
                       <span aria-hidden="true">&gt;</span>
