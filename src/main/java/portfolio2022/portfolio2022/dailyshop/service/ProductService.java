@@ -13,6 +13,8 @@ import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductSearchCond;
 import portfolio2022.portfolio2022.s3upload.S3Uploader;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -139,9 +141,6 @@ public class ProductService {
         }
         if (productSearchCond.getMaxPrice() <=0){
             productSearchCond.setMaxPrice(1000000);
-        }
-        if (searchKeyword == null){
-            productSearchCond.setSearchKeyword("");
         }
         return productRepository.productSearch(searchKeyword,pageable,productSearchCond);
     }
