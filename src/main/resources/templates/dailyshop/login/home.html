@@ -188,7 +188,7 @@
                    <div class="tab-pane fade in active" id="men">
                      <ul class="aa-product-catg">
                        <!-- start single product item -->
-                       <li th:each="product : ${products}" th:if="${product.category == 'MEN'}">
+                       <li th:each="product : ${men8}" th:if="${product.category == 'MEN'}">
                          <figure>
                            <a class="aa-product-img" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><img th:src="${product.filePath}" style="width: 100%;" alt="polo shirt img"></a>
                            <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
@@ -204,13 +204,13 @@
                          <span th:if="${product.badge == 'NORMAL'}"></span>
                        </li>
                      </ul>
-                     <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                     <a class="aa-browse-btn" th:href="@{/dailyShop/product/category/list(category = 'MEN')}">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                    </div>
                    <!-- start women product category -->
                    <div class="tab-pane fade" id="women">
                      <ul class="aa-product-catg">
                        <!-- start single product item -->
-                       <li th:each="product : ${products}" th:if="${product.category == 'WOMEN'}">
+                       <li th:each="product : ${women8}" th:if="${product.category == 'WOMEN'}">
                          <figure>
                            <a class="aa-product-img" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><img th:src="${product.filePath}" style="width: 100%;" alt="polo shirt img"></a>
                            <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
@@ -233,7 +233,7 @@
                    <div class="tab-pane fade" id="sports">
                      <ul class="aa-product-catg">
                        <!-- start single product item -->
-                       <li th:each="product : ${products}" th:if="${product.category == 'SPORTS'}">
+                       <li th:each="product : ${sports8}" th:if="${product.category == 'SPORTS'}">
                          <figure>
                            <a class="aa-product-img" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><img th:src="${product.filePath}" style="width: 100%;" alt="polo shirt img"></a>
                            <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
@@ -256,7 +256,7 @@
                    <div class="tab-pane fade" id="electronics">
                      <ul class="aa-product-catg">
                        <!-- start single product item -->
-                       <li th:each="product : ${products}" th:if="${product.category == 'DIGITAL'}">
+                       <li th:each="product : ${digital8}" th:if="${product.category == 'DIGITAL'}">
                          <figure>
                            <a class="aa-product-img" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><img th:src="${product.filePath}" style="width: 100%;" alt="polo shirt img"></a>
                            <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>

@@ -15,4 +15,9 @@ public interface ProductRepositoryCustom {
     Page<Product> productSearch(String searchKeyword,Pageable pageable,ProductSearchCond productSearchCond);
 
     List<Product> findRelatedProducts(String subCategory,Long productId);
+
+    List<Product> findProductByMen8();
+    List<Product> findProductByWomen8();
+    List<Product> findProductBySports8();
+    List<Product> findProductByDigital8();
 }

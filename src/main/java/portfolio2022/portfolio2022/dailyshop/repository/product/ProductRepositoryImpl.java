@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static portfolio2022.portfolio2022.dailyshop.domain.entity.QProduct.product;
 
@@ -87,6 +88,46 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .select(product)
                 .from(product)
                 .where(product.subCategory.eq(subCategory),product.id.ne(productId))
+                .limit(8)
+                .fetch();
+    }
+
+    @Override
+    public List<Product> findProductByMen8() {
+        return query
+                .select(product)
+                .from(product)
+                .where(product.category.eq("MEN"))
+                .limit(8)
+                .fetch();
+    }
+
+    @Override
+    public List<Product> findProductByWomen8() {
+        return query
+                .select(product)
+                .from(product)
+                .where(product.category.eq("WOMEN"))
+                .limit(8)
+                .fetch();
+    }
+
+    @Override
+    public List<Product> findProductBySports8() {
+        return query
+                .select(product)
+                .from(product)
+                .where(product.category.eq("SPORTS"))
+                .limit(8)
+                .fetch();
+    }
+
+    @Override
+    public List<Product> findProductByDigital8() {
+        return query
+                .select(product)
+                .from(product)
+                .where(product.category.eq("DIGITAL"))
                 .limit(8)
                 .fetch();
     }

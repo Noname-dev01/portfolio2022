@@ -149,4 +149,20 @@ public class ProductService {
     public List<Product> relatedProducts(String subString,Long productId){
         return productRepository.findRelatedProducts(subString,productId);
     }
+
+    /**
+     * 메인페이지 위한 조회 기능 (추후에 리팩토링 해야됨)
+     */
+    public List<Product> findProductByMen8(){
+        return productRepository.findProductByMen8();
+    }
+    public List<Product> findProductByWomen8(){
+        return productRepository.findProductByWomen8();
+    }
+    public List<Product> findProductBySports8(){
+        return productRepository.findProductBySports8();
+    }
+    public List<Product> findProductByDigital8(){
+        return productRepository.findProductByDigital8();
+    }
 }
