@@ -42,7 +42,7 @@
                 <h2 data-seq>Trendy Couple Items</h2>                
                 <!--아래 주석은 나중에 부가설명이 필요한 배너에 사용-->
                 <!-- <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p> -->
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq th:href="@{/dailyShop/product/category/list(category = 'WOMEN')}" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
             <!-- single slide item -->
@@ -53,7 +53,7 @@
               <div class="seq-title">
                 <span data-seq>Save Up to 75% Off</span>                
                 <h2 data-seq>Stoneisland Collection</h2>                
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq th:href="@{/dailyShop/product/category/list(category = 'MEN')}" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
             <!-- single slide item -->
@@ -64,7 +64,7 @@
               <div class="seq-title">
                 <span data-seq>Save Up to 60% Off</span>                
                 <h2 data-seq>Chanel Collection</h2>                
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq th:href="@{/dailyShop/product/category/list(category = 'WOMEN')}" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
             <!-- single slide item -->           
@@ -75,7 +75,7 @@
               <div class="seq-title">
                 <span data-seq>Save Up to 45% Off</span>                
                 <h2 data-seq>Outer sales</h2>                
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq th:href="@{/dailyShop/product/category/list(category = 'MEN')}" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>
             <!-- single slide item -->  
@@ -86,7 +86,7 @@
               <div class="seq-title">
                 <span data-seq>SAVE UP TO 40% OFF</span>                
                 <h2 data-seq>Gucci Collection</h2>               
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                <a data-seq th:href="@{/dailyShop/product/category/list(category = 'WOMEN')}" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
               </div>
             </li>                   
           </ul>
@@ -114,7 +114,7 @@
                     <img src="/dailyShop/img/summer-sales.jpg" alt="img">
                     <div class="aa-prom-content">
                       <span>75% Off</span>
-                      <h4><a href="#">Summer Season OFF</a></h4>
+                      <h4><a th:href="@{/dailyShop/product/category/list(category = 'MEN')}">Summer Season OFF</a></h4>
                     </div>
                   </div>
                 </div>
@@ -127,7 +127,7 @@
                       <img src="/dailyShop/img/gift-for-women.png" alt="img">
                       <div class="aa-prom-content">
                         <span>Exclusive Item</span>
-                        <h4><a href="#">Gift For Women</a></h4>                        
+                        <h4><a th:href="@{/dailyShop/product/category/list(category = 'WOMEN')}">Gift For Women</a></h4>
                       </div>
                     </div>
                   </div>
@@ -136,7 +136,7 @@
                       <img src="/dailyShop/img/shoes-collection.jpg" alt="img">
                       <div class="aa-prom-content">
                         <span>Sale Off</span>
-                        <h4><a href="#">On Shoes</a></h4>                        
+                        <h4><a th:href="@{/dailyShop/product/category/list(category = 'MEN')}">On Shoes</a></h4>
                       </div>
                     </div>
                   </div>
@@ -145,7 +145,7 @@
                       <img src="/dailyShop/img/new-arrivals.jpg" alt="img">
                       <div class="aa-prom-content">
                         <span>New Arrivals</span>
-                        <h4><a href="#">For Men</a></h4>                        
+                        <h4><a th:href="@{/dailyShop/product/category/list(category = 'MEN')}">For Men</a></h4>
                       </div>
                     </div>
                   </div>
@@ -154,7 +154,7 @@
                       <img src="/dailyShop/img/wallet-collection.jpg" alt="img">
                       <div class="aa-prom-content">
                         <span>25% Off</span>
-                        <h4><a href="#">For Wallets</a></h4>                        
+                        <h4><a th:href="@{/dailyShop/product/category/list(category = 'WOMEN')}">For Wallets</a></h4>
                       </div>
                     </div>
                   </div>
@@ -226,7 +226,7 @@
                          <span th:if="${product.badge == 'NORMAL'}"></span>
                        </li>
                      </ul>
-                     <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                     <a class="aa-browse-btn" th:href="@{/dailyShop/product/category/list(category = 'WOMEN')}">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                    </div>
                    <!-- / women product category -->
                    <!-- start sports product category -->
@@ -249,7 +249,7 @@
                          <span th:if="${product.badge == 'NORMAL'}"></span>
                        </li>
                      </ul>
-                     <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                     <a style="margin-left: 41%;" class="aa-browse-btn" th:href="@{/dailyShop/product/category/list(category = 'SPORTS')}">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                    </div>
                    <!-- / sports product category -->
                    <!-- start electronics product category -->
@@ -272,7 +272,7 @@
                          <span th:if="${product.badge == 'NORMAL'}"></span>
                        </li>
                      </ul>
-                     <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                     <a class="aa-browse-btn" th:href="@{/dailyShop/product/category/list(category = 'DIGITAL')}">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                    </div>
                    <!-- / electronics product category -->
                  </div>
@@ -333,7 +333,7 @@
                       <span th:if="${product.badge == 'NORMAL'}"></span>
                     </li>
                   </ul>
-                  <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                  <a class="aa-browse-btn" th:href="@{/dailyShop/product/category/list(category = 'MEN')}">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                 </div>
                 <!-- / popular product category -->
                 
@@ -357,7 +357,7 @@
                       <span th:if="${product.badge == 'NORMAL'}"></span>
                     </li>
                   </ul>
-                  <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                  <a class="aa-browse-btn" th:href="@{/dailyShop/product/category/list(category = 'WOMEN')}">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                 </div>
                 <!-- / featured product category -->
 
@@ -381,7 +381,7 @@
                       <span th:if="${product.badge == 'NORMAL'}"></span>
                     </li>
                   </ul>
-                   <a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
+                   <a class="aa-browse-btn" th:href="@{/dailyShop/product/category/list(category = 'SPORTS')}">Browse all Product <span class="fa fa-long-arrow-right"></span></a>
                 </div>
                 <!-- / latest product category -->              
               </div>
