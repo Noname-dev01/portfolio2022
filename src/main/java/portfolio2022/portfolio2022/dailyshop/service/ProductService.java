@@ -134,8 +134,8 @@ public class ProductService {
      * 홈에서 검색 기능
      */
     public Page<Product> productSearch(String searchKeyword, Pageable pageable, ProductSearchCond productSearchCond){
-        if (productSearchCond.getLimit() <= 0){
-            productSearchCond.setLimit(12);
+        if (productSearchCond.getSize() <= 0){
+            productSearchCond.setSize(12);
         }
         if (productSearchCond.getMaxPrice() <=0){
             productSearchCond.setMaxPrice(1000000);

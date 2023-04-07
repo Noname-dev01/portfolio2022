@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ProductSearchCond {
 
-    private int limit;
+    private int size;
     private String searchKeyword;
     private String orderBy;
     private int minPrice;

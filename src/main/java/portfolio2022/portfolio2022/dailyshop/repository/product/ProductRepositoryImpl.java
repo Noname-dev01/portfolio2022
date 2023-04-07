@@ -70,10 +70,15 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .select(product)
                 .from(product)
                 .where(productNameLike(searchKeyword).or(categoryLike(searchKeyword.toUpperCase())))
-                .limit(productSearchCond.getLimit())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(productByPrice(productSearchCond))
                 .fetch();
-        return new PageImpl<>(result);
+        JPAQuery<Long> countQuery = query
+                .select(product.count())
+                .from(product)
+                .where(productNameLike(searchKeyword).or(categoryLike(searchKeyword.toUpperCase())));
+        return PageableExecutionUtils.getPage(result,pageable,countQuery::fetchOne);
     }
 
     @Override
