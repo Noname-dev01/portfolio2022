@@ -142,6 +142,9 @@ public class ProductService {
         if (productSearchCond.getMaxPrice() <=0){
             productSearchCond.setMaxPrice(1000000);
         }
+        if (searchKeyword == null){
+            productSearchCond.setSearchKeyword("MEN");
+        }
         return productRepository.productSearch(searchKeyword,pageable,productSearchCond);
     }
 

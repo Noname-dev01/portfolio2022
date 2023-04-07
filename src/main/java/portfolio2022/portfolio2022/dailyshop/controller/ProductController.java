@@ -132,14 +132,10 @@ public class ProductController {
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
-            if (searchKeyword != null) {
-                model.addAttribute("productSearch", productService.productSearch(searchKeyword, pageable, productSearchCond));
-            }
+            model.addAttribute("productSearch", productService.productSearch(searchKeyword, pageable, productSearchCond));
             return "dailyshop/product-search";
         }else {
-            if (searchKeyword != null) {
-                model.addAttribute("productSearch", productService.productSearch(searchKeyword, pageable, productSearchCond));
-            }
+            model.addAttribute("productSearch", productService.productSearch(searchKeyword, pageable, productSearchCond));
             return "dailyshop/product-search";
         }
     }
