@@ -49,7 +49,7 @@ public class DailyShopController {
      * 메인 화면(로그인 안하면 카트 기능, 마이페이지 기능 사용 불가)
      */
     @GetMapping
-    public String home(Model model, @AuthenticationPrincipal MemberDetails memberDetails, @PageableDefault(size = 32) Pageable pageable){
+    public String home(Model model, @AuthenticationPrincipal MemberDetails memberDetails, @PageableDefault(size = 32,sort = ("category")) Pageable pageable){
         //로그인 했을 경우
         if (memberDetails != null) {
             Member member = memberService.findMember(memberDetails.getMember().getId());
