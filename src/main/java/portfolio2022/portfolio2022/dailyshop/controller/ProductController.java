@@ -108,10 +108,10 @@ public class ProductController {
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
-            model.addAttribute("productsByCategory", productService.findBySubCategory(category, subCategory, pageable, productListCond));
+            model.addAttribute("productsBySubCategory", productService.findBySubCategory(category, subCategory, pageable, productListCond));
             return "dailyshop/product-list-subcategory";
         }else {
-            model.addAttribute("productsByCategory", productService.findBySubCategory(category, subCategory, pageable, productListCond));
+            model.addAttribute("productsBySubCategory", productService.findBySubCategory(category, subCategory, pageable, productListCond));
             return "dailyshop/product-list-subcategory";
         }
     }

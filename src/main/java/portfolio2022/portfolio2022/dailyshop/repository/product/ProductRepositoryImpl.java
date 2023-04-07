@@ -35,7 +35,6 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .where(product.category.eq(category),priceRange(productListCond))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-//                .limit(productListCond.getLimit())
                 .orderBy(orderByPrice(productListCond))
                 .fetch();
 
@@ -53,10 +52,16 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .select(product)
                 .from(product)
                 .where(product.category.eq(category),subCategory(subCategory),priceRange(productListCond))
-                .limit(productListCond.getSize())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .orderBy(orderByPrice(productListCond))
                 .fetch();
-        return new PageImpl<>(result);
+
+        JPAQuery<Long> countQuery = query
+                .select(product.count())
+                .from(product)
+                .where(product.category.eq(category), subCategory(subCategory), priceRange(productListCond));
+        return PageableExecutionUtils.getPage(result,pageable,countQuery::fetchOne);
     }
 
     @Override

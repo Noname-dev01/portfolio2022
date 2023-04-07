@@ -67,7 +67,7 @@
                   <input class="hidden" th:type="hidden" th:field="*{subCategory}" >
                   <div class="form-group mx-sm-1 mb-2">
                   <label for="limit">Show</label>
-                  <select name="limit" id="limit" th:field="*{limit}" class="custom-select-sm">
+                  <select name="limit" id="limit" th:field="*{size}" class="custom-select-sm">
                     <option value="12" selected="12">12</option>
                     <option value="24">24</option>
                     <option value="36">36</option>
@@ -89,7 +89,7 @@
             <div class="aa-product-catg-body">
               <ul class="aa-product-catg">
                 <!-- start single product item -->
-                <li th:each="product:${productsByCategory}">
+                <li th:each="product:${productsBySubCategory}">
                   <figure>
                     <a class="aa-product-img" href="#"><img th:src="${product.filePath}" style="width: 100%;" alt="polo shirt img"></a>
                     <a class="aa-add-card-btn" th:href="@{/dailyShop/product/view/{productId}(productId=${product.getId()})}"><span class="fa fa-search"></span>상세 보기</a>
@@ -111,22 +111,87 @@
                 </li>
               </ul>
             </div>
-            <div class="aa-product-catg-pagination">
-              <nav>
+            <div class="aa-product-catg-pagination" th:if="${!productsBySubCategory.isEmpty()}">
+              <nav th:with="pageNumber = ${productsBySubCategory.pageable.pageNumber},
+              pageSize = ${productsBySubCategory.pageable.pageSize},
+              totalPages = ${productsBySubCategory.totalPages},
+              startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+              tempEndPage = ${startPage + pageSize - 1},
+              endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
+                   aria-label="Page navigation">
                 <ul class="pagination">
-                  <li>
-                    <a href="#" aria-label="Previous">
+                  <li th:classappend="${pageNumber < pageSize} ? 'disabled'">
+                    <a th:if="${productListCond.orderBy != null}"
+                       th:href="@{/dailyShop/product/subCategory/list(orderBy=${productListCond.orderBy},
+                       category=${productListCond.category},subCategory=${productListCond.subCategory},
+                       size=${productListCond.size},minPrice=${productListCond.minPrice},
+                       maxPrice=${productListCond.maxPrice},page=0)}"
+                       aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">First</span>
+                    </a>
+                    <a th:unless="${productListCond.orderBy != null}"
+                       th:href="@{/dailyShop/product/subCategory/list(category=${productListCond.category},
+                       subCategory=${productListCond.subCategory},page=0)}"
+                       aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">First</span>
                     </a>
                   </li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
+                  <li th:classappend="${productsBySubCategory.first} ? 'disabled'">
+                    <a th:if="${productListCond.orderBy != null}"
+                       th:href="${productsBySubCategory.first} ? '#' : @{/dailyShop/product/subCategory/list(orderBy=${productListCond.orderBy},
+                       category=${productListCond.category},subCategory=${productListCond.subCategory},size=${productListCond.size},
+                       minPrice=${productListCond.minPrice},maxPrice=${productListCond.maxPrice},page=0)}" aria-label="Previous">
+                      <span aria-hidden="true">&lt;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a th:unless="${productListCond.orderBy != null}" class="page-link"
+                       th:href="${productsBySubCategory.first} ? '#' : @{/dailyShop/product/subCategory/list(category=${productListCond.category},
+                       subCategory=${productListCond.subCategory},page=${pageNumber - 1})}" aria-label="Previous">
+                      <span aria-hidden="true">&lt;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li th:each="page : ${#numbers.sequence(startPage,endPage)}"
+                      th:classappend="${page == pageNumber + 1} ? 'active'">
+                    <a th:if="${productListCond.orderBy != null}" th:text="${page}"
+                       th:href="@{/dailyShop/product/subCategory/list(orderBy=${productListCond.orderBy},category=${productListCond.category},
+                       subCategory=${productListCond.subCategory},size=${productListCond.size},minPrice=${productListCond.minPrice},
+                       maxPrice=${productListCond.maxPrice},page=${page - 1})}"></a>
+                    <a th:unless="${productListCond.orderBy != null}" th:text="${page}"
+                       th:href="@{/dailyShop/product/subCategory/list(category=${productListCond.category},subCategory=${productListCond.subCategory},
+                       page=${page - 1})}"></a>
+                  </li>
+                  <li th:classappend="${productsBySubCategory.last} ? 'disabled'" >
+                    <a th:if="${productListCond.orderBy != null}"
+                       th:href="${productsBySubCategory.last} ? '#' : @{/dailyShop/product/subCategory/list(orderBy=${productListCond.orderBy},
+                    category=${productListCond.category},size=${productListCond.size},subCategory=${productListCond.subCategory},
+                    minPrice=${productListCond.minPrice},maxPrice=${productListCond.maxPrice},page=${pageNumber + 1})}"
+                       aria-label="Next">
+                      <span aria-hidden="true">&gt;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                    <a th:unless="${productListCond.orderBy != null}"
+                       th:href="${productsBySubCategory.last} ? '#' : @{/dailyShop/product/subCategory/list(category=${productListCond.category},
+                       subCategory=${productListCond.subCategory},page=${pageNumber + 1})}" aria-label="Next">
+                      <span aria-hidden="true">&gt;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                  <li th:classappend=" ${T(java.lang.Math).floor(totalPages / pageSize) * pageSize - 1 <= startPage} ? 'disabled'">
+                    <a th:if="${productListCond.orderBy != null}"
+                       th:href="@{/dailyShop/product/subCategory/list(orderBy=${productListCond.orderBy},
+                    category=${productListCond.category},subCategory=${productListCond.subCategory},size=${productListCond.size},
+                    minPrice=${productListCond.minPrice},maxPrice=${productListCond.maxPrice},page=${totalPages - 1})}">
+                      <span>&raquo;</span>
+                      <span class="sr-only">Last</span>
+                    </a>
+                    <a th:unless="${productListCond.orderBy != null}"
+                       th:href="@{/dailyShop/product/subCategory/list(category=${productListCond.category},subCategory=${productListCond.subCategory},
+                       page=${totalPages - 1})}">
+                      <span>&raquo;</span>
+                      <span class="sr-only">Last</span>
                     </a>
                   </li>
                 </ul>
