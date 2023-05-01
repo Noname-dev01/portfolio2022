@@ -1,6 +1,6 @@
 # Actions.yml의 최상단입니다.
 env:
-  S3_BUCKET_NAME: portfolio2022-build
+  S3_BUCKET_NAME: portfolio2022-actions-build
   PROJECT_NAME: portfolio2022
 
 name: deploy # Github Action에서 보여질 이름 지정
@@ -47,6 +47,7 @@ jobs:
     - name: Show Current Time
       run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
       shell: bash
+      
     - name: Make zip file
       run: zip -r ./$PROJECT_NAME.zip .
       shell: bash
