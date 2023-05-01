@@ -38,4 +38,5 @@ out/
 
 #S3 properties
 /src/main/resources/aws.yml
+src/main/resources/aws.yml
 aws.yml
