@@ -16,7 +16,6 @@ import portfolio2022.portfolio2022.dailyshop.repository.product.ProductListCond;
 import portfolio2022.portfolio2022.dailyshop.repository.product.ProductSearchCond;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.CartService;
-import portfolio2022.portfolio2022.dailyshop.service.CategoryService;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
 import portfolio2022.portfolio2022.dailyshop.service.ProductService;
 
@@ -29,7 +28,6 @@ public class ProductController {
 
     private final ProductService productService;
     private final MemberService memberService;
-    private final CategoryService categoryService;
     private final CartService cartService;
     /**
      * 상품 등록,수정,삭제는 AdminController에 있음
