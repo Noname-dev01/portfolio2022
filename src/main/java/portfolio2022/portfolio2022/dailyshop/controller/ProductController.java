@@ -82,6 +82,7 @@ public class ProductController {
             model.addAttribute("cartListCount", cartItemList.size());
             model.addAttribute("cartItems", cartItemList);
             model.addAttribute("member", member);
+            model.addAttribute("category",productListCond.getCategory());
             model.addAttribute("productsByCategory", productService.findByCategory(category, pageable, productListCond));
             return "dailyshop/product-list-category";
         }else{
