@@ -3,10 +3,7 @@ package portfolio2022.portfolio2022.dailyshop.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeList;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeStatus;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.exception.DuplicateMemberException;
 import portfolio2022.portfolio2022.dailyshop.repository.CartRepository;
 import portfolio2022.portfolio2022.dailyshop.repository.chargeList.ChargeListRepository;
@@ -30,7 +27,7 @@ public class MemberService {
     public Long join(Member member){
         validateDuplicateMember(member); //중복 회원 검증
         Member memberEntity = memberRepository.save(member);
-        if (Objects.equals(memberEntity.getRole(), "ROLE_USER")){
+        if (Objects.equals(memberEntity.getRole(), Role.USER)){
             Cart cart = Cart.createCart(member);
             cartRepository.save(cart);
         }
@@ -68,7 +65,7 @@ public class MemberService {
      * 권한 정보 수정
      */
     @Transactional
-    public void memberRoleChange(Long id,String role){
+    public void memberRoleChange(Long id, Role role){
         Member memberUpdate = memberRepository.findById(id).get();
         memberUpdate.setRole(role);
     }
