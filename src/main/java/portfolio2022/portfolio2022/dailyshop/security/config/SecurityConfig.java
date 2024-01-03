@@ -64,16 +64,16 @@ public class SecurityConfig {
                 .authenticationDetailsSource(authenticationDetailsSource)
                 .successHandler(customAuthenticationSuccessHandler)
                 .failureHandler(customAuthenticationFailureHandler)
-                .permitAll()
-        .and()
-                .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler())
-                .and()
-                .oauth2Login()
-                .loginPage("/dailyShop/login")
-                .defaultSuccessUrl("/dailyShop")
-                .userInfoEndpoint()
-                .userService(principalOauthUserService);
+                .permitAll();
+//        .and()
+//                .exceptionHandling()
+//                .accessDeniedHandler(accessDeniedHandler())
+//                .and()
+//                .oauth2Login()
+//                .loginPage("/dailyShop/login")
+//                .defaultSuccessUrl("/dailyShop")
+//                .userInfoEndpoint()
+//                .userService(principalOauthUserService);
 
         return http.build();
     }

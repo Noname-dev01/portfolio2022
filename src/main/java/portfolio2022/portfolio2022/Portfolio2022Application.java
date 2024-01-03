@@ -8,7 +8,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class Portfolio2022Application {
 
 	public static final String APPLICATION_LOCATIONS = "spring.config.location="
-			+ "classpath:application-oauth.properties,"
 			+ "classpath:application.yml,"
 			+ "classpath:aws.yml";
 
