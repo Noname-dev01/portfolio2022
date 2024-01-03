@@ -28,9 +28,12 @@ public class Member {
     private String address;
     private String email;
     private String phone;
-    private String role;
+    private Role role;
 
     private int coin;
+
+    private String provider;
+    private String provideId;
 
 
     @OneToMany(mappedBy = "member")
@@ -50,6 +53,21 @@ public class Member {
     @PrePersist
     public void createDate(){
         this.createDate = LocalDateTime.now();
+    }
+
+    @Builder
+    public Member(String username, String password, String email, String name, String address, String phone, int coin, Role role, String provider, String provideId, LocalDateTime createDate) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.coin = coin;
+        this.role = role;
+        this.provider = provider;
+        this.provideId = provideId;
+        this.createDate = createDate;
     }
 
 }

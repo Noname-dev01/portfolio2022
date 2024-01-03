@@ -70,7 +70,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/members/role/modify/{id}")
-    public String memberModify(@PathVariable("id") Long id,String role){
+    public String memberModify(@PathVariable("id") Long id,Role role){
         memberService.memberRoleChange(id,role);
 
         return "redirect:/dailyShop/admin/members";

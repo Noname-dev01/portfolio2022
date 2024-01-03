@@ -1,6 +1,7 @@
 package portfolio2022.portfolio2022.dailyshop.security.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import portfolio2022.portfolio2022.dailyshop.security.common.FormAuthenticationDetailsSource;
 import portfolio2022.portfolio2022.dailyshop.security.handler.CustomAccessDeniedHandler;
+import portfolio2022.portfolio2022.dailyshop.security.service.PrincipalOauthUserService;
 
 @EnableWebSecurity//security 활성화
 @Configuration
@@ -26,6 +28,9 @@ public class SecurityConfig {
     private final FormAuthenticationDetailsSource authenticationDetailsSource;
     private final AuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final AuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Autowired
+    private PrincipalOauthUserService principalOauthUserService;
 
     @Bean
     public PasswordEncoder passwordEncoder(){return PasswordEncoderFactories.createDelegatingPasswordEncoder();}
@@ -62,7 +67,13 @@ public class SecurityConfig {
                 .permitAll()
         .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler());
+                .accessDeniedHandler(accessDeniedHandler())
+                .and()
+                .oauth2Login()
+                .loginPage("/dailyShop/login")
+                .defaultSuccessUrl("/dailyShop")
+                .userInfoEndpoint()
+                .userService(principalOauthUserService);
 
         return http.build();
     }

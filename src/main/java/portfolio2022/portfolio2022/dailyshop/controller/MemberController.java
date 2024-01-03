@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import portfolio2022.portfolio2022.dailyshop.domain.dto.JoinDto;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Cart;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.CartItem;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.ChargeList;
-import portfolio2022.portfolio2022.dailyshop.domain.entity.Member;
+import portfolio2022.portfolio2022.dailyshop.domain.entity.*;
 import portfolio2022.portfolio2022.dailyshop.security.service.MemberDetails;
 import portfolio2022.portfolio2022.dailyshop.service.CartService;
 import portfolio2022.portfolio2022.dailyshop.service.MemberService;
@@ -53,7 +50,7 @@ public class MemberController {
 
         Member member = joinDto.toEntity();
         member.setPassword(passwordEncoder.encode(member.getPassword()));
-        member.setRole("ROLE_USER");
+        member.setRole(Role.USER);
         memberService.join(member);
 
         return "redirect:/dailyShop/login";
